@@ -18,181 +18,201 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-import tempfile
-import tkinter
-from tkinter import ttk, TOP, TRUE, LEFT, W, E, Canvas, HORIZONTAL
-from tkinter import filedialog
-from tkinter import messagebox
-from ttkthemes import ThemedTk
-from nds.tableLocator import TableLocator
-import activejson
+import inspect
 import os
+import sys
+import tempfile
+import threading
+from tkinter import *
+from tkinter import filedialog, scrolledtext
+from tkinter import messagebox
+from tkinter import ttk
+
+from PIL import ImageTk, Image
+from ttkthemes import ThemedTk
+
+import VerifyRom
 from RandomizerUtils import Definitions
 from RandomizerUtils import Randomizer
-import VerifyRom as verifier
-from tkinter.ttk import *
-from tkinter import *
-from PIL import ImageTk, Image
 from RandomizerUtils import Utils
 
 
-class InfoWindow(Toplevel):
-
-    def __init__(self, master=None):
-        super().__init__(master=master)
-        self.title("Warp Randomizer Info")
-        self.geometry("250x200")
-        label1 = Label(self, text="Supported Games:", font='Helvetica 16 bold')
-        label2 = Label(self, text="Pokemon Emerald")
-        label3 = Label(self, text="Pokemon Platinum")
-        label4 = Label(self, text="Pokemon White2")
-        label5 = Label(self, text="Pokemon FireRed")
-        label6 = Label(self, text="Pokemon LeafGreen")
-        label7 = Label(self, text="Pokemon HeartGold")
-        label8 = Label(self, text="Pokemon SoulSilver")
-        label1.pack()
-        label2.pack()
-        label3.pack()
-        label4.pack()
-        label5.pack()
-        label6.pack()
-        label7.pack()
-        label8.pack()
-
-
-root = ThemedTk(theme="breeze")
-root.title('Universal Warp Randomizer V2.0')
-root.resizable(False, False)
-root.geometry('500x140')
-ico = Image.open(Utils.resource_path(os.path.join('Resources', 'doodleDoorPoke.png')))
-photo = ImageTk.PhotoImage(ico)
-root.wm_iconphoto(False, photo)
-
-
-top_frame = ttk.Frame(root)
-top_frame.pack(side=TOP, pady=1)
-
-style = ttk.Style()
-style.configure("Hyperlink.TLabel", foreground="blue")
-
-label1 = ttk.Label(top_frame, text="PointCrow's Universal Warp Randomizer", font='Helvetica 18 bold')
-seed_entry = ttk.Entry(top_frame)
-seed_label = ttk.Label(top_frame, text="Fixed Seed # (Optional)")
-label2 = ttk.Label(top_frame, text="Created By XLuma, Turtleisaac, & AtSign", anchor="e", justify=LEFT)
-info = ttk.Label(top_frame, text="Info", style="Hyperlink.TLabel", cursor="hand2")
-progress_bar = ttk.Progressbar(top_frame, orient=HORIZONTAL, mode='indeterminate', length=400)
-progress_bar['value'] = 0
-pb_increase = [True]
-
-
 def randomize():
-    filetypes = [
-        ('game file', '*.gba *.nds')
-    ]
-    # TODO put *.nds back to enable nds
+    filepath_input = inputSource.get()
+    if not filepath_input:
+        messagebox.showerror('Error', 'Please select a source rom to randomize.')
+        return
 
-    f_in = filedialog.askopenfile(title='Select ROM to Randomize', filetypes=filetypes, mode='r')
-    if f_in is not None:
-        filepath_input = os.path.abspath(f_in.name)
-        f_in.close()
-        verification_tuple = verifier.validate_rom(filepath_input)
+    verification_tuple = VerifyRom.validate_rom(filepath_input)
+    if verification_tuple is None:
+        messagebox.showerror('Error',
+                             f"The provided rom at '{filepath_input}' is not valid. Warp randomization aborted.")
+        return
 
-        if verification_tuple is None:
-            messagebox.showerror('Error', 'The provided rom at ' + filepath_input + ' is not valid. Warp '
-                                                                                    'randomization aborted.')
-            return
+    filepath_output = inputDest.get()
+    if not filepath_output:
+        messagebox.showerror('Error', 'Please select a destination file to save the randomized rom.')
+        return
 
-        f_out = filedialog.asksaveasfilename(defaultextension="." + verification_tuple[2])
-        if f_out is None:  # asksaveasfile return `None` if dialog closed with "cancel".
-            return
-        filepath_output = f_out
-        if filepath_input == filepath_output:
-            messagebox.showerror('Error', 'You can\'t select the same file for both the input and the output. Please '
-                                          'save as a new file.')
-            return
-        # f_out.close()
-        fixed_seed = seed_entry.get()
-        if fixed_seed == '':
-            fixed_seed = -1
-        else:
-            try:
-                fixed_seed = int(fixed_seed)
-            except ValueError:
-                pass
+    if filepath_input == filepath_output:
+        messagebox.showerror('Error', 'You can\'t select the same file for both the input and the output. Please '
+                                      'save as a new file.')
+        return
+
+    clear_status()
+
+    seed_val = inputSeed.get()
+    seed = int(seed_val) if seed_val and seed_val != '(find random)' else -1
+
+    def _run():
         complete = False
-
-        seed_entry['state'] = 'disabled'
-        open_button.grid_forget()
-        progress_bar.grid(row=1, column=0, columnspan=2, pady=5)
-        stored_seed = fixed_seed
-
         while True:
-            set_randomize_gui(stored_seed)
-
             result = Randomizer.start_randomizer(filepath_input, filepath_output, Definitions.get_definition(
-                int(verification_tuple[3])), fixed_seed, verification_tuple[4])
-            stored_seed = result[1]
+                int(verification_tuple[3])), seed, verification_tuple[4])
             if result[2]:
-                messagebox.showerror('Error', 'Provided game is not supported. The list of supported games can be '
-                                              'found in the Info window.')
+                root.after(0, lambda: messagebox.showerror('Error', 'Provided game is not supported. The list of '
+                                                                     'supported games can be found in the Info window.'))
                 break
             if result[0]:
                 complete = True
                 break
-            elif fixed_seed != -1:
-                messagebox.showerror('Error', 'Seed unable to create valid randomization, please try different seed')
+            elif seed != -1:
+                root.after(0, lambda: messagebox.showerror('Error',
+                                                           'Seed unable to create valid randomization, please try different seed'))
                 break
-        reset_gui()
-        if complete:
-            messagebox.showinfo(title='Randomizer', message='Warp Randomization Complete! Output can be found at:\n' +
-                                                            filepath_output)
+
+        def _finish():
+            progress_bar.stop()
+            for widget in [btnStart, btnSource, btnDest, inputSource, inputDest, inputSeed]:
+                widget.config(state="normal")
+            if complete:
+                zip_output = os.path.splitext(filepath_output)[0] + '.zip'
+                messagebox.showinfo(title='Randomizer', message='Warp Randomization Complete! Output can be found at:\n' +
+                                                                zip_output)
+
+        root.after(0, _finish)
+
+    btnStart.config(state="disabled")
+    for widget in [btnSource, btnDest, inputSource, inputDest, inputSeed]:
+        widget.config(state="disabled")
+    progress_bar.start()
+    threading.Thread(target=_run, daemon=True).start()
 
 
-def set_randomize_gui(stored_seed):
-    if stored_seed == -1:
-        label2['text'] = 'Initializing'
+def set_source_file():
+    file = filedialog.askopenfilename(title='Select ROM to Randomize', filetypes=[('game file', '*.gba *.nds')])
+    if not file:
+        return
+    inputSource.delete(0, END)
+    inputSource.insert(0, file)
+    destFile = os.path.splitext(file)[0] + '_randomized.zip'
+    inputDest.delete(0, END)
+    inputDest.insert(0, destFile)
+
+
+def set_dest_file():
+    name = os.path.splitext(os.path.basename(inputSource.get()))[0]
+    if name:
+        name = name + '_randomized'
     else:
-        label2['text'] = 'Attempting Seed %s' % stored_seed
-
-    if progress_bar['value'] == 0:
-        pb_increase[0] = True
-    elif progress_bar['value'] == 100:
-        pb_increase[0] = False
-
-    if pb_increase[0]:
-        progress_bar['value'] += 20
-    elif not pb_increase[0]:
-        progress_bar['value'] -= 20
-    root.update()
-
-
-def reset_gui():
-    progress_bar['value'] = 0
-    progress_bar.grid_forget()
-    open_button.grid(row=1, column=0, columnspan=2, pady=5)
-    label2['text'] = 'Created By XLuma, Turtleisaac, & AtSign'
-    seed_entry['state'] = 'enabled'
-    root.update()
+        name = 'output'
+    file = filedialog.asksaveasfilename(
+        title='Select Destination File',
+        initialfile=name,
+        defaultextension=".zip",
+        filetypes=[('zip archive', '*.zip')]
+    )
+    if not file:
+        return
+    inputDest.delete(0, END)
+    inputDest.insert(0, file)
 
 
-# open button
-open_button = ttk.Button(
-    top_frame,
-    text='Randomize Warps',
-    command=randomize,
-    width=30,
-    # font='Helvetica 12 bold'
-)
+def clear_status():
+    status.config(state="normal")
+    status.delete(1.0, END)
+    status.config(state="disabled")
 
-label1.grid(row=0, column=0, columnspan=2)
-open_button.grid(row=1, column=0, columnspan=2, pady=5)
-seed_label.grid(row=2, column=0, sticky=E, columnspan=1, pady=5)
-seed_entry.grid(row=2, column=1, sticky=W, columnspan=1, pady=5, padx=5)
-info.grid(row=3, column=0, sticky=W, columnspan=1, pady=5)
-info.bind("<Button-1>", lambda e: InfoWindow(root))
-label2.grid(row=3, column=1, sticky=E, columnspan=1, pady=5)
-top_frame.columnconfigure(0, weight=5, uniform='row')
-top_frame.columnconfigure(1, weight=7, uniform='row')
+
+root = ThemedTk(theme="breeze")
+root.title('Universal Warp Randomizer V2.0')
+root.wm_iconphoto(False,
+                  ImageTk.PhotoImage(Image.open(Utils.resource_path(os.path.join('Resources', 'doodleDoorPoke.png')))))
+
+top_frame = ttk.Frame(root)
+top_frame.pack(side='top', pady=1, fill='x', expand=True)
+top_frame.columnconfigure(1, weight=1)
+
+lblTitle = ttk.Label(top_frame, text="PointCrow's Universal Warp Randomizer", font='Helvetica 18 bold')
+lblSubtitle = ttk.Label(top_frame, text="Created By XLuma, Turtleisaac, & AtSign")
+lblInfo = ttk.Label(top_frame,
+                    text="Supported Games: Pokemon Emerald, Platinum, White2, FireRed, LeafGreen, HeartGold, SoulSilver")
+
+lblSeed = ttk.Label(top_frame, text="Seed")
+inputSeed = ttk.Entry(top_frame, foreground='grey')
+inputSeed.insert(0, '(find random)')
+def on_seed_focus_in(_):
+    if inputSeed.get() == '(find random)':
+        inputSeed.delete(0, END)
+        inputSeed.configure(foreground='black')
+inputSeed.bind('<FocusIn>', on_seed_focus_in)
+def on_seed_focus_out(_):
+    if not inputSeed.get():
+        inputSeed.insert(0, '(find random)')
+        inputSeed.configure(foreground='grey')
+inputSeed.bind('<FocusOut>', on_seed_focus_out)
+
+lblSource = ttk.Label(top_frame, text="Source")
+inputSource = ttk.Entry(top_frame)
+btnSource = ttk.Button(top_frame, text='Select', command=set_source_file)
+
+lblDest = ttk.Label(top_frame, text="Destination")
+inputDest = ttk.Entry(top_frame)
+btnDest = ttk.Button(top_frame, text='Select', command=set_dest_file)
+
+btnStart = ttk.Button(top_frame, text='Randomize', command=randomize)
+
+progress_bar = ttk.Progressbar(top_frame, orient='horizontal', mode='indeterminate', length=400)
+status = scrolledtext.ScrolledText(top_frame, wrap="word")
+status.config(state="disabled")
+
+lblTitle.grid(row=0, column=0, columnspan=3)
+lblSubtitle.grid(row=1, column=0, columnspan=3)
+lblInfo.grid(row=2, column=0, columnspan=3)
+lblSeed.grid(row=3, column=0, sticky='w', padx=(4, 0))
+inputSeed.grid(row=3, column=1, columnspan=2, sticky='ew')
+lblSource.grid(row=4, column=0, sticky='w', padx=(4, 0))
+inputSource.grid(row=4, column=1, sticky='ew')
+btnSource.grid(row=4, column=2)
+lblDest.grid(row=5, column=0, sticky='w', padx=(4, 0))
+inputDest.grid(row=5, column=1, sticky='ew')
+btnDest.grid(row=5, column=2)
+btnStart.grid(row=6, column=0, columnspan=3)
+progress_bar.grid(row=7, column=0, columnspan=3, sticky='ew')
+status.grid(row=8, column=0, columnspan=3, sticky='ew')
+
+
+class TkinterConsoleRedirector:
+    def __init__(self, orig):
+        self.orig = orig
+    def write(self, text):
+        self.orig.write(text)
+        if text.strip():
+            frame = inspect.stack()[1]
+            caller = os.path.basename(os.path.splitext(frame.filename)[0])
+            prefixed_text = f"[{caller}] {text}"
+        else:
+            prefixed_text = text
+        status.config(state="normal")
+        status.insert("end", prefixed_text)
+        status.see("end")
+        status.config(state="disabled")
+
+    def flush(self):
+        self.orig.flush()
+        pass
+
+sys.stdout = TkinterConsoleRedirector(sys.stdout)
 
 root.eval('tk::PlaceWindow . center')
 
