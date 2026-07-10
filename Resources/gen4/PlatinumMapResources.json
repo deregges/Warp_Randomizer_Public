@@ -10,7 +10,8 @@
         "dest_warp_id": 1,
         "id": 5,
         "header_id": 3,
-        "dest_map_id": "Map_Jubilife_Poketch_00"
+        "dest_map_id": "Map_Jubilife_Poketch_00",
+        "sekii_id": "jubilife:poketchright"
       },
       {
         "x_pos": 13,
@@ -21,7 +22,8 @@
         "dest_warp_id": 0,
         "id": 8,
         "header_id": 3,
-        "dest_map_id": "Map_Jubilife_Poketch_00"
+        "dest_map_id": "Map_Jubilife_Poketch_00",
+        "sekii_id": "jubilife:poketchleft"
       },
       {
         "x_pos": 1,
@@ -54,7 +56,8 @@
         "dest_warp_id": 1,
         "id": 12,
         "header_id": 3,
-        "dest_map_id": "Map_Route_218_Gate_01"
+        "dest_map_id": "Map_Route_218_Gate_01",
+        "sekii_id": "jubilife:gate"
       },
       {
         "x_pos": 0,
@@ -65,7 +68,8 @@
         "dest_warp_id": 1,
         "id": 13,
         "header_id": 3,
-        "dest_map_id": "Map_Route_218_Gate_01"
+        "dest_map_id": "Map_Route_218_Gate_01",
+        "sekii_id": "jubilife:gate"
       }
     ],
     "connections": [
@@ -84,7 +88,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 3,
-        "dest_map_id": "Map_Jubilife_Building02_00"
+        "dest_map_id": "Map_Jubilife_Building02_00",
+        "sekii_id": "jubilife:righttv"
       },
       {
         "x_pos": 4,
@@ -95,7 +100,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 3,
-        "dest_map_id": "Map_Jubilife_TV_00"
+        "dest_map_id": "Map_Jubilife_TV_00",
+        "sekii_id": "jubilife:jubilifetv"
       },
       {
         "x_pos": 19,
@@ -106,7 +112,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 3,
-        "dest_map_id": "Map_Jubilife_Shop_00"
+        "dest_map_id": "Map_Jubilife_Shop_00",
+        "sekii_id": "jubilife:mart"
       }
     ],
     "connections": [
@@ -127,7 +134,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 3,
-        "dest_map_id": "Map_Global_Terminal_02"
+        "dest_map_id": "Map_Global_Terminal_02",
+        "sekii_id": "jubilife:trade"
       },
       {
         "x_pos": 12,
@@ -138,7 +146,8 @@
         "dest_warp_id": 0,
         "id": 9,
         "header_id": 3,
-        "dest_map_id": "Map_Jubilife_Building03_00"
+        "dest_map_id": "Map_Jubilife_Building03_00",
+        "sekii_id": "jubilife:tradebot"
       }
     ],
     "connections": [
@@ -157,7 +166,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 3,
-        "dest_map_id": "Map_Jubilife_PokemonCenter_00"
+        "dest_map_id": "Map_Jubilife_PokemonCenter_00",
+        "sekii_id": "jubilife:center"
       },
       {
         "x_pos": 7,
@@ -168,7 +178,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 3,
-        "dest_map_id": "Map_Jubilife_Building01_00"
+        "dest_map_id": "Map_Jubilife_Building01_00",
+        "sekii_id": "jubilife:house"
       },
       {
         "x_pos": 8,
@@ -220,7 +231,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 334,
-        "dest_map_id": "Map_Lake_Verity_Dummy_00"
+        "dest_map_id": "Map_Lake_Verity_Dummy_00",
+        "sekii_id": "route201:lake"
       },
       {
         "x_pos": 16,
@@ -231,7 +243,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 334,
-        "dest_map_id": "Map_Lake_Verity_Dummy_00"
+        "dest_map_id": "Map_Lake_Verity_Dummy_00",
+        "sekii_id": "route201:lake"
       },
       {
         "x_pos": 16,
@@ -242,7 +255,8 @@
         "dest_warp_id": 1,
         "id": 2,
         "header_id": 334,
-        "dest_map_id": "Map_Lake_Verity_00"
+        "dest_map_id": "Map_Lake_Verity_00",
+        "sekii_id": "route201:lake"
       },
       {
         "x_pos": 17,
@@ -253,7 +267,8 @@
         "dest_warp_id": 2,
         "id": 3,
         "header_id": 334,
-        "dest_map_id": "Map_Lake_Verity_00"
+        "dest_map_id": "Map_Lake_Verity_00",
+        "sekii_id": "route201:lake"
       }
     ],
     "connections": [
@@ -302,7 +317,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 344,
-        "dest_map_id": "Map_Oreburgh_Gate_00"
+        "dest_map_id": "Map_Oreburgh_Gate_00",
+        "sekii_id": "oreburghgate_r203:route203"
       }
     ],
     "connections": [
@@ -320,7 +336,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 345,
-        "dest_map_id": "Map_Ravaged_Path_00"
+        "dest_map_id": "Map_Ravaged_Path_00",
+        "sekii_id": "route204:bot"
       }
     ],
     "connections": [
@@ -352,7 +369,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 392,
-        "dest_map_id": "Map_Route_221_House01_00"
+        "dest_map_id": "Map_Route_221_House01_00",
+        "sekii_id": "route221:house"
       }
     ],
     "connections": [
@@ -371,7 +389,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 392,
-        "dest_map_id": "Map_Pal_Park_Interior_00"
+        "dest_map_id": "Map_Pal_Park_Interior_00",
+        "sekii_id": "route221:palpark"
       },
       {
         "x_pos": 19,
@@ -382,7 +401,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 392,
-        "dest_map_id": "Map_Pal_Park_Interior_00"
+        "dest_map_id": "Map_Pal_Park_Interior_00",
+        "sekii_id": "route221:palpark"
       }
     ],
     "connections": [
@@ -451,7 +471,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 418,
-        "dest_map_id": "Map_Sandgem_Shop_00"
+        "dest_map_id": "Map_Sandgem_Shop_00",
+        "sekii_id": "sandgem:mart"
       },
       {
         "x_pos": 17,
@@ -462,7 +483,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 418,
-        "dest_map_id": "Map_Sandgem_PokemonCenter_00"
+        "dest_map_id": "Map_Sandgem_PokemonCenter_00",
+        "sekii_id": "sandgem:center"
       },
       {
         "x_pos": 8,
@@ -484,7 +506,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 418,
-        "dest_map_id": "Map_Sandgem_House01_00"
+        "dest_map_id": "Map_Sandgem_House01_00",
+        "sekii_id": "sandgem:profhouse"
       },
       {
         "x_pos": 7,
@@ -495,7 +518,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 418,
-        "dest_map_id": "Map_Sandgem_Town_Room03_00"
+        "dest_map_id": "Map_Sandgem_Town_Room03_00",
+        "sekii_id": "sandgem:house"
       }
     ],
     "connections": [
@@ -529,7 +553,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Gym_00"
+        "dest_map_id": "Map_Oreburgh_Gym_00",
+        "sekii_id": "oreburgh:gym"
       },
       {
         "x_pos": 29,
@@ -540,7 +565,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Shop_00"
+        "dest_map_id": "Map_Oreburgh_Shop_00",
+        "sekii_id": "oreburgh:mart"
       },
       {
         "x_pos": 15,
@@ -551,7 +577,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Building01_00"
+        "dest_map_id": "Map_Oreburgh_Building01_00",
+        "sekii_id": "oreburgh:top1"
       },
       {
         "x_pos": 17,
@@ -562,7 +589,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_City_Room05_00"
+        "dest_map_id": "Map_Oreburgh_City_Room05_00",
+        "sekii_id": "oreburgh:leftgym"
       },
       {
         "x_pos": 22,
@@ -573,7 +601,8 @@
         "dest_warp_id": 0,
         "id": 8,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Building02_00"
+        "dest_map_id": "Map_Oreburgh_Building02_00",
+        "sekii_id": "oreburgh:top2"
       },
       {
         "x_pos": 2,
@@ -584,7 +613,8 @@
         "dest_warp_id": 1,
         "id": 10,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Gate_00"
+        "dest_map_id": "Map_Oreburgh_Gate_00",
+        "sekii_id": "oreburgh:entrance"
       }
     ],
     "connections": [
@@ -602,7 +632,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_PokemonCenter_00"
+        "dest_map_id": "Map_Oreburgh_PokemonCenter_00",
+        "sekii_id": "oreburgh:center"
       },
       {
         "x_pos": 5,
@@ -613,7 +644,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_City_Room03_00"
+        "dest_map_id": "Map_Oreburgh_City_Room03_00",
+        "sekii_id": "oreburgh:leftcenter"
       },
       {
         "x_pos": 17,
@@ -624,7 +656,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Museum_00"
+        "dest_map_id": "Map_Oreburgh_Museum_00",
+        "sekii_id": "oreburgh:museum"
       },
       {
         "x_pos": 24,
@@ -635,7 +668,8 @@
         "dest_warp_id": 0,
         "id": 7,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Building03_00"
+        "dest_map_id": "Map_Oreburgh_Building03_00",
+        "sekii_id": "oreburgh:rightcenter"
       }
     ],
     "connections": [
@@ -655,7 +689,8 @@
         "dest_warp_id": 0,
         "id": 9,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_City_Room07_00"
+        "dest_map_id": "Map_Oreburgh_City_Room07_00",
+        "sekii_id": "oreburgh:minehouse"
       },
       {
         "x_pos": 12,
@@ -666,7 +701,8 @@
         "dest_warp_id": 0,
         "id": 11,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Mine_Room01_00"
+        "dest_map_id": "Map_Oreburgh_Mine_Room01_00",
+        "sekii_id": "oreburgh:mineentrance"
       },
       {
         "x_pos": 13,
@@ -677,7 +713,8 @@
         "dest_warp_id": 0,
         "id": 12,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Mine_Room01_00"
+        "dest_map_id": "Map_Oreburgh_Mine_Room01_00",
+        "sekii_id": "oreburgh:mineentrance"
       },
       {
         "x_pos": 14,
@@ -688,7 +725,8 @@
         "dest_warp_id": 1,
         "id": 13,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Mine_Room01_00"
+        "dest_map_id": "Map_Oreburgh_Mine_Room01_00",
+        "sekii_id": "oreburgh:mineentrance"
       },
       {
         "x_pos": 15,
@@ -699,7 +737,8 @@
         "dest_warp_id": 2,
         "id": 14,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Mine_Room01_00"
+        "dest_map_id": "Map_Oreburgh_Mine_Room01_00",
+        "sekii_id": "oreburgh:mineentrance"
       },
       {
         "x_pos": 16,
@@ -710,7 +749,8 @@
         "dest_warp_id": 2,
         "id": 15,
         "header_id": 45,
-        "dest_map_id": "Map_Oreburgh_Mine_Room01_00"
+        "dest_map_id": "Map_Oreburgh_Mine_Room01_00",
+        "sekii_id": "oreburgh:mineentrance"
       }
     ],
     "connections": [
@@ -750,7 +790,8 @@
         "dest_warp_id": 1,
         "id": 13,
         "header_id": 350,
-        "dest_map_id": "Map_Wayward_Cave_Room01_01"
+        "dest_map_id": "Map_Wayward_Cave_Room01_01",
+        "sekii_id": "route206:caveright"
       },
 
       {
@@ -762,7 +803,8 @@
         "dest_warp_id": 0,
         "id": 12,
         "header_id": 350,
-        "dest_map_id": "Map_Wayward_Cave_Room01_00"
+        "dest_map_id": "Map_Wayward_Cave_Room01_00",
+        "sekii_id": "route206:caveleft"
       },
 
       {
@@ -774,7 +816,8 @@
         "dest_warp_id": 4,
         "id": 0,
         "header_id": 350,
-        "dest_map_id": "Map_Route_206_Gate_00"
+        "dest_map_id": "Map_Route_206_Gate_00",
+        "sekii_id": "route206:exit"
       },
       {
         "x_pos": 15,
@@ -785,7 +828,8 @@
         "dest_warp_id": 4,
         "id": 1,
         "header_id": 350,
-        "dest_map_id": "Map_Route_206_Gate_00"
+        "dest_map_id": "Map_Route_206_Gate_00",
+        "sekii_id": "route206:exit"
       },
       {
         "x_pos": 14,
@@ -862,7 +906,8 @@
         "dest_warp_id": 1,
         "id": 10,
         "header_id": 350,
-        "dest_map_id": "Map_Route_206_Gate_00"
+        "dest_map_id": "Map_Route_206_Gate_00",
+        "sekii_id": "route206:exit"
       },
       {
         "x_pos": 16,
@@ -873,7 +918,8 @@
         "dest_warp_id": 5,
         "id": 11,
         "header_id": 350,
-        "dest_map_id": "Map_Route_206_Gate_00"
+        "dest_map_id": "Map_Route_206_Gate_00",
+        "sekii_id": "route206:exit"
       }
     ],
     "connections": [
@@ -899,7 +945,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 353,
-        "dest_map_id": "Map_Mount_Coronet_Floor00_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor00_00",
+        "sekii_id": "route207_route208:r207"
       },
       {
         "x_pos": 28,
@@ -928,7 +975,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 65,
-        "dest_map_id": "Map_Eterna_PokemonCenter_00"
+        "dest_map_id": "Map_Eterna_PokemonCenter_00",
+        "sekii_id": "eterna:center"
       },
       {
         "x_pos": 22,
@@ -939,7 +987,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 65,
-        "dest_map_id": "Map_Eterna_Cycle_Shop_00"
+        "dest_map_id": "Map_Eterna_Cycle_Shop_00",
+        "sekii_id": "eterna:bikeshop"
       },
       {
         "x_pos": 17,
@@ -950,7 +999,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 65,
-        "dest_map_id": "Map_Eterna_Galactic_Building_Floor00_00"
+        "dest_map_id": "Map_Eterna_Galactic_Building_Floor00_00",
+        "sekii_id": "eterna:galactic"
       },
       {
         "x_pos": 28,
@@ -961,7 +1011,8 @@
         "dest_warp_id": 0,
         "id": 7,
         "header_id": 65,
-        "dest_map_id": "Map_Eterna_House03_00"
+        "dest_map_id": "Map_Eterna_House03_00",
+        "sekii_id": "eterna:leftstatue"
       },
       {
         "x_pos": 22,
@@ -972,7 +1023,8 @@
         "dest_warp_id": 0,
         "id": 11,
         "header_id": 65,
-        "dest_map_id": "Map_Eterna_ExplorerKit_House_00"
+        "dest_map_id": "Map_Eterna_ExplorerKit_House_00",
+        "sekii_id": "eterna:underground"
       }
     ],
     "connections": [
@@ -992,7 +1044,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 65,
-        "dest_map_id": "Map_Eterna_House02_00"
+        "dest_map_id": "Map_Eterna_House02_00",
+        "sekii_id": "eterna:botstatue"
       }
     ],
     "connections": [
@@ -1011,7 +1064,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 65,
-        "dest_map_id": "Map_Eterna_Shop_00"
+        "dest_map_id": "Map_Eterna_Shop_00",
+        "sekii_id": "eterna:mart"
       },
       {
         "x_pos": 27,
@@ -1022,7 +1076,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 65,
-        "dest_map_id": "Map_Eterna_Building01_00"
+        "dest_map_id": "Map_Eterna_Building01_00",
+        "sekii_id": "eterna:rightmart"
       },
       {
         "x_pos": 10,
@@ -1033,7 +1088,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 65,
-        "dest_map_id": "Map_Eterna_House01_00"
+        "dest_map_id": "Map_Eterna_House01_00",
+        "sekii_id": "eterna:leftgym"
       },
       {
         "x_pos": 16,
@@ -1044,7 +1100,8 @@
         "dest_warp_id": 0,
         "id": 8,
         "header_id": 65,
-        "dest_map_id": "Map_Route_206_Gate_01"
+        "dest_map_id": "Map_Route_206_Gate_01",
+        "sekii_id": "eterna:route"
       },
       {
         "x_pos": 17,
@@ -1055,7 +1112,8 @@
         "dest_warp_id": 0,
         "id": 9,
         "header_id": 65,
-        "dest_map_id": "Map_Route_206_Gate_01"
+        "dest_map_id": "Map_Route_206_Gate_01",
+        "sekii_id": "eterna:route"
       },
       {
         "x_pos": 24,
@@ -1066,7 +1124,8 @@
         "dest_warp_id": 0,
         "id": 10,
         "header_id": 65,
-        "dest_map_id": "Map_Eterna_Gym_00"
+        "dest_map_id": "Map_Eterna_Gym_00",
+        "sekii_id": "eterna:gym"
       }
     ],
     "connections": [
@@ -1084,7 +1143,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 200,
-        "dest_map_id": "Map_ValleyWindworks_Interior_00"
+        "dest_map_id": "Map_ValleyWindworks_Interior_00",
+        "sekii_id": "windworks:house"
       }
     ],
     "connections": [
@@ -1130,7 +1190,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 204,
-        "dest_map_id": "Map_Fuego_Ironworks_Interior_00"
+        "dest_map_id": "Map_Fuego_Ironworks_Interior_00",
+        "sekii_id": "ironworks_meadow:works_house"
       },
       {
         "x_pos": 8,
@@ -1141,7 +1202,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 204,
-        "dest_map_id": "Map_Fuego_Ironworks_Interior_00"
+        "dest_map_id": "Map_Fuego_Ironworks_Interior_00",
+        "sekii_id": "ironworks_meadow:works_house"
       },
       {
         "x_pos": 10,
@@ -1152,7 +1214,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 204,
-        "dest_map_id": "Map_Fuego_Ironworks_Interior_00"
+        "dest_map_id": "Map_Fuego_Ironworks_Interior_00",
+        "sekii_id": "ironworks_meadow:works_house"
       }
     ],
     "connections": [
@@ -1171,7 +1234,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 346,
-        "dest_map_id": "Map_Ravaged_Path_00"
+        "dest_map_id": "Map_Ravaged_Path_00",
+        "sekii_id": "route204:top"
       }
     ],
     "connections": [
@@ -1189,7 +1253,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 347,
-        "dest_map_id": "Map_Eterna_Forest_Interior_02"
+        "dest_map_id": "Map_Eterna_Forest_Interior_02",
+        "sekii_id": "eternaforest_r205:r205_entrance"
       },
       {
         "x_pos": 15,
@@ -1200,7 +1265,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 347,
-        "dest_map_id": "Map_Eterna_Forest_Interior_02"
+        "dest_map_id": "Map_Eterna_Forest_Interior_02",
+        "sekii_id": "eternaforest_r205:r205_entrance"
       },
       {
         "x_pos": 22,
@@ -1211,7 +1277,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 347,
-        "dest_map_id": "Map_Route_205_House01_00"
+        "dest_map_id": "Map_Route_205_House01_00",
+        "sekii_id": "eternaforest_r205:r205_house"
       }
     ],
     "connections": [
@@ -1246,7 +1313,8 @@
         "dest_warp_id": 3,
         "id": 0,
         "header_id": 349,
-        "dest_map_id": "Map_Eterna_Forest_Interior_01"
+        "dest_map_id": "Map_Eterna_Forest_Interior_01",
+        "sekii_id": "eternaforest_r205:r205_exit"
       },
       {
         "x_pos": 3,
@@ -1257,7 +1325,8 @@
         "dest_warp_id": 2,
         "id": 1,
         "header_id": 349,
-        "dest_map_id": "Map_Eterna_Forest_Interior_01"
+        "dest_map_id": "Map_Eterna_Forest_Interior_01",
+        "sekii_id": "eternaforest_r205:r205_exit"
       }
     ],
     "connections": [
@@ -1276,7 +1345,8 @@
         "dest_warp_id": 2,
         "id": 0,
         "header_id": 365,
-        "dest_map_id": "Map_Mount_Coronet_Floor09_01"
+        "dest_map_id": "Map_Mount_Coronet_Floor09_01",
+        "sekii_id": "route211:left"
       }
     ],
     "connections": [
@@ -1294,7 +1364,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 426,
-        "dest_map_id": "Map_Floaroma_Meadow_00"
+        "dest_map_id": "Map_Floaroma_Meadow_00",
+        "sekii_id": "ironworks_meadow:works_meadow"
       },
       {
         "x_pos": 21,
@@ -1305,7 +1376,8 @@
         "dest_warp_id": 1,
         "id": 6,
         "header_id": 426,
-        "dest_map_id": "Map_Floaroma_Meadow_00"
+        "dest_map_id": "Map_Floaroma_Meadow_00",
+        "sekii_id": "ironworks_meadow:works_meadow"
       }
     ],
     "connections": [
@@ -1323,7 +1395,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 426,
-        "dest_map_id": "Map_Floaroma_Shop_00"
+        "dest_map_id": "Map_Floaroma_Shop_00",
+        "sekii_id": "floaroma:mart"
       },
       {
         "x_pos": 16,
@@ -1334,7 +1407,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 426,
-        "dest_map_id": "Map_Floaroma_PokemonCenter_00"
+        "dest_map_id": "Map_Floaroma_PokemonCenter_00",
+        "sekii_id": "floaroma:center"
       },
       {
         "x_pos": 20,
@@ -1345,7 +1419,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 426,
-        "dest_map_id": "Map_Floaroma_Flower_Shop_00"
+        "dest_map_id": "Map_Floaroma_Flower_Shop_00",
+        "sekii_id": "floaroma:flowershop"
       },
       {
         "x_pos": 24,
@@ -1356,7 +1431,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 426,
-        "dest_map_id": "Map_Floaroma_Town_Room02_00"
+        "dest_map_id": "Map_Floaroma_Town_Room02_00",
+        "sekii_id": "floaroma:rightcenter"
       },
       {
         "x_pos": 11,
@@ -1367,7 +1443,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 426,
-        "dest_map_id": "Map_Floaroma_Town_Room03_00"
+        "dest_map_id": "Map_Floaroma_Town_Room03_00",
+        "sekii_id": "floaroma:leftflower"
       },
       {
         "x_pos": 2,
@@ -1378,7 +1455,8 @@
         "dest_warp_id": 3,
         "id": 7,
         "header_id": 426,
-        "dest_map_id": "Map_Floaroma_Meadow_00"
+        "dest_map_id": "Map_Floaroma_Meadow_00",
+        "sekii_id": "floaroma:meadows"
       },
       {
         "x_pos": 3,
@@ -1389,7 +1467,8 @@
         "dest_warp_id": 4,
         "id": 8,
         "header_id": 426,
-        "dest_map_id": "Map_Floaroma_Meadow_00"
+        "dest_map_id": "Map_Floaroma_Meadow_00",
+        "sekii_id": "floaroma:meadows"
       }
     ],
     "connections": [
@@ -1408,7 +1487,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_Amity_Gate_00"
+        "dest_map_id": "Map_Hearthome_Amity_Gate_00",
+        "sekii_id": "hearthome:squareleft"
       },
       {
         "x_pos": 11,
@@ -1419,7 +1499,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_Amity_Gate_00"
+        "dest_map_id": "Map_Hearthome_Amity_Gate_00",
+        "sekii_id": "hearthome:squareleft"
       },
       {
         "x_pos": 31,
@@ -1430,7 +1511,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_Contest_00"
+        "dest_map_id": "Map_Hearthome_Contest_00",
+        "sekii_id": "hearthome:contesthall"
       },
       {
         "x_pos": 17,
@@ -1441,7 +1523,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_PokemonCenter_00"
+        "dest_map_id": "Map_Hearthome_PokemonCenter_00",
+        "sekii_id": "hearthome:center"
       },
       {
         "x_pos": 22,
@@ -1452,7 +1535,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_House04_00"
+        "dest_map_id": "Map_Hearthome_House04_00",
+        "sekii_id": "hearthome:bebe"
       }
     ],
     "connections": [
@@ -1471,7 +1555,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_Amity_Gate_01"
+        "dest_map_id": "Map_Hearthome_Amity_Gate_01",
+        "sekii_id": "hearthome:squareright"
       },
       {
         "x_pos": 21,
@@ -1482,7 +1567,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_Amity_Gate_01"
+        "dest_map_id": "Map_Hearthome_Amity_Gate_01",
+        "sekii_id": "hearthome:squareright"
       },
       {
         "x_pos": 19,
@@ -1493,7 +1579,8 @@
         "dest_warp_id": 3,
         "id": 8,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_Gym_00"
+        "dest_map_id": "Map_Hearthome_Gym_00",
+        "sekii_id": "hearthome:gym"
       },
       {
         "x_pos": 6,
@@ -1504,7 +1591,8 @@
         "dest_warp_id": 0,
         "id": 13,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_House03_00"
+        "dest_map_id": "Map_Hearthome_House03_00",
+        "sekii_id": "hearthome:righthall"
       }
     ],
     "connections": [
@@ -1523,7 +1611,8 @@
         "dest_warp_id": 0,
         "id": 9,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_Church_00"
+        "dest_map_id": "Map_Hearthome_Church_00",
+        "sekii_id": "hearthome:church"
       },
       {
         "x_pos": 24,
@@ -1534,7 +1623,8 @@
         "dest_warp_id": 0,
         "id": 10,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_Poffin_House_00"
+        "dest_map_id": "Map_Hearthome_Poffin_House_00",
+        "sekii_id": "hearthome:poffin"
       },
       {
         "x_pos": 29,
@@ -1545,7 +1635,8 @@
         "dest_warp_id": 0,
         "id": 11,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_Shop_00"
+        "dest_map_id": "Map_Hearthome_Shop_00",
+        "sekii_id": "hearthome:mart"
       },
       {
         "x_pos": 6,
@@ -1556,7 +1647,8 @@
         "dest_warp_id": 0,
         "id": 14,
         "header_id": 86,
-        "dest_map_id": "Map_Route_208_Gate_00"
+        "dest_map_id": "Map_Route_208_Gate_00",
+        "sekii_id": "hearthome:routeleft"
       },
       {
         "x_pos": 10,
@@ -1567,7 +1659,8 @@
         "dest_warp_id": 0,
         "id": 15,
         "header_id": 86,
-        "dest_map_id": "Map_Route_212_Gate_00"
+        "dest_map_id": "Map_Route_212_Gate_00",
+        "sekii_id": "hearthome:routemid"
       },
       {
         "x_pos": 11,
@@ -1578,7 +1671,8 @@
         "dest_warp_id": 0,
         "id": 16,
         "header_id": 86,
-        "dest_map_id": "Map_Route_212_Gate_00"
+        "dest_map_id": "Map_Route_212_Gate_00",
+        "sekii_id": "hearthome:routemid"
       },
       {
         "x_pos": 6,
@@ -1589,7 +1683,8 @@
         "dest_warp_id": 0,
         "id": 18,
         "header_id": 86,
-        "dest_map_id": "Map_Route_208_Gate_00"
+        "dest_map_id": "Map_Route_208_Gate_00",
+        "sekii_id": "hearthome:routeleft"
       }
     ],
     "connections": [
@@ -1608,7 +1703,8 @@
         "dest_warp_id": 0,
         "id": 7,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_House02_00"
+        "dest_map_id": "Map_Hearthome_House02_00",
+        "sekii_id": "hearthome:hotel"
       },
       {
         "x_pos": 8,
@@ -1619,7 +1715,8 @@
         "dest_warp_id": 0,
         "id": 12,
         "header_id": 86,
-        "dest_map_id": "Map_Hearthome_House01_00"
+        "dest_map_id": "Map_Hearthome_House01_00",
+        "sekii_id": "hearthome:fanclub"
       },
       {
         "x_pos": 25,
@@ -1630,7 +1727,8 @@
         "dest_warp_id": 0,
         "id": 17,
         "header_id": 86,
-        "dest_map_id": "Map_Route_209_Gate_00"
+        "dest_map_id": "Map_Route_209_Gate_00",
+        "sekii_id": "hearthome:routeright"
       },
       {
         "x_pos": 25,
@@ -1641,7 +1739,8 @@
         "dest_warp_id": 0,
         "id": 19,
         "header_id": 86,
-        "dest_map_id": "Map_Route_209_Gate_00"
+        "dest_map_id": "Map_Route_209_Gate_00",
+        "sekii_id": "hearthome:routeright"
       }
     ],
     "connections": [
@@ -1660,7 +1759,8 @@
         "dest_warp_id": 1,
         "id": 3,
         "header_id": 354,
-        "dest_map_id": "Map_Mount_Coronet_Floor00_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor00_00",
+        "sekii_id": "route207_route208:r208_cave"
       }
     ],
     "connections": [
@@ -1678,7 +1778,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 354,
-        "dest_map_id": "Map_Route_208_Gate_00"
+        "dest_map_id": "Map_Route_208_Gate_00",
+        "sekii_id": "route207_route208:r208_city"
       },
       {
         "x_pos": 31,
@@ -1689,7 +1790,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 354,
-        "dest_map_id": "Map_Route_208_Gate_00"
+        "dest_map_id": "Map_Route_208_Gate_00",
+        "sekii_id": "route207_route208:r208_city"
       },
       {
         "x_pos": 25,
@@ -1700,7 +1802,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 354,
-        "dest_map_id": "Map_Berry_Master_00"
+        "dest_map_id": "Map_Berry_Master_00",
+        "sekii_id": "route207_route208:r208_house"
       }
     ],
     "connections": [
@@ -1718,7 +1821,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 356,
-        "dest_map_id": "Map_Pokemon_Tower_00"
+        "dest_map_id": "Map_Pokemon_Tower_00",
+        "sekii_id": "route209:tower"
       }
     ],
     "connections": [
@@ -1737,7 +1841,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 356,
-        "dest_map_id": "Map_Route_209_Gate_00"
+        "dest_map_id": "Map_Route_209_Gate_00",
+        "sekii_id": "route209:entrance"
       },
       {
         "x_pos": 0,
@@ -1748,7 +1853,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 356,
-        "dest_map_id": "Map_Route_209_Gate_00"
+        "dest_map_id": "Map_Route_209_Gate_00",
+        "sekii_id": "route209:entrance"
       }
     ],
     "connections": [
@@ -1780,7 +1886,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 362,
-        "dest_map_id": "Map_Route_210_Cafe_00"
+        "dest_map_id": "Map_Route_210_Cafe_00",
+        "sekii_id": "route210_route215:r210_cafe"
       }
     ],
     "connections": [
@@ -1822,7 +1929,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 363,
-        "dest_map_id": "Map_Route_210_Room01_00"
+        "dest_map_id": "Map_Route_210_Room01_00",
+        "sekii_id": "route210_route215:r210_grandma"
       }
     ],
     "connections": [
@@ -1842,7 +1950,8 @@
         "dest_warp_id": 3,
         "id": 0,
         "header_id": 366,
-        "dest_map_id": "Map_Mount_Coronet_Floor09_01"
+        "dest_map_id": "Map_Mount_Coronet_Floor09_01",
+        "sekii_id": "route211:right"
       }
     ],
     "connections": [
@@ -1874,7 +1983,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 382,
-        "dest_map_id": "Map_Route_215_Gate_00"
+        "dest_map_id": "Map_Route_215_Gate_00",
+        "sekii_id": "route210_route215:r215"
       },
       {
         "x_pos": 31,
@@ -1885,7 +1995,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 382,
-        "dest_map_id": "Map_Route_215_Gate_00"
+        "dest_map_id": "Map_Route_215_Gate_00",
+        "sekii_id": "route210_route215:r215"
       }
     ],
     "connections": [
@@ -1903,7 +2014,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 433,
-        "dest_map_id": "Map_Solaceon_Daycare_00"
+        "dest_map_id": "Map_Solaceon_Daycare_00",
+        "sekii_id": "solaceon:daycare"
       },
       {
         "x_pos": 27,
@@ -1914,7 +2026,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 433,
-        "dest_map_id": "Map_Solaceon_House01_00"
+        "dest_map_id": "Map_Solaceon_House01_00",
+        "sekii_id": "solaceon:rightcenter"
       },
       {
         "x_pos": 21,
@@ -1925,7 +2038,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 433,
-        "dest_map_id": "Map_Solaceon_Town_Room04_00"
+        "dest_map_id": "Map_Solaceon_Town_Room04_00",
+        "sekii_id": "solaceon:rightcare"
       },
       {
         "x_pos": 22,
@@ -1936,7 +2050,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 433,
-        "dest_map_id": "Map_Solaceon_PokemonCenter_00"
+        "dest_map_id": "Map_Solaceon_PokemonCenter_00",
+        "sekii_id": "solaceon:center"
       },
       {
         "x_pos": 27,
@@ -1947,7 +2062,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 433,
-        "dest_map_id": "Map_Solaceon_Shop_00"
+        "dest_map_id": "Map_Solaceon_Shop_00",
+        "sekii_id": "solaceon:mart"
       }
     ],
     "connections": [
@@ -1967,7 +2083,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 433,
-        "dest_map_id": "Map_Solaceon_Town_Room02_00"
+        "dest_map_id": "Map_Solaceon_Town_Room02_00",
+        "sekii_id": "solaceon:right1"
       },
       {
         "x_pos": 5,
@@ -1978,7 +2095,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 433,
-        "dest_map_id": "Map_Solaceon_Town_Room05_00"
+        "dest_map_id": "Map_Solaceon_Town_Room05_00",
+        "sekii_id": "solaceon:right2"
       },
       {
         "x_pos": 21,
@@ -2000,7 +2118,8 @@
         "dest_warp_id": 0,
         "id": 8,
         "header_id": 433,
-        "dest_map_id": "Map_Solaceon_Ruins_Room02_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room02_00",
+        "sekii_id": "solaceon:ruins"
       }
     ],
     "connections": [
@@ -2018,7 +2137,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 442,
-        "dest_map_id": "Map_Celestic_Town_House03_00"
+        "dest_map_id": "Map_Celestic_Town_House03_00",
+        "sekii_id": "celestic:topmid"
       },
       {
         "x_pos": 2,
@@ -2029,7 +2149,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 442,
-        "dest_map_id": "Map_Celestic_Town_House04_00"
+        "dest_map_id": "Map_Celestic_Town_House04_00",
+        "sekii_id": "celestic:topleft"
       },
       {
         "x_pos": 25,
@@ -2040,7 +2161,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 442,
-        "dest_map_id": "Map_Celestic_Town_House01_00"
+        "dest_map_id": "Map_Celestic_Town_House01_00",
+        "sekii_id": "celestic:topright"
       },
       {
         "x_pos": 6,
@@ -2051,7 +2173,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 442,
-        "dest_map_id": "Map_Celestic_Town_House02_00"
+        "dest_map_id": "Map_Celestic_Town_House02_00",
+        "sekii_id": "celestic:botleft"
       },
       {
         "x_pos": 15,
@@ -2062,7 +2185,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 442,
-        "dest_map_id": "Map_Celestic_Shrine_00"
+        "dest_map_id": "Map_Celestic_Shrine_00",
+        "sekii_id": "celestic:cave"
       },
       {
         "x_pos": 24,
@@ -2073,7 +2197,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 442,
-        "dest_map_id": "Map_Celestic_PokemonCenter_00"
+        "dest_map_id": "Map_Celestic_PokemonCenter_00",
+        "sekii_id": "celestic:center"
       }
     ],
     "connections": [
@@ -2092,7 +2217,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 132,
-        "dest_map_id": "Map_Route_215_Gate_00"
+        "dest_map_id": "Map_Route_215_Gate_00",
+        "sekii_id": "veilstone:route215"
       },
       {
         "x_pos": 6,
@@ -2103,7 +2229,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 132,
-        "dest_map_id": "Map_Route_215_Gate_00"
+        "dest_map_id": "Map_Route_215_Gate_00",
+        "sekii_id": "veilstone:route215"
       },
       {
         "x_pos": 29,
@@ -2114,7 +2241,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 132,
-        "dest_map_id": "Map_Veilstone_Mall_00"
+        "dest_map_id": "Map_Veilstone_Mall_00",
+        "sekii_id": "veilstone:department"
       },
       {
         "x_pos": 29,
@@ -2125,7 +2253,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 132,
-        "dest_map_id": "Map_Veilstone_Warehouse_00"
+        "dest_map_id": "Map_Veilstone_Warehouse_00",
+        "sekii_id": "veilstone:warehouse"
       }
     ],
     "connections": [
@@ -2144,7 +2273,8 @@
         "dest_warp_id": 0,
         "id": 8,
         "header_id": 132,
-        "dest_map_id": "Map_Veilstone_House02_00"
+        "dest_map_id": "Map_Veilstone_House02_00",
+        "sekii_id": "veilstone:centerupleft"
       },
       {
         "x_pos": 13,
@@ -2155,7 +2285,8 @@
         "dest_warp_id": 0,
         "id": 9,
         "header_id": 132,
-        "dest_map_id": "Map_Veilstone_City_Room07_00"
+        "dest_map_id": "Map_Veilstone_City_Room07_00",
+        "sekii_id": "veilstone:centerupright"
       },
       {
         "x_pos": 10,
@@ -2166,7 +2297,8 @@
         "dest_warp_id": 0,
         "id": 14,
         "header_id": 132,
-        "dest_map_id": "Map_Galactic_HQ_Floor00_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor00_00",
+        "sekii_id": "veilstone:galacticleft"
       },
       {
         "x_pos": 13,
@@ -2177,7 +2309,8 @@
         "dest_warp_id": 1,
         "id": 15,
         "header_id": 132,
-        "dest_map_id": "Map_Galactic_HQ_Floor00_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor00_00",
+        "sekii_id": "veilstone:galactigmid"
       },
       {
         "x_pos": 16,
@@ -2188,7 +2321,8 @@
         "dest_warp_id": 2,
         "id": 16,
         "header_id": 132,
-        "dest_map_id": "Map_Galactic_HQ_Floor00_01"
+        "dest_map_id": "Map_Galactic_HQ_Floor00_01",
+        "sekii_id": "veilstone:galacticright"
       }
     ],
     "connections": [
@@ -2207,7 +2341,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 132,
-        "dest_map_id": "Map_Veilstone_City_Room08_00"
+        "dest_map_id": "Map_Veilstone_City_Room08_00",
+        "sekii_id": "veilstone:leftcasino2"
       },
       {
         "x_pos": 24,
@@ -2218,7 +2353,8 @@
         "dest_warp_id": 0,
         "id": 7,
         "header_id": 132,
-        "dest_map_id": "Map_Veilstone_House01_00"
+        "dest_map_id": "Map_Veilstone_House01_00",
+        "sekii_id": "veilstone:leftcasino1"
       },
       {
         "x_pos": 12,
@@ -2229,7 +2365,8 @@
         "dest_warp_id": 0,
         "id": 13,
         "header_id": 132,
-        "dest_map_id": "Map_Veilstone_Gym_00"
+        "dest_map_id": "Map_Veilstone_Gym_00",
+        "sekii_id": "veilstone:gym"
       }
     ],
     "connections": [
@@ -2248,7 +2385,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 132,
-        "dest_map_id": "Map_Veilstone_Game_Corner_00"
+        "dest_map_id": "Map_Veilstone_Game_Corner_00",
+        "sekii_id": "veilstone:casino"
       },
       {
         "x_pos": 12,
@@ -2259,7 +2397,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 132,
-        "dest_map_id": "Map_Veilstone_Coin_Market_00"
+        "dest_map_id": "Map_Veilstone_Coin_Market_00",
+        "sekii_id": "veilstone:rightcasino"
       },
       {
         "x_pos": 13,
@@ -2270,7 +2409,8 @@
         "dest_warp_id": 0,
         "id": 10,
         "header_id": 132,
-        "dest_map_id": "Map_Veilstone_PokemonCenter_00"
+        "dest_map_id": "Map_Veilstone_PokemonCenter_00",
+        "sekii_id": "veilstone:center"
       },
       {
         "x_pos": 14,
@@ -2281,7 +2421,8 @@
         "dest_warp_id": 0,
         "id": 11,
         "header_id": 132,
-        "dest_map_id": "Map_Route_214_Gate_00"
+        "dest_map_id": "Map_Route_214_Gate_00",
+        "sekii_id": "veilstone:route214"
       },
       {
         "x_pos": 15,
@@ -2292,7 +2433,8 @@
         "dest_warp_id": 0,
         "id": 12,
         "header_id": 132,
-        "dest_map_id": "Map_Route_214_Gate_00"
+        "dest_map_id": "Map_Route_214_Gate_00",
+        "sekii_id": "veilstone:route214"
       }
     ],
     "connections": [
@@ -2311,7 +2453,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 120,
-        "dest_map_id": "Map_Pastoria_Gym_00"
+        "dest_map_id": "Map_Pastoria_Gym_00",
+        "sekii_id": "pastoria:gym"
       },
       {
         "x_pos": 24,
@@ -2322,7 +2465,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 120,
-        "dest_map_id": "Map_Pastoria_City_Room05_00"
+        "dest_map_id": "Map_Pastoria_City_Room05_00",
+        "sekii_id": "pastoria:rightgym"
       },
       {
         "x_pos": 24,
@@ -2333,7 +2477,8 @@
         "dest_warp_id": 0,
         "id": 9,
         "header_id": 120,
-        "dest_map_id": "Map_Pastoria_PokemonCenter_00"
+        "dest_map_id": "Map_Pastoria_PokemonCenter_00",
+        "sekii_id": "pastoria:center"
       }
     ],
     "connections": [
@@ -2352,7 +2497,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 120,
-        "dest_map_id": "Map_Pastoria_City_Room06_00"
+        "dest_map_id": "Map_Pastoria_City_Room06_00",
+        "sekii_id": "pastoria:leftroute"
       },
       {
         "x_pos": 2,
@@ -2385,7 +2531,8 @@
         "dest_warp_id": 1,
         "id": 10,
         "header_id": 120,
-        "dest_map_id": "Map_Route_213_Gate_00"
+        "dest_map_id": "Map_Route_213_Gate_00",
+        "sekii_id": "pastoria:route"
       },
       {
         "x_pos": 31,
@@ -2396,7 +2543,8 @@
         "dest_warp_id": 1,
         "id": 11,
         "header_id": 120,
-        "dest_map_id": "Map_Route_213_Gate_00"
+        "dest_map_id": "Map_Route_213_Gate_00",
+        "sekii_id": "pastoria:route"
       }
     ],
     "connections": [
@@ -2415,7 +2563,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 120,
-        "dest_map_id": "Map_Pastoria_City_Room03_00"
+        "dest_map_id": "Map_Pastoria_City_Room03_00",
+        "sekii_id": "pastoria:upmart"
       },
       {
         "x_pos": 25,
@@ -2426,7 +2575,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 120,
-        "dest_map_id": "Map_Pastoria_Mart_00"
+        "dest_map_id": "Map_Pastoria_Mart_00",
+        "sekii_id": "pastoria:mart"
       },
       {
         "x_pos": 13,
@@ -2437,7 +2587,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 120,
-        "dest_map_id": "Map_Pastoria_City_Room02_00"
+        "dest_map_id": "Map_Pastoria_City_Room02_00",
+        "sekii_id": "pastoria:leftmart"
       }
     ],
     "connections": [
@@ -2457,7 +2608,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 120,
-        "dest_map_id": "Map_Pastoria_House01_00"
+        "dest_map_id": "Map_Pastoria_House01_00",
+        "sekii_id": "pastoria:rightmart"
       }
     ],
     "connections": [
@@ -2476,7 +2628,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 367,
-        "dest_map_id": "Map_Route_212_Gate_00"
+        "dest_map_id": "Map_Route_212_Gate_00",
+        "sekii_id": "r212_mansion:r212_city"
       },
       {
         "x_pos": 11,
@@ -2487,7 +2640,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 367,
-        "dest_map_id": "Map_Route_212_Gate_00"
+        "dest_map_id": "Map_Route_212_Gate_00",
+        "sekii_id": "r212_mansion:r212_city"
       }
     ],
     "connections": [
@@ -2505,7 +2659,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 367,
-        "dest_map_id": "Map_Pokemon_Mansion_01"
+        "dest_map_id": "Map_Pokemon_Mansion_01",
+        "sekii_id": "r212_mansion:r212_mansion"
       }
     ],
     "connections": [
@@ -2545,7 +2700,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 371,
-        "dest_map_id": "Map_Route_212_House01_00"
+        "dest_map_id": "Map_Route_212_House01_00",
+        "sekii_id": "r212_mansion:r212_house"
       }
     ],
     "connections": [
@@ -2571,7 +2727,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 150,
-        "dest_map_id": "Map_Sunyshore_Market_00"
+        "dest_map_id": "Map_Sunyshore_Market_00",
+        "sekii_id": "sunyshore:market"
       },
       {
         "x_pos": 0,
@@ -2604,7 +2761,8 @@
         "dest_warp_id": 0,
         "id": 12,
         "header_id": 150,
-        "dest_map_id": "Map_Sunyshore_Gym_00"
+        "dest_map_id": "Map_Sunyshore_Gym_00",
+        "sekii_id": "sunyshore:gym"
       },
       {
         "x_pos": 18,
@@ -2615,7 +2773,8 @@
         "dest_warp_id": 0,
         "id": 13,
         "header_id": 150,
-        "dest_map_id": "Map_Sunyshore_Market_00"
+        "dest_map_id": "Map_Sunyshore_Market_00",
+        "sekii_id": "sunyshore:market"
       }
     ],
     "connections": [
@@ -2635,7 +2794,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 150,
-        "dest_map_id": "Map_Sunyshore_House02_00"
+        "dest_map_id": "Map_Sunyshore_House02_00",
+        "sekii_id": "sunyshore:topright"
       },
       {
         "x_pos": 11,
@@ -2646,7 +2806,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 150,
-        "dest_map_id": "Map_Sunyshore_House03_00"
+        "dest_map_id": "Map_Sunyshore_House03_00",
+        "sekii_id": "sunyshore:topleft"
       }
     ],
     "connections": [
@@ -2665,7 +2826,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 150,
-        "dest_map_id": "Map_Sunyshore_Underground_House_00"
+        "dest_map_id": "Map_Sunyshore_Underground_House_00",
+        "sekii_id": "sunyshore:leftmart"
       },
       {
         "x_pos": 0,
@@ -2676,7 +2838,8 @@
         "dest_warp_id": 1,
         "id": 3,
         "header_id": 150,
-        "dest_map_id": "Map_Route_222_Gate_00"
+        "dest_map_id": "Map_Route_222_Gate_00",
+        "sekii_id": "sunyshore:gate"
       },
       {
         "x_pos": 21,
@@ -2687,7 +2850,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 150,
-        "dest_map_id": "Map_Sunyshore_Shop_00"
+        "dest_map_id": "Map_Sunyshore_Shop_00",
+        "sekii_id": "sunyshore:mart"
       },
       {
         "x_pos": 0,
@@ -2698,7 +2862,8 @@
         "dest_warp_id": 1,
         "id": 6,
         "header_id": 150,
-        "dest_map_id": "Map_Route_222_Gate_00"
+        "dest_map_id": "Map_Route_222_Gate_00",
+        "sekii_id": "sunyshore:gate"
       },
       {
         "x_pos": 28,
@@ -2709,7 +2874,8 @@
         "dest_warp_id": 0,
         "id": 11,
         "header_id": 150,
-        "dest_map_id": "Map_Sunyshore_PokemonCenter_00"
+        "dest_map_id": "Map_Sunyshore_PokemonCenter_00",
+        "sekii_id": "sunyshore:center"
       }
     ],
     "connections": [
@@ -2728,7 +2894,8 @@
         "dest_warp_id": 0,
         "id": 9,
         "header_id": 150,
-        "dest_map_id": "Map_Sunyshore_House01_00"
+        "dest_map_id": "Map_Sunyshore_House01_00",
+        "sekii_id": "sunyshore:toplight"
       },
       {
         "x_pos": 22,
@@ -2739,7 +2906,8 @@
         "dest_warp_id": 0,
         "id": 10,
         "header_id": 150,
-        "dest_map_id": "Map_Lighthouse_00"
+        "dest_map_id": "Map_Lighthouse_00",
+        "sekii_id": "sunyshore:lighthouse"
       }
     ],
     "connections": [
@@ -2776,7 +2944,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 172,
-        "dest_map_id": "Map_Pokemon_League_PokemonCenter_00"
+        "dest_map_id": "Map_Pokemon_League_PokemonCenter_00",
+        "sekii_id": "league:center"
       },
       {
         "x_pos": 19,
@@ -2787,7 +2956,8 @@
         "dest_warp_id": 7,
         "id": 2,
         "header_id": 172,
-        "dest_map_id": "Map_Victory_Road_Floor01_00"
+        "dest_map_id": "Map_Victory_Road_Floor01_00",
+        "sekii_id": "league:entrance"
       },
       {
         "x_pos": 21,
@@ -2809,7 +2979,8 @@
         "dest_warp_id": 7,
         "id": 4,
         "header_id": 172,
-        "dest_map_id": "Map_Victory_Road_Floor01_00"
+        "dest_map_id": "Map_Victory_Road_Floor01_00",
+        "sekii_id": "league:entrance"
       },
       {
         "x_pos": 20,
@@ -2820,7 +2991,8 @@
         "dest_warp_id": 7,
         "id": 5,
         "header_id": 172,
-        "dest_map_id": "Map_Victory_Road_Floor01_00"
+        "dest_map_id": "Map_Victory_Road_Floor01_00",
+        "sekii_id": "league:entrance"
       },
       {
         "x_pos": 21,
@@ -2990,7 +3162,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 165,
-        "dest_map_id": "Map_Snowpoint_City_Room01_00"
+        "dest_map_id": "Map_Snowpoint_City_Room01_00",
+        "sekii_id": "snowpoint:left"
       },
       {
         "x_pos": 27,
@@ -3001,7 +3174,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 165,
-        "dest_map_id": "Map_Snowpoint_House01_00"
+        "dest_map_id": "Map_Snowpoint_House01_00",
+        "sekii_id": "snowpoint:right"
       },
       {
         "x_pos": 14,
@@ -3012,7 +3186,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 165,
-        "dest_map_id": "Map_Snowpoint_Temple_00"
+        "dest_map_id": "Map_Snowpoint_Temple_00",
+        "sekii_id": "snowpoint:temple"
       },
       {
         "x_pos": 15,
@@ -3023,7 +3198,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 165,
-        "dest_map_id": "Map_Snowpoint_Gym_00"
+        "dest_map_id": "Map_Snowpoint_Gym_00",
+        "sekii_id": "snowpoint:gym"
       },
       {
         "x_pos": 15,
@@ -3034,7 +3210,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 165,
-        "dest_map_id": "Map_Snowpoint_Temple_00"
+        "dest_map_id": "Map_Snowpoint_Temple_00",
+        "sekii_id": "snowpoint:temple"
       }
     ],
     "connections": [
@@ -3053,7 +3230,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 165,
-        "dest_map_id": "Map_Snowpoint_Shop_00"
+        "dest_map_id": "Map_Snowpoint_Shop_00",
+        "sekii_id": "snowpoint:mart"
       },
       {
         "x_pos": 27,
@@ -3064,7 +3242,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 165,
-        "dest_map_id": "Map_Snowpoint_PokemonCenter_00"
+        "dest_map_id": "Map_Snowpoint_PokemonCenter_00",
+        "sekii_id": "snowpoint:center"
       }
     ],
     "connections": [
@@ -3098,7 +3277,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 340,
-        "dest_map_id": "Map_Lake_Acuity_NoCave_00"
+        "dest_map_id": "Map_Lake_Acuity_NoCave_00",
+        "sekii_id": "route216_route217:r217_lake"
       },
       {
         "x_pos": 21,
@@ -3109,7 +3289,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 340,
-        "dest_map_id": "Map_Lake_Acuity_NoCave_00"
+        "dest_map_id": "Map_Lake_Acuity_NoCave_00",
+        "sekii_id": "route216_route217:r217_lake"
       },
       {
         "x_pos": 20,
@@ -3120,7 +3301,8 @@
         "dest_warp_id": 3,
         "id": 2,
         "header_id": 340,
-        "dest_map_id": "Map_Lake_Acuity_WithCave_00"
+        "dest_map_id": "Map_Lake_Acuity_WithCave_00",
+        "sekii_id": "route216_route217:r217_lake"
       },
       {
         "x_pos": 21,
@@ -3131,7 +3313,8 @@
         "dest_warp_id": 4,
         "id": 3,
         "header_id": 340,
-        "dest_map_id": "Map_Lake_Acuity_WithCave_00"
+        "dest_map_id": "Map_Lake_Acuity_WithCave_00",
+        "sekii_id": "route216_route217:r217_lake"
       }
     ],
     "connections": [
@@ -3159,7 +3342,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 383,
-        "dest_map_id": "Map_Route_216_House01_00"
+        "dest_map_id": "Map_Route_216_House01_00",
+        "sekii_id": "route216_route217:r216_house"
       }
     ],
     "connections": [
@@ -3185,7 +3369,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 383,
-        "dest_map_id": "Map_Mount_Coronet_Floor08_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor08_00",
+        "sekii_id": "route216_route217:r216_cave"
       }
     ],
     "connections": [
@@ -3203,7 +3388,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 385,
-        "dest_map_id": "Map_Route_217_House02_00"
+        "dest_map_id": "Map_Route_217_House02_00",
+        "sekii_id": "route216_route217:r217_right"
       }
     ],
     "connections": [
@@ -3222,7 +3408,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 385,
-        "dest_map_id": "Map_Route_217_House01_00"
+        "dest_map_id": "Map_Route_217_House01_00",
+        "sekii_id": "route216_route217:r217_left"
       }
     ],
     "connections": [
@@ -3255,7 +3442,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 33,
-        "dest_map_id": "Map_Canalave_Gym_00"
+        "dest_map_id": "Map_Canalave_Gym_00",
+        "sekii_id": "canalave:gym"
       },
       {
         "x_pos": 26,
@@ -3266,7 +3454,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 33,
-        "dest_map_id": "Map_Canalave_PokemonCenter_00"
+        "dest_map_id": "Map_Canalave_PokemonCenter_00",
+        "sekii_id": "canalave:center"
       },
       {
         "x_pos": 5,
@@ -3277,7 +3466,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 33,
-        "dest_map_id": "Map_Canalave_Library_00"
+        "dest_map_id": "Map_Canalave_Library_00",
+        "sekii_id": "canalave:left1"
       },
       {
         "x_pos": 26,
@@ -3288,7 +3478,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 33,
-        "dest_map_id": "Map_Canalave_Darkrai_House_00"
+        "dest_map_id": "Map_Canalave_Darkrai_House_00",
+        "sekii_id": "canalave:right1"
       },
       {
         "x_pos": 21,
@@ -3299,7 +3490,8 @@
         "dest_warp_id": 0,
         "id": 9,
         "header_id": 33,
-        "dest_map_id": "Map_Canalave_City_Room03_00"
+        "dest_map_id": "Map_Canalave_City_Room03_00",
+        "sekii_id": "canalave:right2"
       }
     ],
     "connections": [
@@ -3318,7 +3510,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 33,
-        "dest_map_id": "Map_Canalave_Shop_00"
+        "dest_map_id": "Map_Canalave_Shop_00",
+        "sekii_id": "canalave:mart"
       },
       {
         "x_pos": 22,
@@ -3329,7 +3522,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 33,
-        "dest_map_id": "Map_Canalave_City_Room02_00"
+        "dest_map_id": "Map_Canalave_City_Room02_00",
+        "sekii_id": "canalave:right3"
       },
       {
         "x_pos": 7,
@@ -3340,7 +3534,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 33,
-        "dest_map_id": "Map_Canalave_House02_00"
+        "dest_map_id": "Map_Canalave_House02_00",
+        "sekii_id": "canalave:left3"
       },
       {
         "x_pos": 31,
@@ -3351,7 +3546,8 @@
         "dest_warp_id": 0,
         "id": 7,
         "header_id": 33,
-        "dest_map_id": "Map_Route_218_Gate_00"
+        "dest_map_id": "Map_Route_218_Gate_00",
+        "sekii_id": "canalave:route"
       },
       {
         "x_pos": 31,
@@ -3362,7 +3558,8 @@
         "dest_warp_id": 0,
         "id": 8,
         "header_id": 33,
-        "dest_map_id": "Map_Route_218_Gate_00"
+        "dest_map_id": "Map_Route_218_Gate_00",
+        "sekii_id": "canalave:route"
       },
       {
         "x_pos": 6,
@@ -3373,7 +3570,8 @@
         "dest_warp_id": 0,
         "id": 10,
         "header_id": 33,
-        "dest_map_id": "Map_Canalave_House01_00"
+        "dest_map_id": "Map_Canalave_House01_00",
+        "sekii_id": "canalave:left2"
       }
     ],
     "connections": [
@@ -3419,7 +3617,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 288,
-        "dest_map_id": "Map_Iron_Island_House01_00"
+        "dest_map_id": "Map_Iron_Island_House01_00",
+        "sekii_id": "ironisland:exterior_house"
       },
       {
         "x_pos": 21,
@@ -3430,7 +3629,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 288,
-        "dest_map_id": "Map_Iron_Island_Room01_00"
+        "dest_map_id": "Map_Iron_Island_Room01_00",
+        "sekii_id": "ironisland:exterior_entrance"
       },
       {
         "x_pos": 7,
@@ -3441,7 +3641,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 288,
-        "dest_map_id": "Map_Iron_Island_Room06_00"
+        "dest_map_id": "Map_Iron_Island_Room06_00",
+        "sekii_id": "ironisland:exterior_ledge"
       }
     ],
     "connections": [
@@ -3545,7 +3746,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 262,
-        "dest_map_id": "Map_Stark_Mountain_Room01_00"
+        "dest_map_id": "Map_Stark_Mountain_Room01_00",
+        "sekii_id": "route226_route227:r227_stark"
       }
     ],
     "connections": [
@@ -3570,7 +3772,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 400,
-        "dest_map_id": "Map_Route_225_Room01_00"
+        "dest_map_id": "Map_Route_225_Room01_00",
+        "sekii_id": "route225:house"
       }
     ],
     "connections": [
@@ -3589,7 +3792,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 400,
-        "dest_map_id": "Map_Route_225_Gate_00"
+        "dest_map_id": "Map_Route_225_Gate_00",
+        "sekii_id": "route225:entrance"
       },
       {
         "x_pos": 23,
@@ -3600,7 +3804,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 400,
-        "dest_map_id": "Map_Route_225_Gate_00"
+        "dest_map_id": "Map_Route_225_Gate_00",
+        "sekii_id": "route225:entrance"
       }
     ],
     "connections": [
@@ -3625,7 +3830,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 403,
-        "dest_map_id": "Map_Route_227_House01_00"
+        "dest_map_id": "Map_Route_227_House01_00",
+        "sekii_id": "route226_route227:r227_house"
       }
     ],
     "connections": [
@@ -3644,7 +3850,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 450,
-        "dest_map_id": "Map_Battleground_00"
+        "dest_map_id": "Map_Battleground_00",
+        "sekii_id": "survivalarea:bar"
       },
       {
         "x_pos": 15,
@@ -3655,7 +3862,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 450,
-        "dest_map_id": "Map_Survival_Area_House01_00"
+        "dest_map_id": "Map_Survival_Area_House01_00",
+        "sekii_id": "survivalarea:bot"
       },
       {
         "x_pos": 16,
@@ -3666,7 +3874,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 450,
-        "dest_map_id": "Map_Survival_Area_House02_00"
+        "dest_map_id": "Map_Survival_Area_House02_00",
+        "sekii_id": "survivalarea:up"
       },
       {
         "x_pos": 19,
@@ -3677,7 +3886,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 450,
-        "dest_map_id": "Map_Survival_Area_PokemonCenter_00"
+        "dest_map_id": "Map_Survival_Area_PokemonCenter_00",
+        "sekii_id": "survivalarea:center"
       },
       {
         "x_pos": 23,
@@ -3688,7 +3898,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 450,
-        "dest_map_id": "Map_Survival_Area_Shop_00"
+        "dest_map_id": "Map_Survival_Area_Shop_00",
+        "sekii_id": "survivalarea:mart"
       }
     ],
     "connections": [
@@ -3721,7 +3932,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 469,
-        "dest_map_id": "Map_Route_226_House01_00"
+        "dest_map_id": "Map_Route_226_House01_00",
+        "sekii_id": "route226_route227:r226_house"
       },
       {
         "x_pos": 31,
@@ -3732,7 +3944,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 469,
-        "dest_map_id": "Map_Route_228_Gate_00"
+        "dest_map_id": "Map_Route_228_Gate_00",
+        "sekii_id": "route226_route227:r226_gate"
       },
       {
         "x_pos": 31,
@@ -3743,7 +3956,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 469,
-        "dest_map_id": "Map_Route_228_Gate_00"
+        "dest_map_id": "Map_Route_228_Gate_00",
+        "sekii_id": "route226_route227:r226_gate"
       }
     ],
     "connections": [
@@ -3769,7 +3983,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 336,
-        "dest_map_id": "Map_Lake_Valor_Bombed_00"
+        "dest_map_id": "Map_Lake_Valor_Bombed_00",
+        "sekii_id": "valorlakefront:lakefront_lake"
       },
       {
         "x_pos": 13,
@@ -3780,7 +3995,8 @@
         "dest_warp_id": 2,
         "id": 4,
         "header_id": 336,
-        "dest_map_id": "Map_Lake_Valor_Bombed_00"
+        "dest_map_id": "Map_Lake_Valor_Bombed_00",
+        "sekii_id": "valorlakefront:lakefront_lake"
       },
       {
         "x_pos": 13,
@@ -3791,7 +4007,8 @@
         "dest_warp_id": 3,
         "id": 5,
         "header_id": 336,
-        "dest_map_id": "Map_Lake_Valor_Normal_00"
+        "dest_map_id": "Map_Lake_Valor_Normal_00",
+        "sekii_id": "valorlakefront:lakefront_lake"
       },
       {
         "x_pos": 13,
@@ -3802,7 +4019,8 @@
         "dest_warp_id": 4,
         "id": 6,
         "header_id": 336,
-        "dest_map_id": "Map_Lake_Valor_Normal_00"
+        "dest_map_id": "Map_Lake_Valor_Normal_00",
+        "sekii_id": "valorlakefront:lakefront_lake"
       }
     ],
     "connections": [
@@ -3822,7 +4040,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 336,
-        "dest_map_id": "Map_Grand_Lake_House02_00"
+        "dest_map_id": "Map_Grand_Lake_House02_00",
+        "sekii_id": "valorlakefront:lakefront_topleft"
       }
     ],
     "connections": [
@@ -3841,7 +4060,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 336,
-        "dest_map_id": "Map_Grand_Lake_House06_00"
+        "dest_map_id": "Map_Grand_Lake_House06_00",
+        "sekii_id": "valorlakefront:lakefront_topmid"
       },
       {
         "x_pos": 11,
@@ -3852,7 +4072,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 336,
-        "dest_map_id": "Map_Grand_Lake_House01_00"
+        "dest_map_id": "Map_Grand_Lake_House01_00",
+        "sekii_id": "valorlakefront:lakefront_topright"
       }
     ],
     "connections": [
@@ -3888,7 +4109,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 341,
-        "dest_map_id": "Map_Sendoff_Springs_01"
+        "dest_map_id": "Map_Sendoff_Springs_01",
+        "sekii_id": "route214:forest"
       },
       {
         "x_pos": 27,
@@ -3899,7 +4121,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 341,
-        "dest_map_id": "Map_Sendoff_Springs_01"
+        "dest_map_id": "Map_Sendoff_Springs_01",
+        "sekii_id": "route214:forest"
       }
     ],
     "connections": [
@@ -3926,7 +4149,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 373,
-        "dest_map_id": "Map_Route_213_Gate_00"
+        "dest_map_id": "Map_Route_213_Gate_00",
+        "sekii_id": "valorlakefront:r213_city"
       },
       {
         "x_pos": 6,
@@ -3937,7 +4161,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 373,
-        "dest_map_id": "Map_Route_213_Gate_00"
+        "dest_map_id": "Map_Route_213_Gate_00",
+        "sekii_id": "valorlakefront:r213_city"
       },
 
       {
@@ -3949,7 +4174,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 373,
-        "dest_map_id": "Map_Grand_Lake_House04_00"
+        "dest_map_id": "Map_Grand_Lake_House04_00",
+        "sekii_id": "valorlakefront:lakefront_midleft"
       },
 
       {
@@ -3961,7 +4187,8 @@
         "dest_warp_id": 1,
         "id": 3,
         "header_id": 373,
-        "dest_map_id": "Map_Grand_Lake_Gate_00"
+        "dest_map_id": "Map_Grand_Lake_Gate_00",
+        "sekii_id": "valorlakefront:r213_hotel"
       },
       {
         "x_pos": 2,
@@ -3972,7 +4199,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 373,
-        "dest_map_id": "Map_Grand_Lake_Gate_00"
+        "dest_map_id": "Map_Grand_Lake_Gate_00",
+        "sekii_id": "valorlakefront:lakefront_hotel"
       },
       {
         "x_pos": 6,
@@ -3983,7 +4211,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 373,
-        "dest_map_id": "Map_Grand_Lake_House03_00"
+        "dest_map_id": "Map_Grand_Lake_House03_00",
+        "sekii_id": "valorlakefront:lakefront_midbot"
       },
       {
         "x_pos": 8,
@@ -3994,7 +4223,8 @@
         "dest_warp_id": 0,
         "id": 7,
         "header_id": 373,
-        "dest_map_id": "Map_Grand_Lake_House05_00"
+        "dest_map_id": "Map_Grand_Lake_House05_00",
+        "sekii_id": "valorlakefront:lakefront_midtop"
       },
 
       {
@@ -4006,7 +4236,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 373,
-        "dest_map_id": "Map_Footstep_House_00"
+        "dest_map_id": "Map_Footstep_House_00",
+        "sekii_id": "valorlakefront:r213_house"
       }
     ],
     "connections": ["Map_Valor_Lakefront_03"]
@@ -4022,7 +4253,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 380,
-        "dest_map_id": "Map_Route_214_Gate_00"
+        "dest_map_id": "Map_Route_214_Gate_00",
+        "sekii_id": "route214:top"
       },
       {
         "x_pos": 15,
@@ -4033,7 +4265,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 380,
-        "dest_map_id": "Map_Route_214_Gate_00"
+        "dest_map_id": "Map_Route_214_Gate_00",
+        "sekii_id": "route214:top"
       },
       {
         "x_pos": 9,
@@ -4044,7 +4277,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 380,
-        "dest_map_id": "Map_Ruin_Maniac_Cave_00"
+        "dest_map_id": "Map_Ruin_Maniac_Cave_00",
+        "sekii_id": "route214:cave"
       },
       {
         "x_pos": 9,
@@ -4055,7 +4289,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 380,
-        "dest_map_id": "Map_Ruin_Maniac_Cave_01"
+        "dest_map_id": "Map_Ruin_Maniac_Cave_01",
+        "sekii_id": "route214:cave"
       },
       {
         "x_pos": 9,
@@ -4066,7 +4301,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 380,
-        "dest_map_id": "Map_Maniac_Cave_01"
+        "dest_map_id": "Map_Maniac_Cave_01",
+        "sekii_id": "route214:cave"
       }
     ],
     "connections": [
@@ -4107,7 +4343,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 395,
-        "dest_map_id": "Map_Route_222_Room01_00"
+        "dest_map_id": "Map_Route_222_Room01_00",
+        "sekii_id": "route222:left"
       }
     ],
     "connections": [
@@ -4126,7 +4363,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 395,
-        "dest_map_id": "Map_Route_222_Gate_00"
+        "dest_map_id": "Map_Route_222_Gate_00",
+        "sekii_id": "route222:city"
       },
       {
         "x_pos": 25,
@@ -4137,7 +4375,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 395,
-        "dest_map_id": "Map_Route_222_Gate_00"
+        "dest_map_id": "Map_Route_222_Gate_00",
+        "sekii_id": "route222:city"
       },
       {
         "x_pos": 1,
@@ -4148,7 +4387,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 395,
-        "dest_map_id": "Map_Route_222_Room02_00"
+        "dest_map_id": "Map_Route_222_Room02_00",
+        "sekii_id": "route222:right"
       }
     ],
     "connections": [
@@ -4166,7 +4406,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 188,
-        "dest_map_id": "Map_Route_225_Gate_00"
+        "dest_map_id": "Map_Route_225_Gate_00",
+        "sekii_id": "fightarea:gate"
       },
       {
         "x_pos": 23,
@@ -4177,7 +4418,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 188,
-        "dest_map_id": "Map_Route_225_Gate_00"
+        "dest_map_id": "Map_Route_225_Gate_00",
+        "sekii_id": "fightarea:gate"
       }
     ],
     "connections": [
@@ -4195,7 +4437,8 @@
         "dest_warp_id": 3,
         "id": 2,
         "header_id": 188,
-        "dest_map_id": "Map_Battle_Frontier_Interior_00"
+        "dest_map_id": "Map_Battle_Frontier_Interior_00",
+        "sekii_id": "fightarea:frontier"
       },
       {
         "x_pos": 15,
@@ -4206,7 +4449,8 @@
         "dest_warp_id": 3,
         "id": 3,
         "header_id": 188,
-        "dest_map_id": "Map_Battle_Frontier_Interior_00"
+        "dest_map_id": "Map_Battle_Frontier_Interior_00",
+        "sekii_id": "fightarea:frontier"
       },
       {
         "x_pos": 14,
@@ -4217,7 +4461,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 188,
-        "dest_map_id": "Map_Fight_Area_Room03_00"
+        "dest_map_id": "Map_Fight_Area_Room03_00",
+        "sekii_id": "fightarea:up"
       },
       {
         "x_pos": 14,
@@ -4228,7 +4473,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 188,
-        "dest_map_id": "Map_Fight_Area_Room04_00"
+        "dest_map_id": "Map_Fight_Area_Room04_00",
+        "sekii_id": "fightarea:bot"
       },
       {
         "x_pos": 7,
@@ -4239,7 +4485,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 188,
-        "dest_map_id": "Map_Fight_Area_PokemonCenter_00"
+        "dest_map_id": "Map_Fight_Area_PokemonCenter_00",
+        "sekii_id": "fightarea:center"
       },
       {
         "x_pos": 20,
@@ -4250,7 +4497,8 @@
         "dest_warp_id": 0,
         "id": 7,
         "header_id": 188,
-        "dest_map_id": "Map_Fight_Area_Shop_00"
+        "dest_map_id": "Map_Fight_Area_Shop_00",
+        "sekii_id": "fightarea:mart"
       }
     ],
     "connections": [
@@ -4269,7 +4517,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 406,
-        "dest_map_id": "Map_Route_228_Gate_00"
+        "dest_map_id": "Map_Route_228_Gate_00",
+        "sekii_id": "route228:gate"
       },
       {
         "x_pos": 6,
@@ -4280,7 +4529,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 406,
-        "dest_map_id": "Map_Route_228_Gate_00"
+        "dest_map_id": "Map_Route_228_Gate_00",
+        "sekii_id": "route228:gate"
       },
       {
         "x_pos": 17,
@@ -4291,7 +4541,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 406,
-        "dest_map_id": "Map_Regirock_Empty_Cave_00"
+        "dest_map_id": "Map_Regirock_Empty_Cave_00",
+        "sekii_id": "route228:cave"
       },
       {
         "x_pos": 17,
@@ -4302,7 +4553,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 406,
-        "dest_map_id": "Map_Regirock_Cave_00"
+        "dest_map_id": "Map_Regirock_Cave_00",
+        "sekii_id": "route228:cave"
       }
     ],
     "connections": [
@@ -4320,7 +4572,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 406,
-        "dest_map_id": "Map_Route_228_House02_00"
+        "dest_map_id": "Map_Route_228_House02_00",
+        "sekii_id": "route228:right"
       }
     ],
     "connections": [
@@ -4339,7 +4592,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 406,
-        "dest_map_id": "Map_Route_228_House01_00"
+        "dest_map_id": "Map_Route_228_House01_00",
+        "sekii_id": "route228:left"
       }
     ],
     "connections": [
@@ -4373,7 +4627,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 457,
-        "dest_map_id": "Map_Villa_00"
+        "dest_map_id": "Map_Villa_00",
+        "sekii_id": "resortarea:villa"
       },
       {
         "x_pos": 10,
@@ -4384,7 +4639,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 457,
-        "dest_map_id": "Map_Resort_Area_Room03_00"
+        "dest_map_id": "Map_Resort_Area_Room03_00",
+        "sekii_id": "resortarea:house"
       },
       {
         "x_pos": 24,
@@ -4395,7 +4651,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 457,
-        "dest_map_id": "Map_Ribbon_Syndicate_00"
+        "dest_map_id": "Map_Ribbon_Syndicate_00",
+        "sekii_id": "resortarea:ribbon"
       },
       {
         "x_pos": 2,
@@ -4406,7 +4663,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 457,
-        "dest_map_id": "Map_Resort_Area_PokemonCenter_00"
+        "dest_map_id": "Map_Resort_Area_PokemonCenter_00",
+        "sekii_id": "resortarea:center"
       }
     ],
     "connections": [
@@ -4445,7 +4703,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 258,
-        "dest_map_id": "Map_Route_203_01"
+        "dest_map_id": "Map_Route_203_01",
+        "sekii_id": "oreburghgate_r203:gate_left"
       },
       {
         "x_pos": 27,
@@ -4456,7 +4715,8 @@
         "dest_warp_id": 10,
         "id": 1,
         "header_id": 258,
-        "dest_map_id": "Map_Oreburgh_City_00"
+        "dest_map_id": "Map_Oreburgh_City_00",
+        "sekii_id": "oreburghgate_r203:gate_right"
       },
       {
         "x_pos": 20,
@@ -4467,7 +4727,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 258,
-        "dest_map_id": "Map_Oreburgh_Gate_Floor01_00"
+        "dest_map_id": "Map_Oreburgh_Gate_Floor01_00",
+        "sekii_id": "oreburghgate_r203:gate_top"
       }
     ],
     "connections": []
@@ -4588,7 +4849,8 @@
         "dest_warp_id": 4,
         "id": 4,
         "header_id": 203,
-        "dest_map_id": "Map_Old_Chateau_Room01_00"
+        "dest_map_id": "Map_Old_Chateau_Room01_00",
+        "sekii_id": "eternaforest_r205:forest_chateau"
       }
     ],
     "connections": [
@@ -4607,7 +4869,8 @@
         "dest_warp_id": 1,
         "id": 2,
         "header_id": 203,
-        "dest_map_id": "Map_Route_205_03"
+        "dest_map_id": "Map_Route_205_03",
+        "sekii_id": "eternaforest_r205:forest_exit"
       },
       {
         "x_pos": 22,
@@ -4618,7 +4881,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 203,
-        "dest_map_id": "Map_Route_205_03"
+        "dest_map_id": "Map_Route_205_03",
+        "sekii_id": "eternaforest_r205:forest_exit"
       }
     ],
     "connections": [
@@ -4638,7 +4902,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 203,
-        "dest_map_id": "Map_Route_205_00"
+        "dest_map_id": "Map_Route_205_00",
+        "sekii_id": "eternaforest_r205:forest_entrance"
       },
       {
         "x_pos": 29,
@@ -4649,7 +4914,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 203,
-        "dest_map_id": "Map_Route_205_00"
+        "dest_map_id": "Map_Route_205_00",
+        "sekii_id": "eternaforest_r205:forest_entrance"
       }
     ],
     "connections": [
@@ -4686,7 +4952,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 207,
-        "dest_map_id": "Map_Route_207_01"
+        "dest_map_id": "Map_Route_207_01",
+        "sekii_id": "coronet:f1_entrance"
       },
       {
         "x_pos": 27,
@@ -4697,7 +4964,8 @@
         "dest_warp_id": 3,
         "id": 1,
         "header_id": 207,
-        "dest_map_id": "Map_Route_208_00"
+        "dest_map_id": "Map_Route_208_00",
+        "sekii_id": "coronet:f1_exit"
       },
       {
         "x_pos": 25,
@@ -4708,7 +4976,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 207,
-        "dest_map_id": "Map_Mount_Coronet_Floor01_01"
+        "dest_map_id": "Map_Mount_Coronet_Floor01_01",
+        "sekii_id": "coronet:f1_stairs"
       }
     ],
     "connections": []
@@ -4724,7 +4993,8 @@
         "dest_warp_id": 3,
         "id": 2,
         "header_id": 208,
-        "dest_map_id": "Map_Mount_Coronet_Floor01_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor01_00",
+        "sekii_id": "coronet:f2_top"
       },
       {
         "x_pos": 7,
@@ -4775,7 +5045,8 @@
         "dest_warp_id": 2,
         "id": 0,
         "header_id": 208,
-        "dest_map_id": "Map_Mount_Coronet_Floor00_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor00_00",
+        "sekii_id": "coronet:f2_right"
       },
       {
         "x_pos": 2,
@@ -4786,7 +5057,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 208,
-        "dest_map_id": "Map_Route_207_01"
+        "dest_map_id": "Map_Route_207_01",
+        "sekii_id": "coronet:f2_left"
       }
     ],
     "connections": [
@@ -4804,7 +5076,8 @@
         "dest_warp_id": 4,
         "id": 0,
         "header_id": 209,
-        "dest_map_id": "Map_Mount_Coronet_Floor01_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor01_00",
+        "sekii_id": "coronet:f3_left"
       },
       {
         "x_pos": 18,
@@ -4815,7 +5088,8 @@
         "dest_warp_id": 5,
         "id": 1,
         "header_id": 209,
-        "dest_map_id": "Map_Mount_Coronet_Floor01_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor01_00",
+        "sekii_id": "coronet:f3_right"
       },
       {
         "x_pos": 3,
@@ -4826,7 +5100,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 209,
-        "dest_map_id": "Map_Mount_Coronet_Exterior_03"
+        "dest_map_id": "Map_Mount_Coronet_Exterior_03",
+        "sekii_id": "coronet:f3_entrance"
       }
     ],
     "connections": []
@@ -4842,7 +5117,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 210,
-        "dest_map_id": "Map_Mount_Coronet_Floor04_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor04_00",
+        "sekii_id": "coronetsummit:top"
       },
 
       {
@@ -4854,7 +5130,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 210,
-        "dest_map_id": "Map_Mount_Coronet_Floor07_01"
+        "dest_map_id": "Map_Mount_Coronet_Floor07_01",
+        "sekii_id": "coronetsummit:topright"
       },
 
       {
@@ -4866,7 +5143,8 @@
         "dest_warp_id": 4,
         "id": 0,
         "header_id": 210,
-        "dest_map_id": "Map_Mount_Coronet_Floor03_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor03_00",
+        "sekii_id": "coronetsummit:topleft"
       }
     ],
     "connections": [
@@ -4883,7 +5161,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 211,
-        "dest_map_id": "Map_Mount_Coronet_Floor03_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor03_00",
+        "sekii_id": "coronetsummit:botleft"
       },
 
       {
@@ -4895,7 +5174,8 @@
         "dest_warp_id": 1,
         "id": 2,
         "header_id": 211,
-        "dest_map_id": "Map_Mount_Coronet_Floor03_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor03_00",
+        "sekii_id": "coronetsummit:botright"
       },
 
       {
@@ -4907,7 +5187,8 @@
         "dest_warp_id": 2,
         "id": 0,
         "header_id": 211,
-        "dest_map_id": "Map_Mount_Coronet_Floor02_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor02_00",
+        "sekii_id": "coronetsummit:bot"
       }
     ],
     "connections": [
@@ -4924,7 +5205,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 212,
-        "dest_map_id": "Map_Mount_Coronet_Exterior_03"
+        "dest_map_id": "Map_Mount_Coronet_Exterior_03",
+        "sekii_id": "coronet:f4_left"
       },
       {
         "x_pos": 17,
@@ -4935,7 +5217,8 @@
         "dest_warp_id": 3,
         "id": 2,
         "header_id": 212,
-        "dest_map_id": "Map_Mount_Coronet_Floor03_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor03_00",
+        "sekii_id": "coronet:f4_water"
       },
 
       {
@@ -4947,7 +5230,8 @@
         "dest_warp_id": 2,
         "id": 1,
         "header_id": 212,
-        "dest_map_id": "Map_Mount_Coronet_Exterior_03"
+        "dest_map_id": "Map_Mount_Coronet_Exterior_03",
+        "sekii_id": "coronet:f4_right"
       },
       {
         "x_pos": 27,
@@ -4969,7 +5253,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 212,
-        "dest_map_id": "Map_Mount_Coronet_Exterior_00"
+        "dest_map_id": "Map_Mount_Coronet_Exterior_00",
+        "sekii_id": "coronet:f4_up"
       }
     ],
     "connections": [
@@ -5136,7 +5421,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 217,
-        "dest_map_id": "Map_Mount_Coronet_Floor10_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor10_00",
+        "sekii_id": "coronet:upf12_bot"
       },
       {
         "x_pos": 2,
@@ -5147,7 +5433,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 217,
-        "dest_map_id": "Map_Route_216_02"
+        "dest_map_id": "Map_Route_216_02",
+        "sekii_id": "coronet:upf12_left"
       },
       {
         "x_pos": 15,
@@ -5158,7 +5445,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 217,
-        "dest_map_id": "Map_Regice_Empty_Cave_00"
+        "dest_map_id": "Map_Regice_Empty_Cave_00",
+        "sekii_id": "coronet:upf12_top"
       },
       {
         "x_pos": 15,
@@ -5169,7 +5457,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 217,
-        "dest_map_id": "Map_Regice_Cave_00"
+        "dest_map_id": "Map_Regice_Cave_00",
+        "sekii_id": "coronet:upf12_top"
       }
     ],
     "connections": []
@@ -5185,7 +5474,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 218,
-        "dest_map_id": "Map_Mount_Coronet_Floor10_01"
+        "dest_map_id": "Map_Mount_Coronet_Floor10_01",
+        "sekii_id": "coronet:upf1_top"
       }
     ],
     "connections": [
@@ -5203,7 +5493,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 218,
-        "dest_map_id": "Map_Mount_Coronet_Floor07_00"
+        "dest_map_id": "Map_Mount_Coronet_Floor07_00",
+        "sekii_id": "coronet:upf1_bot"
       },
       {
         "x_pos": 2,
@@ -5214,7 +5505,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 218,
-        "dest_map_id": "Map_Route_211_00"
+        "dest_map_id": "Map_Route_211_00",
+        "sekii_id": "coronet:upf1_left"
       },
       {
         "x_pos": 29,
@@ -5225,7 +5517,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 218,
-        "dest_map_id": "Map_Route_211_01"
+        "dest_map_id": "Map_Route_211_01",
+        "sekii_id": "coronet:upf1_right"
       }
     ],
     "connections": [
@@ -5344,7 +5637,8 @@
         "dest_warp_id": 8,
         "id": 0,
         "header_id": 226,
-        "dest_map_id": "Map_Solaceon_Town_01"
+        "dest_map_id": "Map_Solaceon_Town_01",
+        "sekii_id": "solaceonruins:entrance_door"
       },
       {
         "x_pos": 6,
@@ -5355,7 +5649,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 226,
-        "dest_map_id": "Map_Solaceon_Ruins_Room08_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room08_00",
+        "sekii_id": "solaceonruins:entrance_topright"
       },
       {
         "x_pos": 6,
@@ -5366,7 +5661,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 226,
-        "dest_map_id": "Map_Solaceon_Ruins_Room04_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room04_00",
+        "sekii_id": "solaceonruins:entrance_botright"
       },
       {
         "x_pos": 4,
@@ -5377,7 +5673,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 226,
-        "dest_map_id": "Map_Solaceon_Ruins_Room06_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room06_00",
+        "sekii_id": "solaceonruins:entrance_topleft"
       }
     ],
     "connections": []
@@ -5393,7 +5690,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 239,
-        "dest_map_id": "Map_Solaceon_Ruins_Room05_01"
+        "dest_map_id": "Map_Solaceon_Ruins_Room05_01",
+        "sekii_id": "solaceonruins:bf4_topleft"
       },
       {
         "x_pos": 6,
@@ -5404,7 +5702,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 239,
-        "dest_map_id": "Map_Solaceon_Ruins_Room07_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room07_00",
+        "sekii_id": "solaceonruins:bf4_topright"
       },
       {
         "x_pos": 2,
@@ -5415,7 +5714,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 239,
-        "dest_map_id": "Map_Solaceon_Ruins_Room11_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room11_00",
+        "sekii_id": "solaceonruins:bf4_botleft"
       },
       {
         "x_pos": 6,
@@ -5426,7 +5726,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 239,
-        "dest_map_id": "Map_Solaceon_Ruins_Room04_03"
+        "dest_map_id": "Map_Solaceon_Ruins_Room04_03",
+        "sekii_id": "solaceonruins:bf4_botright"
       }
     ],
     "connections": []
@@ -5506,7 +5807,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 231,
-        "dest_map_id": "Map_Solaceon_Ruins_Room08_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room08_00",
+        "sekii_id": "solaceonruins:bf2_botright"
       },
       {
         "x_pos": 6,
@@ -5517,7 +5819,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 231,
-        "dest_map_id": "Map_Solaceon_Ruins_Room07_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room07_00",
+        "sekii_id": "solaceonruins:bf2_topright"
       },
       {
         "x_pos": 4,
@@ -5528,7 +5831,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 231,
-        "dest_map_id": "Map_Solaceon_Ruins_Room06_01"
+        "dest_map_id": "Map_Solaceon_Ruins_Room06_01",
+        "sekii_id": "solaceonruins:bf2_topleft"
       },
       {
         "x_pos": 4,
@@ -5539,7 +5843,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 231,
-        "dest_map_id": "Map_Solaceon_Ruins_Room06_02"
+        "dest_map_id": "Map_Solaceon_Ruins_Room06_02",
+        "sekii_id": "solaceonruins:bf2_botleft"
       }
     ],
     "connections": []
@@ -5555,7 +5860,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 238,
-        "dest_map_id": "Map_Solaceon_Ruins_Room06_03"
+        "dest_map_id": "Map_Solaceon_Ruins_Room06_03",
+        "sekii_id": "solaceonruins:bf3_topleft"
       },
       {
         "x_pos": 6,
@@ -5566,7 +5872,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 238,
-        "dest_map_id": "Map_Solaceon_Ruins_Room03_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room03_00",
+        "sekii_id": "solaceonruins:bf3_topright"
       },
       {
         "x_pos": 4,
@@ -5577,7 +5884,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 238,
-        "dest_map_id": "Map_Solaceon_Ruins_Room10_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room10_00",
+        "sekii_id": "solaceonruins:bf3_botleft"
       },
       {
         "x_pos": 6,
@@ -5588,7 +5896,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 238,
-        "dest_map_id": "Map_Solaceon_Ruins_Room09_01"
+        "dest_map_id": "Map_Solaceon_Ruins_Room09_01",
+        "sekii_id": "solaceonruins:bf3_botright"
       }
     ],
     "connections": []
@@ -5668,7 +5977,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 237,
-        "dest_map_id": "Map_Solaceon_Ruins_Room03_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room03_00",
+        "sekii_id": "solaceonruins:bf32_topleft"
       },
       {
         "x_pos": 4,
@@ -5679,7 +5989,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 237,
-        "dest_map_id": "Map_Solaceon_Ruins_Room05_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room05_00",
+        "sekii_id": "solaceonruins:bf32_botleft"
       },
       {
         "x_pos": 6,
@@ -5690,7 +6001,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 237,
-        "dest_map_id": "Map_Solaceon_Ruins_Room04_02"
+        "dest_map_id": "Map_Solaceon_Ruins_Room04_02",
+        "sekii_id": "solaceonruins:bf32_botright"
       }
     ],
     "connections": []
@@ -5706,7 +6018,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 229,
-        "dest_map_id": "Map_Solaceon_Ruins_Room02_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room02_00",
+        "sekii_id": "solaceonruins:bf1_topleft"
       },
       {
         "x_pos": 4,
@@ -5717,7 +6030,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 229,
-        "dest_map_id": "Map_Solaceon_Ruins_Room05_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room05_00",
+        "sekii_id": "solaceonruins:bf1_botleft"
       },
       {
         "x_pos": 6,
@@ -5728,7 +6042,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 229,
-        "dest_map_id": "Map_Solaceon_Ruins_Room09_00"
+        "dest_map_id": "Map_Solaceon_Ruins_Room09_00",
+        "sekii_id": "solaceonruins:bf1_topright"
       },
       {
         "x_pos": 6,
@@ -5739,7 +6054,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 229,
-        "dest_map_id": "Map_Solaceon_Ruins_Room04_01"
+        "dest_map_id": "Map_Solaceon_Ruins_Room04_01",
+        "sekii_id": "solaceonruins:bf1_botright"
       }
     ],
     "connections": []
@@ -5819,7 +6135,8 @@
         "dest_warp_id": 2,
         "id": 5,
         "header_id": 244,
-        "dest_map_id": "Map_Victory_Road_Floor02_00"
+        "dest_map_id": "Map_Victory_Road_Floor02_00",
+        "sekii_id": "victoryroad:f1_left1"
       },
 
       {
@@ -5831,7 +6148,8 @@
         "dest_warp_id": 2,
         "id": 4,
         "header_id": 244,
-        "dest_map_id": "Map_Victory_Road_Floor03_00"
+        "dest_map_id": "Map_Victory_Road_Floor03_00",
+        "sekii_id": "victoryroad:f1_right1"
       },
       {
         "x_pos": 2,
@@ -5842,7 +6160,8 @@
         "dest_warp_id": 3,
         "id": 8,
         "header_id": 244,
-        "dest_map_id": "Map_Pokemon_League_01"
+        "dest_map_id": "Map_Pokemon_League_01",
+        "sekii_id": "victoryroad:f1_exit"
       },
       {
         "x_pos": 2,
@@ -5853,7 +6172,8 @@
         "dest_warp_id": 3,
         "id": 11,
         "header_id": 244,
-        "dest_map_id": "Map_Pokemon_League_01"
+        "dest_map_id": "Map_Pokemon_League_01",
+        "sekii_id": "victoryroad:f1_exit"
       },
       {
         "x_pos": 2,
@@ -5864,7 +6184,8 @@
         "dest_warp_id": 3,
         "id": 12,
         "header_id": 244,
-        "dest_map_id": "Map_Pokemon_League_01"
+        "dest_map_id": "Map_Pokemon_League_01",
+        "sekii_id": "victoryroad:f1_exit"
       },
 
       {
@@ -5876,7 +6197,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 244,
-        "dest_map_id": "Map_Victory_Road_Floor02_00"
+        "dest_map_id": "Map_Victory_Road_Floor02_00",
+        "sekii_id": "victoryroad:f1_left2"
       },
       {
         "x_pos": 7,
@@ -5887,7 +6209,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 244,
-        "dest_map_id": "Map_Victory_Road_Floor02_00"
+        "dest_map_id": "Map_Victory_Road_Floor02_00",
+        "sekii_id": "victoryroad:f1_left3"
       },
 
       {
@@ -5899,7 +6222,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 244,
-        "dest_map_id": "Map_Victory_Road_Floor03_01"
+        "dest_map_id": "Map_Victory_Road_Floor03_01",
+        "sekii_id": "victoryroad:f1_right3"
       },
       {
         "x_pos": 12,
@@ -5921,7 +6245,8 @@
         "dest_warp_id": 0,
         "id": 6,
         "header_id": 244,
-        "dest_map_id": "Map_Victory_Road_Floor05_00"
+        "dest_map_id": "Map_Victory_Road_Floor05_00",
+        "sekii_id": "victoryroad:f1_right2"
       },
 
       {
@@ -5933,7 +6258,8 @@
         "dest_warp_id": 2,
         "id": 7,
         "header_id": 244,
-        "dest_map_id": "Map_Pokemon_League_01"
+        "dest_map_id": "Map_Pokemon_League_01",
+        "sekii_id": "victoryroad:f1_entrance"
       },
       {
         "x_pos": 14,
@@ -5944,7 +6270,8 @@
         "dest_warp_id": 2,
         "id": 9,
         "header_id": 244,
-        "dest_map_id": "Map_Pokemon_League_01"
+        "dest_map_id": "Map_Pokemon_League_01",
+        "sekii_id": "victoryroad:f1_entrance"
       },
       {
         "x_pos": 16,
@@ -5955,7 +6282,8 @@
         "dest_warp_id": 2,
         "id": 10,
         "header_id": 244,
-        "dest_map_id": "Map_Pokemon_League_01"
+        "dest_map_id": "Map_Pokemon_League_01",
+        "sekii_id": "victoryroad:f1_entrance"
       }
     ],
     "connections": [
@@ -6013,7 +6341,8 @@
         "dest_warp_id": 4,
         "id": 2,
         "header_id": 246,
-        "dest_map_id": "Map_Victory_Road_Floor01_00"
+        "dest_map_id": "Map_Victory_Road_Floor01_00",
+        "sekii_id": "victoryroad:bf1_top"
       }
     ],
     "connections": [
@@ -6032,7 +6361,8 @@
         "dest_warp_id": 2,
         "id": 0,
         "header_id": 246,
-        "dest_map_id": "Map_Victory_Road_Floor01_00"
+        "dest_map_id": "Map_Victory_Road_Floor01_00",
+        "sekii_id": "victoryroad:bf1_mid"
       },
       {
         "x_pos": 6,
@@ -6043,7 +6373,8 @@
         "dest_warp_id": 3,
         "id": 1,
         "header_id": 246,
-        "dest_map_id": "Map_Victory_Road_Floor01_00"
+        "dest_map_id": "Map_Victory_Road_Floor01_00",
+        "sekii_id": "victoryroad:bf1_bot"
       }
     ],
     "connections": [
@@ -6273,7 +6604,8 @@
         "dest_warp_id": 5,
         "id": 0,
         "header_id": 256,
-        "dest_map_id": "Map_Floaroma_Town_00"
+        "dest_map_id": "Map_Floaroma_Town_00",
+        "sekii_id": "ironworks_meadow:meadow_exit"
       },
       {
         "x_pos": 19,
@@ -6284,7 +6616,8 @@
         "dest_warp_id": 6,
         "id": 1,
         "header_id": 256,
-        "dest_map_id": "Map_Floaroma_Town_00"
+        "dest_map_id": "Map_Floaroma_Town_00",
+        "sekii_id": "ironworks_meadow:meadow_exit"
       },
 
       {
@@ -6296,7 +6629,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 256,
-        "dest_map_id": "Map_Floaroma_Meadow_Room01_00"
+        "dest_map_id": "Map_Floaroma_Meadow_Room01_00",
+        "sekii_id": "ironworks_meadow:meadow_house"
       },
 
       {
@@ -6308,7 +6642,8 @@
         "dest_warp_id": 7,
         "id": 3,
         "header_id": 256,
-        "dest_map_id": "Map_Floaroma_Town_01"
+        "dest_map_id": "Map_Floaroma_Town_01",
+        "sekii_id": "ironworks_meadow:meadow_entrance"
       },
       {
         "x_pos": 13,
@@ -6319,7 +6654,8 @@
         "dest_warp_id": 8,
         "id": 4,
         "header_id": 256,
-        "dest_map_id": "Map_Floaroma_Town_01"
+        "dest_map_id": "Map_Floaroma_Town_01",
+        "sekii_id": "ironworks_meadow:meadow_entrance"
       }
     ],
     "connections": [
@@ -7879,7 +8215,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 289,
-        "dest_map_id": "Map_Iron_Island_00"
+        "dest_map_id": "Map_Iron_Island_00",
+        "sekii_id": "ironisland:f1_entrance"
       },
       {
         "x_pos": 4,
@@ -7890,7 +8227,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 289,
-        "dest_map_id": "Map_Iron_Island_Room02_00"
+        "dest_map_id": "Map_Iron_Island_Room02_00",
+        "sekii_id": "ironisland:f1_left"
       },
       {
         "x_pos": 8,
@@ -7901,7 +8239,8 @@
         "dest_warp_id": 2,
         "id": 2,
         "header_id": 289,
-        "dest_map_id": "Map_Iron_Island_Room03_00"
+        "dest_map_id": "Map_Iron_Island_Room03_00",
+        "sekii_id": "ironisland:f1_right"
       }
     ],
     "connections": []
@@ -7933,7 +8272,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 291,
-        "dest_map_id": "Map_Iron_Island_Room05_00"
+        "dest_map_id": "Map_Iron_Island_Room05_00",
+        "sekii_id": "ironisland:bf2_left"
       },
       {
         "x_pos": 16,
@@ -7944,7 +8284,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 291,
-        "dest_map_id": "Map_Iron_Island_Room04_00"
+        "dest_map_id": "Map_Iron_Island_Room04_00",
+        "sekii_id": "ironisland:bf2_right"
       },
       {
         "x_pos": 2,
@@ -7955,7 +8296,8 @@
         "dest_warp_id": 2,
         "id": 2,
         "header_id": 291,
-        "dest_map_id": "Map_Iron_Island_Room01_00"
+        "dest_map_id": "Map_Iron_Island_Room01_00",
+        "sekii_id": "ironisland:bf2_top"
       }
     ],
     "connections": []
@@ -8025,7 +8367,8 @@
         "dest_warp_id": 2,
         "id": 0,
         "header_id": 294,
-        "dest_map_id": "Map_Iron_Island_00"
+        "dest_map_id": "Map_Iron_Island_00",
+        "sekii_id": "ironisland:bf3_left"
       },
       {
         "x_pos": 14,
@@ -8036,7 +8379,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 294,
-        "dest_map_id": "Map_Iron_Island_Room05_01"
+        "dest_map_id": "Map_Iron_Island_Room05_01",
+        "sekii_id": "ironisland:bf3_bot"
       },
       {
         "x_pos": 14,
@@ -8047,7 +8391,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 294,
-        "dest_map_id": "map_Registeel_Empty_Cave_00"
+        "dest_map_id": "map_Registeel_Empty_Cave_00",
+        "sekii_id": "ironisland:bf3_right"
       },
       {
         "x_pos": 14,
@@ -8058,7 +8403,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 294,
-        "dest_map_id": "Map_Registeel_Cave_00"
+        "dest_map_id": "Map_Registeel_Cave_00",
+        "sekii_id": "ironisland:bf3_right"
       }
     ],
     "connections": []
@@ -8074,7 +8420,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 295,
-        "dest_map_id": "Map_Old_Chateau_Room03_00"
+        "dest_map_id": "Map_Old_Chateau_Room03_00",
+        "sekii_id": "eternaforest_r205:chateau_hub_left"
       },
       {
         "x_pos": 17,
@@ -8085,7 +8432,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 295,
-        "dest_map_id": "Map_Old_Chateau_Room03_00"
+        "dest_map_id": "Map_Old_Chateau_Room03_00",
+        "sekii_id": "eternaforest_r205:chateau_hub_right"
       },
       {
         "x_pos": 9,
@@ -8096,7 +8444,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 295,
-        "dest_map_id": "Map_Old_Chateau_Room02_00"
+        "dest_map_id": "Map_Old_Chateau_Room02_00",
+        "sekii_id": "eternaforest_r205:chateau_hub_middle"
       },
       {
         "x_pos": 9,
@@ -8107,7 +8456,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 295,
-        "dest_map_id": "Map_Old_Chateau_Room04_00"
+        "dest_map_id": "Map_Old_Chateau_Room04_00",
+        "sekii_id": "eternaforest_r205:chateau_hub_top"
       },
       {
         "x_pos": 9,
@@ -8118,7 +8468,8 @@
         "dest_warp_id": 4,
         "id": 4,
         "header_id": 295,
-        "dest_map_id": "Map_Eterna_Forest_Interior_00"
+        "dest_map_id": "Map_Eterna_Forest_Interior_00",
+        "sekii_id": "eternaforest_r205:chateau_hub_entrance"
       }
     ],
     "connections": []
@@ -8179,7 +8530,8 @@
         "dest_warp_id": 3,
         "id": 0,
         "header_id": 298,
-        "dest_map_id": "Map_Old_Chateau_Room01_00"
+        "dest_map_id": "Map_Old_Chateau_Room01_00",
+        "sekii_id": "eternaforest_r205:chateau_line_entrance"
       },
       {
         "x_pos": 4,
@@ -8190,7 +8542,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 298,
-        "dest_map_id": "Map_Old_Chateau_Room05_00"
+        "dest_map_id": "Map_Old_Chateau_Room05_00",
+        "sekii_id": "eternaforest_r205:chateau_line_door1"
       },
       {
         "x_pos": 11,
@@ -8201,7 +8554,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 298,
-        "dest_map_id": "Map_Old_Chateau_Room06_00"
+        "dest_map_id": "Map_Old_Chateau_Room06_00",
+        "sekii_id": "eternaforest_r205:chateau_line_door2"
       },
       {
         "x_pos": 19,
@@ -8212,7 +8566,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 298,
-        "dest_map_id": "Map_Old_Chateau_Room07_00"
+        "dest_map_id": "Map_Old_Chateau_Room07_00",
+        "sekii_id": "eternaforest_r205:chateau_line_door3"
       },
       {
         "x_pos": 27,
@@ -8223,7 +8578,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 298,
-        "dest_map_id": "Map_Old_Chateau_Room08_00"
+        "dest_map_id": "Map_Old_Chateau_Room08_00",
+        "sekii_id": "eternaforest_r205:chateau_line_door4"
       }
     ],
     "connections": [
@@ -8241,7 +8597,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 298,
-        "dest_map_id": "Map_Old_Chateau_Room_09_00"
+        "dest_map_id": "Map_Old_Chateau_Room_09_00",
+        "sekii_id": "eternaforest_r205:chateau_line_door5"
       }
     ],
     "connections": [
@@ -8339,7 +8696,8 @@
         "dest_warp_id": 14,
         "id": 0,
         "header_id": 305,
-        "dest_map_id": "Map_Veilstone_City_01"
+        "dest_map_id": "Map_Veilstone_City_01",
+        "sekii_id": "galactichq:f1_left"
       },
       {
         "x_pos": 29,
@@ -8350,7 +8708,8 @@
         "dest_warp_id": 15,
         "id": 1,
         "header_id": 305,
-        "dest_map_id": "Map_Veilstone_City_01"
+        "dest_map_id": "Map_Veilstone_City_01",
+        "sekii_id": "galactichq:f1_right"
       },
       {
         "x_pos": 4,
@@ -8372,7 +8731,8 @@
         "dest_warp_id": 2,
         "id": 4,
         "header_id": 305,
-        "dest_map_id": "Map_Galactic_HQ_Floor01_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor01_00",
+        "sekii_id": "galactichq:f1_top"
       },
       {
         "x_pos": 27,
@@ -8433,7 +8793,8 @@
         "dest_warp_id": 0,
         "id": 7,
         "header_id": 305,
-        "dest_map_id": "Map_Galactic_HQ_Floor05_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor05_00",
+        "sekii_id": "galactichq:f12_stairs"
       },
       {
         "x_pos": 20,
@@ -8455,7 +8816,8 @@
         "dest_warp_id": 8,
         "id": 9,
         "header_id": 305,
-        "dest_map_id": "Map_Galactic_HQ_Floor00_01"
+        "dest_map_id": "Map_Galactic_HQ_Floor00_01",
+        "sekii_id": "galactichq:f12_right"
       },
       {
         "x_pos": 7,
@@ -8466,7 +8828,8 @@
         "dest_warp_id": 11,
         "id": 10,
         "header_id": 305,
-        "dest_map_id": "Map_Galactic_HQ_Floor00_01"
+        "dest_map_id": "Map_Galactic_HQ_Floor00_01",
+        "sekii_id": "galactichq:f12_left"
       },
       {
         "x_pos": 0,
@@ -8516,7 +8879,8 @@
         "dest_warp_id": 3,
         "id": 0,
         "header_id": 306,
-        "dest_map_id": "Map_Galactic_HQ_Floor00_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor00_00",
+        "sekii_id": "galactichq:f22_left"
       },
       {
         "x_pos": 24,
@@ -8538,7 +8902,8 @@
         "dest_warp_id": 4,
         "id": 2,
         "header_id": 306,
-        "dest_map_id": "Map_Galactic_HQ_Floor00_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor00_00",
+        "sekii_id": "galactichq:f2_stairs"
       },
       {
         "x_pos": 12,
@@ -8549,7 +8914,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 306,
-        "dest_map_id": "Map_Galactic_HQ_Floor02_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor02_00",
+        "sekii_id": "galactichq:f22_right"
       },
       {
         "x_pos": 1,
@@ -8560,7 +8926,8 @@
         "dest_warp_id": 6,
         "id": 5,
         "header_id": 306,
-        "dest_map_id": "Map_Galactic_HQ_Floor01_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor01_00",
+        "sekii_id": "galactichq:f22_tele"
       },
       {
         "x_pos": 17,
@@ -8593,7 +8960,8 @@
         "dest_warp_id": 0,
         "id": 10,
         "header_id": 306,
-        "dest_map_id": "Map_Galactic_HQ_Floor06_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor06_00",
+        "sekii_id": "galactichq:f2_tv"
       },
       {
         "x_pos": 18,
@@ -8638,7 +9006,8 @@
         "dest_warp_id": 7,
         "id": 8,
         "header_id": 306,
-        "dest_map_id": "Map_Galactic_HQ_Floor01_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor01_00",
+        "sekii_id": "galactichq:f2_top"
       },
       {
         "x_pos": 20,
@@ -8671,7 +9040,8 @@
         "dest_warp_id": 13,
         "id": 14,
         "header_id": 306,
-        "dest_map_id": "Map_Galactic_HQ_Floor01_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor01_00",
+        "sekii_id": "galactichq:f2_bot"
       }
     ],
     "connections": [
@@ -8721,7 +9091,8 @@
         "dest_warp_id": 3,
         "id": 4,
         "header_id": 307,
-        "dest_map_id": "Map_Galactic_HQ_Floor02_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor02_00",
+        "sekii_id": "galactichq:f3_left"
       },
       {
         "x_pos": 17,
@@ -8732,7 +9103,8 @@
         "dest_warp_id": 6,
         "id": 5,
         "header_id": 307,
-        "dest_map_id": "Map_Galactic_HQ_Floor02_01"
+        "dest_map_id": "Map_Galactic_HQ_Floor02_01",
+        "sekii_id": "galactichq:f3_mid"
       },
       {
         "x_pos": 19,
@@ -8743,7 +9115,8 @@
         "dest_warp_id": 8,
         "id": 7,
         "header_id": 307,
-        "dest_map_id": "Map_Galactic_HQ_Floor02_01"
+        "dest_map_id": "Map_Galactic_HQ_Floor02_01",
+        "sekii_id": "galactichq:f3_right"
       }
     ],
     "connections": [
@@ -8761,7 +9134,8 @@
         "dest_warp_id": 4,
         "id": 1,
         "header_id": 307,
-        "dest_map_id": "Map_Galactic_HQ_Floor01_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor01_00",
+        "sekii_id": "galactichq:f3_stairs"
       },
       {
         "x_pos": 20,
@@ -8801,7 +9175,8 @@
         "dest_warp_id": 2,
         "id": 0,
         "header_id": 308,
-        "dest_map_id": "Map_Galactic_HQ_Floor02_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor02_00",
+        "sekii_id": "galactichq:f4_stairs"
       },
       {
         "x_pos": 22,
@@ -8812,7 +9187,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 308,
-        "dest_map_id": "Map_Galactic_HQ_SS1_Room00_00"
+        "dest_map_id": "Map_Galactic_HQ_SS1_Room00_00",
+        "sekii_id": "galactichq:f4_right"
       },
       {
         "x_pos": 21,
@@ -8823,7 +9199,8 @@
         "dest_warp_id": 14,
         "id": 2,
         "header_id": 308,
-        "dest_map_id": "Map_Galactic_HQ_Floor00_01"
+        "dest_map_id": "Map_Galactic_HQ_Floor00_01",
+        "sekii_id": "galactichq:f4_green"
       },
       {
         "x_pos": 8,
@@ -8834,7 +9211,8 @@
         "dest_warp_id": 2,
         "id": 3,
         "header_id": 308,
-        "dest_map_id": "Map_Galactic_HQ_Floor06_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor06_00",
+        "sekii_id": "galactichq:f4_left"
       }
     ],
     "connections": []
@@ -8850,7 +9228,8 @@
         "dest_warp_id": 1,
         "id": 2,
         "header_id": 310,
-        "dest_map_id": "Map_Veilstone_Warehouse_00"
+        "dest_map_id": "Map_Veilstone_Warehouse_00",
+        "sekii_id": "galactichq:bf2_left"
       },
 
       {
@@ -8862,7 +9241,8 @@
         "dest_warp_id": 6,
         "id": 0,
         "header_id": 310,
-        "dest_map_id": "Map_Galactic_HQ_Floor00_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor00_00",
+        "sekii_id": "galactichq:bf2_top"
       },
 
       {
@@ -8874,7 +9254,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 310,
-        "dest_map_id": "Map_Galactic_HQ_Floor05_00"
+        "dest_map_id": "Map_Galactic_HQ_Floor05_00",
+        "sekii_id": "galactichq:bf2_bot"
       }
     ],
     "connections": []
@@ -9279,7 +9660,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 122,
-        "dest_map_id": "Map_Pastoria_City_00"
+        "dest_map_id": "Map_Pastoria_City_00",
+        "sekii_id": ":fen_badge"
       }
     ],
     "connections": [
@@ -9297,7 +9679,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 35,
-        "dest_map_id": "Map_Canalave_City_00"
+        "dest_map_id": "Map_Canalave_City_00",
+        "sekii_id": ":mine_badge"
       }
     ],
     "connections": []
@@ -9313,7 +9696,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 47,
-        "dest_map_id": "Map_Oreburgh_City_00"
+        "dest_map_id": "Map_Oreburgh_City_00",
+        "sekii_id": ":coal_badge"
       }
     ],
     "connections": []
@@ -9329,7 +9713,8 @@
         "dest_warp_id": 5,
         "id": 0,
         "header_id": 167,
-        "dest_map_id": "Map_Snowpoint_City_00"
+        "dest_map_id": "Map_Snowpoint_City_00",
+        "sekii_id": ":icicle_badge"
       }
     ],
     "connections": []
@@ -9345,7 +9730,8 @@
         "dest_warp_id": 13,
         "id": 0,
         "header_id": 133,
-        "dest_map_id": "Map_Veilstone_City_02"
+        "dest_map_id": "Map_Veilstone_City_02",
+        "sekii_id": ":cobble_badge"
       }
     ],
     "connections": []
@@ -9361,7 +9747,8 @@
         "dest_warp_id": 2,
         "id": 0,
         "header_id": 6,
-        "dest_map_id": "Map_Jubilife_City_03"
+        "dest_map_id": "Map_Jubilife_City_03",
+        "sekii_id": "jubilife:center_mid"
       },
       {
         "x_pos": 2,
@@ -9372,7 +9759,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 6,
-        "dest_map_id": "Map_Jubilife_PokemonCenter_01"
+        "dest_map_id": "Map_Jubilife_PokemonCenter_01",
+        "sekii_id": "jubilife:center_up"
       },
       {
         "x_pos": 14,
@@ -9383,7 +9771,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 6,
-        "dest_map_id": "Map_Jubilife_PokemonCenter_02"
+        "dest_map_id": "Map_Jubilife_PokemonCenter_02",
+        "sekii_id": "jubilife:center_bot"
       }
     ],
     "connections": []
@@ -9399,7 +9788,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 36,
-        "dest_map_id": "Map_Canalave_City_00"
+        "dest_map_id": "Map_Canalave_City_00",
+        "sekii_id": "canalave:center_mid"
       },
       {
         "x_pos": 2,
@@ -9410,7 +9800,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 36,
-        "dest_map_id": "Map_Canalave_PokemonCenter_01"
+        "dest_map_id": "Map_Canalave_PokemonCenter_01",
+        "sekii_id": "canalave:center_up"
       },
       {
         "x_pos": 14,
@@ -9421,7 +9812,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 36,
-        "dest_map_id": "Map_Canalave_PokemonCenter_02"
+        "dest_map_id": "Map_Canalave_PokemonCenter_02",
+        "sekii_id": "canalave:center_bot"
       }
     ],
     "connections": []
@@ -9437,7 +9829,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 48,
-        "dest_map_id": "Map_Oreburgh_City_01"
+        "dest_map_id": "Map_Oreburgh_City_01",
+        "sekii_id": "oreburgh:center_mid"
       },
       {
         "x_pos": 2,
@@ -9448,7 +9841,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 48,
-        "dest_map_id": "Map_Oreburgh_PokemonCenter_01"
+        "dest_map_id": "Map_Oreburgh_PokemonCenter_01",
+        "sekii_id": "oreburgh:center_up"
       },
       {
         "x_pos": 14,
@@ -9459,7 +9853,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 48,
-        "dest_map_id": "Map_Oreburgh_PokemonCenter_02"
+        "dest_map_id": "Map_Oreburgh_PokemonCenter_02",
+        "sekii_id": "oreburgh:center_bot"
       }
     ],
     "connections": []
@@ -9475,7 +9870,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 69,
-        "dest_map_id": "Map_Eterna_City_00"
+        "dest_map_id": "Map_Eterna_City_00",
+        "sekii_id": "eterna:center_mid"
       },
       {
         "x_pos": 2,
@@ -9486,7 +9882,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 69,
-        "dest_map_id": "Map_Eterna_PokemonCenter_01"
+        "dest_map_id": "Map_Eterna_PokemonCenter_01",
+        "sekii_id": "eterna:center_up"
       },
       {
         "x_pos": 14,
@@ -9497,7 +9894,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 69,
-        "dest_map_id": "Map_Eterna_PokemonCenter_02"
+        "dest_map_id": "Map_Eterna_PokemonCenter_02",
+        "sekii_id": "eterna:center_bot"
       }
     ],
     "connections": []
@@ -9513,7 +9911,8 @@
         "dest_warp_id": 5,
         "id": 0,
         "header_id": 101,
-        "dest_map_id": "Map_Hearthome_City_00"
+        "dest_map_id": "Map_Hearthome_City_00",
+        "sekii_id": "hearthome:center_mid"
       },
       {
         "x_pos": 2,
@@ -9524,7 +9923,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 101,
-        "dest_map_id": "Map_Hearthome_PokemonCenter_01"
+        "dest_map_id": "Map_Hearthome_PokemonCenter_01",
+        "sekii_id": "hearthome:center_up"
       },
       {
         "x_pos": 14,
@@ -9535,7 +9935,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 101,
-        "dest_map_id": "Map_Hearthome_PokemonCenter_02"
+        "dest_map_id": "Map_Hearthome_PokemonCenter_02",
+        "sekii_id": "hearthome:center_bot"
       }
     ],
     "connections": []
@@ -9551,7 +9952,8 @@
         "dest_warp_id": 9,
         "id": 0,
         "header_id": 123,
-        "dest_map_id": "Map_Pastoria_City_00"
+        "dest_map_id": "Map_Pastoria_City_00",
+        "sekii_id": "pastoria:center_mid"
       },
       {
         "x_pos": 2,
@@ -9562,7 +9964,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 123,
-        "dest_map_id": "Map_Pastoria_PokemonCenter_01"
+        "dest_map_id": "Map_Pastoria_PokemonCenter_01",
+        "sekii_id": "pastoria:center_up"
       },
       {
         "x_pos": 14,
@@ -9573,7 +9976,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 123,
-        "dest_map_id": "Map_Pastoria_PokemonCenter_02"
+        "dest_map_id": "Map_Pastoria_PokemonCenter_02",
+        "sekii_id": "pastoria:center_bot"
       }
     ],
     "connections": []
@@ -9589,7 +9993,8 @@
         "dest_warp_id": 10,
         "id": 0,
         "header_id": 134,
-        "dest_map_id": "Map_Veilstone_City_03"
+        "dest_map_id": "Map_Veilstone_City_03",
+        "sekii_id": "veilstone:center_mid"
       },
       {
         "x_pos": 2,
@@ -9600,7 +10005,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 134,
-        "dest_map_id": "Map_Veilstone_PokemonCenter_01"
+        "dest_map_id": "Map_Veilstone_PokemonCenter_01",
+        "sekii_id": "veilstone:center_up"
       },
       {
         "x_pos": 14,
@@ -9611,7 +10017,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 134,
-        "dest_map_id": "Map_Veilstone_PokemonCenter_02"
+        "dest_map_id": "Map_Veilstone_PokemonCenter_02",
+        "sekii_id": "veilstone:center_bot"
       }
     ],
     "connections": []
@@ -9627,7 +10034,8 @@
         "dest_warp_id": 11,
         "id": 0,
         "header_id": 151,
-        "dest_map_id": "Map_Sunyshore_City_02"
+        "dest_map_id": "Map_Sunyshore_City_02",
+        "sekii_id": "sunyshore:center_mid"
       },
       {
         "x_pos": 2,
@@ -9638,7 +10046,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 151,
-        "dest_map_id": "Map_Sunyshore_PokemonCenter_01"
+        "dest_map_id": "Map_Sunyshore_PokemonCenter_01",
+        "sekii_id": "sunyshore:center_up"
       },
       {
         "x_pos": 14,
@@ -9649,7 +10058,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 151,
-        "dest_map_id": "Map_Sunyshore_PokemonCenter_02"
+        "dest_map_id": "Map_Sunyshore_PokemonCenter_02",
+        "sekii_id": "sunyshore:center_bot"
       }
     ],
     "connections": []
@@ -9665,7 +10075,8 @@
         "dest_warp_id": 4,
         "id": 0,
         "header_id": 168,
-        "dest_map_id": "Map_Snowpoint_City_01"
+        "dest_map_id": "Map_Snowpoint_City_01",
+        "sekii_id": "snowpoint:center_mid"
       },
       {
         "x_pos": 2,
@@ -9676,7 +10087,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 168,
-        "dest_map_id": "Map_Snowpoint_PokemonCenter_01"
+        "dest_map_id": "Map_Snowpoint_PokemonCenter_01",
+        "sekii_id": "snowpoint:center_up"
       },
       {
         "x_pos": 14,
@@ -9687,7 +10099,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 168,
-        "dest_map_id": "Map_Snowpoint_PokemonCenter_02"
+        "dest_map_id": "Map_Snowpoint_PokemonCenter_02",
+        "sekii_id": "snowpoint:center_bot"
       }
     ],
     "connections": []
@@ -9703,7 +10116,8 @@
         "dest_warp_id": 0,
         "id": 0,
         "header_id": 173,
-        "dest_map_id": "Map_Pokemon_League_01"
+        "dest_map_id": "Map_Pokemon_League_01",
+        "sekii_id": "league:center_mid"
       },
       {
         "x_pos": 2,
@@ -9714,7 +10128,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 173,
-        "dest_map_id": "Map_Pokemon_League_PokemonCenter_01"
+        "dest_map_id": "Map_Pokemon_League_PokemonCenter_01",
+        "sekii_id": "league:center_up"
       },
       {
         "x_pos": 14,
@@ -9725,7 +10140,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 173,
-        "dest_map_id": "Map_Pokemon_League_PokemonCenter_02"
+        "dest_map_id": "Map_Pokemon_League_PokemonCenter_02",
+        "sekii_id": "league:center_bot"
       }
     ],
     "connections": []
@@ -9741,7 +10157,8 @@
         "dest_warp_id": 6,
         "id": 0,
         "header_id": 189,
-        "dest_map_id": "Map_Fight_Area_01"
+        "dest_map_id": "Map_Fight_Area_01",
+        "sekii_id": "fightarea:center_mid"
       },
       {
         "x_pos": 2,
@@ -9752,7 +10169,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 189,
-        "dest_map_id": "Map_Fight_Area_PokemonCenter_01"
+        "dest_map_id": "Map_Fight_Area_PokemonCenter_01",
+        "sekii_id": "fightarea:center_up"
       },
       {
         "x_pos": 14,
@@ -9763,7 +10181,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 189,
-        "dest_map_id": "Map_Fight_Area_PokemonCenter_02"
+        "dest_map_id": "Map_Fight_Area_PokemonCenter_02",
+        "sekii_id": "fightarea:center_bot"
       }
     ],
     "connections": []
@@ -9779,7 +10198,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 420,
-        "dest_map_id": "Map_Sandgem_Town_00"
+        "dest_map_id": "Map_Sandgem_Town_00",
+        "sekii_id": "sandgem:center_mid"
       },
       {
         "x_pos": 2,
@@ -9790,7 +10210,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 420,
-        "dest_map_id": "Map_Sandgem_PokemonCenter_01"
+        "dest_map_id": "Map_Sandgem_PokemonCenter_01",
+        "sekii_id": "sandgem:center_up"
       },
       {
         "x_pos": 14,
@@ -9801,7 +10222,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 420,
-        "dest_map_id": "Map_Sandgem_PokemonCenter_02"
+        "dest_map_id": "Map_Sandgem_PokemonCenter_02",
+        "sekii_id": "sandgem:center_bot"
       }
     ],
     "connections": []
@@ -9817,7 +10239,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 428,
-        "dest_map_id": "Map_Floaroma_Town_01"
+        "dest_map_id": "Map_Floaroma_Town_01",
+        "sekii_id": "floaroma:center_mid"
       },
       {
         "x_pos": 2,
@@ -9828,7 +10251,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 428,
-        "dest_map_id": "Map_Floaroma_PokemonCenter_01"
+        "dest_map_id": "Map_Floaroma_PokemonCenter_01",
+        "sekii_id": "floaroma:center_up"
       },
       {
         "x_pos": 14,
@@ -9839,7 +10263,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 428,
-        "dest_map_id": "Map_Floaroma_PokemonCenter_02"
+        "dest_map_id": "Map_Floaroma_PokemonCenter_02",
+        "sekii_id": "floaroma:center_bot"
       }
     ],
     "connections": []
@@ -9855,7 +10280,8 @@
         "dest_warp_id": 5,
         "id": 0,
         "header_id": 435,
-        "dest_map_id": "Map_Solaceon_Town_00"
+        "dest_map_id": "Map_Solaceon_Town_00",
+        "sekii_id": "solaceon:center_mid"
       },
       {
         "x_pos": 2,
@@ -9866,7 +10292,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 435,
-        "dest_map_id": "Map_Solaceon_PokemonCenter_01"
+        "dest_map_id": "Map_Solaceon_PokemonCenter_01",
+        "sekii_id": "solaceon:center_up"
       },
       {
         "x_pos": 14,
@@ -9877,7 +10304,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 435,
-        "dest_map_id": "Map_Solaceon_PokemonCenter_02"
+        "dest_map_id": "Map_Solaceon_PokemonCenter_02",
+        "sekii_id": "solaceon:center_bot"
       }
     ],
     "connections": []
@@ -9893,7 +10321,8 @@
         "dest_warp_id": 5,
         "id": 0,
         "header_id": 443,
-        "dest_map_id": "Map_Celestic_Town_00"
+        "dest_map_id": "Map_Celestic_Town_00",
+        "sekii_id": "celestic:center_mid"
       },
       {
         "x_pos": 2,
@@ -9904,7 +10333,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 443,
-        "dest_map_id": "Map_Celestic_PokemonCenter_01"
+        "dest_map_id": "Map_Celestic_PokemonCenter_01",
+        "sekii_id": "celestic:center_up"
       },
       {
         "x_pos": 14,
@@ -9915,7 +10345,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 443,
-        "dest_map_id": "Map_Celestic_PokemonCenter_02"
+        "dest_map_id": "Map_Celestic_PokemonCenter_02",
+        "sekii_id": "celestic:center_bot"
       }
     ],
     "connections": []
@@ -9931,7 +10362,8 @@
         "dest_warp_id": 3,
         "id": 0,
         "header_id": 452,
-        "dest_map_id": "Map_Survival_Area_00"
+        "dest_map_id": "Map_Survival_Area_00",
+        "sekii_id": "survivalarea:center_mid"
       },
       {
         "x_pos": 2,
@@ -9942,7 +10374,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 452,
-        "dest_map_id": "Map_Survival_Area_PokemonCenter_01"
+        "dest_map_id": "Map_Survival_Area_PokemonCenter_01",
+        "sekii_id": "survivalarea:center_up"
       },
       {
         "x_pos": 14,
@@ -9953,7 +10386,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 452,
-        "dest_map_id": "Map_Survival_Area_PokemonCenter_02"
+        "dest_map_id": "Map_Survival_Area_PokemonCenter_02",
+        "sekii_id": "survivalarea:center_bot"
       }
     ],
     "connections": []
@@ -9969,7 +10403,8 @@
         "dest_warp_id": 3,
         "id": 0,
         "header_id": 459,
-        "dest_map_id": "Map_Resort_Area_00"
+        "dest_map_id": "Map_Resort_Area_00",
+        "sekii_id": "resortarea:center_mid"
       },
       {
         "x_pos": 2,
@@ -9980,7 +10415,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 459,
-        "dest_map_id": "Map_Resort_Area_PokemonCenter_01"
+        "dest_map_id": "Map_Resort_Area_PokemonCenter_01",
+        "sekii_id": "resortarea:center_up"
       },
       {
         "x_pos": 14,
@@ -9991,7 +10427,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 459,
-        "dest_map_id": "Map_Resort_Area_PokemonCenter_02"
+        "dest_map_id": "Map_Resort_Area_PokemonCenter_02",
+        "sekii_id": "resortarea:center_bot"
       }
     ],
     "connections": []
@@ -11852,7 +12289,8 @@
         "dest_warp_id": 2,
         "id": 0,
         "header_id": 71,
-        "dest_map_id": "Map_Eterna_City_00"
+        "dest_map_id": "Map_Eterna_City_00",
+        "sekii_id": ":bike"
       }
     ],
     "connections": []
@@ -11900,7 +12338,8 @@
         "dest_warp_id": 8,
         "id": 0,
         "header_id": 8,
-        "dest_map_id": "Map_Jubilife_City_00"
+        "dest_map_id": "Map_Jubilife_City_00",
+        "sekii_id": "jubilifetv_poketch:poketch_left"
       },
       {
         "x_pos": 16,
@@ -11911,7 +12350,8 @@
         "dest_warp_id": 5,
         "id": 1,
         "header_id": 8,
-        "dest_map_id": "Map_Jubilife_City_00"
+        "dest_map_id": "Map_Jubilife_City_00",
+        "sekii_id": "jubilifetv_poketch:poketch_right"
       },
       {
         "x_pos": 6,
@@ -11922,7 +12362,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 8,
-        "dest_map_id": "Map_Jubilife_Poketch_01"
+        "dest_map_id": "Map_Jubilife_Poketch_01",
+        "sekii_id": "jubilifetv_poketch:poketch_stairs"
       }
     ],
     "connections": []
@@ -11981,7 +12422,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 175,
-        "dest_map_id": "Map_Pokemon_League_Interior_01"
+        "dest_map_id": "Map_Pokemon_League_Interior_01",
+        "sekii_id": "league:league_e4"
       },
       {
         "x_pos": 11,
@@ -11992,7 +12434,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 175,
-        "dest_map_id": "Map_Pokemon_League_00"
+        "dest_map_id": "Map_Pokemon_League_00",
+        "sekii_id": "league:league_door"
       },
       {
         "x_pos": 2,
@@ -12003,7 +12446,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 175,
-        "dest_map_id": "Map_Pokemon_League_PokemonCenter02_01"
+        "dest_map_id": "Map_Pokemon_League_PokemonCenter02_01",
+        "sekii_id": "league:league_top"
       },
       {
         "x_pos": 6,
@@ -12014,7 +12458,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 175,
-        "dest_map_id": "Map_Pokemon_League_Interior_00_SS1"
+        "dest_map_id": "Map_Pokemon_League_Interior_00_SS1",
+        "sekii_id": "league:league_bot"
       }
     ],
     "connections": []
@@ -12153,7 +12598,8 @@
         "dest_warp_id": 3,
         "id": 0,
         "header_id": 11,
-        "dest_map_id": "Map_Jubilife_City_01"
+        "dest_map_id": "Map_Jubilife_City_01",
+        "sekii_id": "jubilifetv_poketch:tv_f1_entrance"
       },
       {
         "x_pos": 14,
@@ -12164,7 +12610,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 11,
-        "dest_map_id": "Map_Jubilife_TV_01"
+        "dest_map_id": "Map_Jubilife_TV_01",
+        "sekii_id": "jubilifetv_poketch:tv_f1_stairs"
       },
       {
         "x_pos": 18,
@@ -12191,7 +12638,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 12,
-        "dest_map_id": "Map_Jubilife_TV_00"
+        "dest_map_id": "Map_Jubilife_TV_00",
+        "sekii_id": "jubilifetv_poketch:tv_f2_down"
       },
       {
         "x_pos": 14,
@@ -12202,7 +12650,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 12,
-        "dest_map_id": "Map_Jubilife_TV_02"
+        "dest_map_id": "Map_Jubilife_TV_02",
+        "sekii_id": "jubilifetv_poketch:tv_f2_up"
       },
       {
         "x_pos": 3,
@@ -12213,7 +12662,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 12,
-        "dest_map_id": "Map_Jubilife_TV_04"
+        "dest_map_id": "Map_Jubilife_TV_04",
+        "sekii_id": "jubilifetv_poketch:tv_f2_door"
       },
       {
         "x_pos": 18,
@@ -12240,7 +12690,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 13,
-        "dest_map_id": "Map_Jubilife_TV_01"
+        "dest_map_id": "Map_Jubilife_TV_01",
+        "sekii_id": "jubilifetv_poketch:tv_f3_down"
       },
       {
         "x_pos": 14,
@@ -12251,7 +12702,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 13,
-        "dest_map_id": "Map_Jubilife_TV_03"
+        "dest_map_id": "Map_Jubilife_TV_03",
+        "sekii_id": "jubilifetv_poketch:tv_f3_up"
       },
       {
         "x_pos": 5,
@@ -12262,7 +12714,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 13,
-        "dest_map_id": "Map_Jubilife_TV_06"
+        "dest_map_id": "Map_Jubilife_TV_06",
+        "sekii_id": "jubilifetv_poketch:tv_f3_right"
       },
       {
         "x_pos": 2,
@@ -12273,7 +12726,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 13,
-        "dest_map_id": "Map_Jubilife_TV_05"
+        "dest_map_id": "Map_Jubilife_TV_05",
+        "sekii_id": "jubilifetv_poketch:tv_f3_left"
       },
       {
         "x_pos": 18,
@@ -12300,7 +12754,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 14,
-        "dest_map_id": "Map_Jubilife_TV_02"
+        "dest_map_id": "Map_Jubilife_TV_02",
+        "sekii_id": "jubilifetv_poketch:tv_f4_stairs"
       },
       {
         "x_pos": 18,
@@ -12515,7 +12970,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 73,
-        "dest_map_id": "Map_Eterna_Galactic_Building_Floor02_00"
+        "dest_map_id": "Map_Eterna_Galactic_Building_Floor02_00",
+        "sekii_id": "eternagalactic:f2_stairs3"
       },
       {
         "x_pos": 8,
@@ -12526,7 +12982,8 @@
         "dest_warp_id": 2,
         "id": 2,
         "header_id": 73,
-        "dest_map_id": "Map_Eterna_Galactic_Building_Floor00_00"
+        "dest_map_id": "Map_Eterna_Galactic_Building_Floor00_00",
+        "sekii_id": "eternagalactic:f2_stairs1"
       },
       {
         "x_pos": 14,
@@ -12537,7 +12994,8 @@
         "dest_warp_id": 2,
         "id": 3,
         "header_id": 73,
-        "dest_map_id": "Map_Eterna_Galactic_Building_Floor02_00"
+        "dest_map_id": "Map_Eterna_Galactic_Building_Floor02_00",
+        "sekii_id": "eternagalactic:f2_stairs2"
       }
     ],
     "connections": []
@@ -12564,7 +13022,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 74,
-        "dest_map_id": "Map_Eterna_Galactic_Building_Floor03_00"
+        "dest_map_id": "Map_Eterna_Galactic_Building_Floor03_00",
+        "sekii_id": "eternagalactic:f3_stairs3"
       },
       {
         "x_pos": 2,
@@ -12575,7 +13034,8 @@
         "dest_warp_id": 3,
         "id": 2,
         "header_id": 74,
-        "dest_map_id": "Map_Eterna_Galactic_Building_Floor01_00"
+        "dest_map_id": "Map_Eterna_Galactic_Building_Floor01_00",
+        "sekii_id": "eternagalactic:f3_stairs1"
       },
       {
         "x_pos": 14,
@@ -12586,7 +13046,8 @@
         "dest_warp_id": 1,
         "id": 3,
         "header_id": 74,
-        "dest_map_id": "Map_Eterna_Galactic_Building_Floor03_00"
+        "dest_map_id": "Map_Eterna_Galactic_Building_Floor03_00",
+        "sekii_id": "eternagalactic:f3_stairs2"
       }
     ],
     "connections": []
@@ -12770,7 +13231,8 @@
         "dest_warp_id": 3,
         "id": 0,
         "header_id": 137,
-        "dest_map_id": "Map_Veilstone_City_00"
+        "dest_map_id": "Map_Veilstone_City_00",
+        "sekii_id": "departmentstore:f1_entrance"
       },
       {
         "x_pos": 12,
@@ -12781,7 +13243,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 137,
-        "dest_map_id": "Map_Veilstone_Mall_01"
+        "dest_map_id": "Map_Veilstone_Mall_01",
+        "sekii_id": "departmentstore:f1_right"
       },
       {
         "x_pos": 15,
@@ -12803,7 +13266,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 137,
-        "dest_map_id": "Map_Veilstone_Mall_05"
+        "dest_map_id": "Map_Veilstone_Mall_05",
+        "sekii_id": "departmentstore:f1_left"
       }
     ],
     "connections": [
@@ -12825,7 +13289,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 138,
-        "dest_map_id": "Map_Veilstone_Mall_00"
+        "dest_map_id": "Map_Veilstone_Mall_00",
+        "sekii_id": "departmentstore:f2_left"
       },
       {
         "x_pos": 12,
@@ -12836,7 +13301,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 138,
-        "dest_map_id": "Map_Veilstone_Mall_02"
+        "dest_map_id": "Map_Veilstone_Mall_02",
+        "sekii_id": "departmentstore:f2_right"
       },
       {
         "x_pos": 15,
@@ -12869,7 +13335,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 139,
-        "dest_map_id": "Map_Veilstone_Mall_01"
+        "dest_map_id": "Map_Veilstone_Mall_01",
+        "sekii_id": "departmentstore:f3_left"
       },
       {
         "x_pos": 12,
@@ -12880,7 +13347,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 139,
-        "dest_map_id": "Map_Veilstone_Mall_03"
+        "dest_map_id": "Map_Veilstone_Mall_03",
+        "sekii_id": "departmentstore:f3_right"
       },
       {
         "x_pos": 15,
@@ -12913,7 +13381,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 140,
-        "dest_map_id": "Map_Veilstone_Mall_02"
+        "dest_map_id": "Map_Veilstone_Mall_02",
+        "sekii_id": "departmentstore:f4_left"
       },
       {
         "x_pos": 12,
@@ -12924,7 +13393,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 140,
-        "dest_map_id": "Map_Veilstone_Mall_04"
+        "dest_map_id": "Map_Veilstone_Mall_04",
+        "sekii_id": "departmentstore:f4_right"
       },
       {
         "x_pos": 15,
@@ -12957,7 +13427,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 141,
-        "dest_map_id": "Map_Veilstone_Mall_03"
+        "dest_map_id": "Map_Veilstone_Mall_03",
+        "sekii_id": "departmentstore:f5_stairs"
       },
       {
         "x_pos": 15,
@@ -13017,7 +13488,8 @@
         "dest_warp_id": 1,
         "id": 1,
         "header_id": 368,
-        "dest_map_id": "Map_Pokemon_Mansion_Room01_00"
+        "dest_map_id": "Map_Pokemon_Mansion_Room01_00",
+        "sekii_id": "r212_mansion:mansion_left1"
       },
       {
         "x_pos": 13,
@@ -13028,7 +13500,8 @@
         "dest_warp_id": 2,
         "id": 2,
         "header_id": 368,
-        "dest_map_id": "Map_Pokemon_Mansion_Room01_00"
+        "dest_map_id": "Map_Pokemon_Mansion_Room01_00",
+        "sekii_id": "r212_mansion:mansion_left2"
       },
       {
         "x_pos": 21,
@@ -13039,7 +13512,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 368,
-        "dest_map_id": "Map_Pokemon_Mansion_Room01_00"
+        "dest_map_id": "Map_Pokemon_Mansion_Room01_00",
+        "sekii_id": "r212_mansion:mansion_left3"
       }
     ],
     "connections": [
@@ -13057,7 +13531,8 @@
         "dest_warp_id": 2,
         "id": 0,
         "header_id": 368,
-        "dest_map_id": "Map_Route_212_01"
+        "dest_map_id": "Map_Route_212_01",
+        "sekii_id": "r212_mansion:mansion_door"
       },
       {
         "x_pos": 16,
@@ -13068,7 +13543,8 @@
         "dest_warp_id": 0,
         "id": 4,
         "header_id": 368,
-        "dest_map_id": "Map_Pokemon_Mansion_Room02_00"
+        "dest_map_id": "Map_Pokemon_Mansion_Room02_00",
+        "sekii_id": "r212_mansion:mansion_right"
       },
       {
         "x_pos": 1,
@@ -13079,7 +13555,8 @@
         "dest_warp_id": 0,
         "id": 5,
         "header_id": 368,
-        "dest_map_id": "Map_Trophy_Garden_00"
+        "dest_map_id": "Map_Trophy_Garden_00",
+        "sekii_id": "r212_mansion:mansion_top"
       }
     ],
     "connections": [
@@ -13205,7 +13682,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 177,
-        "dest_map_id": "Map_Pokemon_League_Interior_02"
+        "dest_map_id": "Map_Pokemon_League_Interior_02",
+        "sekii_id": "league:aaron_top"
       },
       {
         "x_pos": 8,
@@ -13216,7 +13694,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 177,
-        "dest_map_id": "Map_Pokemon_League_Interior_01"
+        "dest_map_id": "Map_Pokemon_League_Interior_01",
+        "sekii_id": "league:aaron_bot"
       }
     ],
     "connections": []
@@ -13232,7 +13711,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 179,
-        "dest_map_id": "Map_Pokemon_League_Interior_03"
+        "dest_map_id": "Map_Pokemon_League_Interior_03",
+        "sekii_id": "league:bertha_top"
       },
       {
         "x_pos": 8,
@@ -13243,7 +13723,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 179,
-        "dest_map_id": "Map_Pokemon_League_Interior_02"
+        "dest_map_id": "Map_Pokemon_League_Interior_02",
+        "sekii_id": "league:bertha_bot"
       }
     ],
     "connections": []
@@ -13259,7 +13740,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 181,
-        "dest_map_id": "Map_Pokemon_League_Interior_04"
+        "dest_map_id": "Map_Pokemon_League_Interior_04",
+        "sekii_id": "league:flint_top"
       },
       {
         "x_pos": 8,
@@ -13270,7 +13752,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 181,
-        "dest_map_id": "Map_Pokemon_League_Interior_03"
+        "dest_map_id": "Map_Pokemon_League_Interior_03",
+        "sekii_id": "league:flint_bot"
       }
     ],
     "connections": []
@@ -13286,7 +13769,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 183,
-        "dest_map_id": "Map_Pokemon_League_Interior_05"
+        "dest_map_id": "Map_Pokemon_League_Interior_05",
+        "sekii_id": "league:lucian_top"
       },
       {
         "x_pos": 8,
@@ -13297,7 +13781,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 183,
-        "dest_map_id": "Map_Pokemon_League_Interior_04"
+        "dest_map_id": "Map_Pokemon_League_Interior_04",
+        "sekii_id": "league:lucian_bot"
       }
     ],
     "connections": []
@@ -13459,7 +13944,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 185,
-        "dest_map_id": "Map_Pokemon_League_Interior_05"
+        "dest_map_id": "Map_Pokemon_League_Interior_05",
+        "sekii_id": ":p_cynthia"
       }
     ],
     "connections": []
@@ -13658,7 +14144,8 @@
         "dest_warp_id": 1,
         "id": 0,
         "header_id": 28,
-        "dest_map_id": "Map_Jubilife_City_02"
+        "dest_map_id": "Map_Jubilife_City_02",
+        "sekii_id": "jubilife:trade_entrance"
       },
       {
         "x_pos": 16,
@@ -13669,7 +14156,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 28,
-        "dest_map_id": "Map_Global_Terminal_01"
+        "dest_map_id": "Map_Global_Terminal_01",
+        "sekii_id": "jubilife:trade_green"
       },
       {
         "x_pos": 20,
@@ -13680,7 +14168,8 @@
         "dest_warp_id": 0,
         "id": 2,
         "header_id": 28,
-        "dest_map_id": "Map_Global_Terminal_00"
+        "dest_map_id": "Map_Global_Terminal_00",
+        "sekii_id": "jubilife:trade_red"
       }
     ],
     "connections": []
@@ -14416,7 +14905,8 @@
         "dest_warp_id": 10,
         "id": 0,
         "header_id": 67,
-        "dest_map_id": "Map_Eterna_City_02"
+        "dest_map_id": "Map_Eterna_City_02",
+        "sekii_id": ":forest_badge"
       },
       {
         "x_pos": 11,
@@ -14492,7 +14982,8 @@
         "dest_warp_id": 8,
         "id": 3,
         "header_id": 88,
-        "dest_map_id": "Map_Hearthome_City_01"
+        "dest_map_id": "Map_Hearthome_City_01",
+        "sekii_id": ":relic_badge"
       },
       {
         "x_pos": 11,
@@ -14909,7 +15400,8 @@
         "dest_warp_id": 12,
         "id": 0,
         "header_id": 154,
-        "dest_map_id": "Map_Sunyshore_City_00"
+        "dest_map_id": "Map_Sunyshore_City_00",
+        "sekii_id": ":beacon_badge"
       },
       {
         "x_pos": 8,
@@ -15836,7 +16328,8 @@
         "dest_warp_id": 3,
         "id": 0,
         "header_id": 566,
-        "dest_map_id": "Map_Veilstone_Mall_00"
+        "dest_map_id": "Map_Veilstone_Mall_00",
+        "sekii_id": "departmentstore:bf1_stairs"
       },
       {
         "x_pos": 14,
@@ -16942,7 +17435,8 @@
         "dest_warp_id": 3,
         "id": 0,
         "header_id": 72,
-        "dest_map_id": "Map_Eterna_City_00"
+        "dest_map_id": "Map_Eterna_City_00",
+        "sekii_id": "eternagalactic:f1_entrance"
       },
       {
         "x_pos": 14,
@@ -16953,7 +17447,8 @@
         "dest_warp_id": 0,
         "id": 1,
         "header_id": 72,
-        "dest_map_id": "Map_Eterna_Galactic_Building_Floor01_00"
+        "dest_map_id": "Map_Eterna_Galactic_Building_Floor01_00",
+        "sekii_id": "eternagalactic:f1_stairs1"
       },
       {
         "x_pos": 20,
@@ -16964,7 +17459,8 @@
         "dest_warp_id": 2,
         "id": 2,
         "header_id": 72,
-        "dest_map_id": "Map_Eterna_Galactic_Building_Floor01_00"
+        "dest_map_id": "Map_Eterna_Galactic_Building_Floor01_00",
+        "sekii_id": "eternagalactic:f1_stairs2"
       },
       {
         "x_pos": 2,
@@ -16975,7 +17471,8 @@
         "dest_warp_id": 0,
         "id": 3,
         "header_id": 72,
-        "dest_map_id": "Map_Rotom_Room_00"
+        "dest_map_id": "Map_Rotom_Room_00",
+        "sekii_id": "eternagalactic:f1_door"
       }
     ],
     "connections": []
