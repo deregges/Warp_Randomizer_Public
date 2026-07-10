@@ -662,6 +662,11 @@ cant_go_back_warps = {
     'MAP_ROUTE18_EAST_ENTRANCE_1F': [0]
 }
 
+# Forced warp pairs (custom "treat these warps as one door" flagging).
+# Format: { map_name: [ [warp_id, warp_id, ...], ... ] }. Groups non-adjacent
+# warps into a single logical door. None defined for this gen yet.
+forced_warp_pairs = {}
+
 # Handles Connection Requirements
 surf_needed = ['MAP_ROUTE21_NORTH', 'MAP_ROUTE21_SOUTH', 'MAP_ROUTE19', 'MAP_ROUTE20', 'MAP_CINNABAR_ISLAND']
 pokeflute_needed = ['MAP_ROUTE12']

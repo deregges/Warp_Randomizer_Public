@@ -23,12 +23,12 @@ import typing
 from gen3 import FireRedWarpMapInfo as info
 from ips_util import Patch
 from RandomizerUtils import Utils
-from RandomizerUtils import SructureDefinitions
-from RandomizerUtils import SructureDefinitions as structs
+from RandomizerUtils import StructureDefinitions
+from RandomizerUtils import StructureDefinitions as structs
 from RandomizerUtils import Definitions
 
 
-class FireRedRandomizerFunctions(SructureDefinitions.GenRandomizerFunctions):
+class FireRedRandomizerFunctions(StructureDefinitions.GenRandomizerFunctions):
     def __init__(self, rom_type, revision):
         self.rom_type = rom_type
         self.revision = revision
@@ -78,7 +78,7 @@ class FireRedRandomizerFunctions(SructureDefinitions.GenRandomizerFunctions):
                     for warp in warps:
                         temp1.append(
                             structs.Warp(warp['x'], warp['y'], warp['elevation'], warp['dest_map'],
-                                         warp["dest_warp_id"], i))
+                                         warp["dest_warp_id"], i, sekii_id=warp.get('sekii_id')))
                         i = i + 1
                 if connections is not None:
                     for connection in connections:

@@ -61,20 +61,20 @@ END_FLAG = ROARK_FLAG
 # reminder - move deleter is in Map_Canalave_City_Room03_00
 
 trainerschool_event = ['Map_Jubilife_Trainer_School_00']
-rocksmash_event = ['Map_Oreburgh_Gate_00', 'Map_Oreburgh_Gym_00']
+rocksmash_event = ['Map_Oreburgh_Gate_00:0', 'Map_Oreburgh_Gym_00']
 windworks_event = ['Map_ValleyWindworks_Interior_00']
 cut_event = ['Map_Oreburgh_Gym_00', 'Map_Eterna_Gym_00', 'Map_Eterna_City_01']
 flash_event = ['Map_Oreburgh_Gate_Floor01_00']
-bike_event = ['Map_Eterna_Cycle_Shop_00', 'Map_Eterna_Galactic_Building_Floor03_00:1']
+bike_event = ['Map_Eterna_Galactic_Building_Floor03_00:1', 'Map_Eterna_Cycle_Shop_00']
 constesthall_event = ['Map_Hearthome_Contest_00']
 hearthomegym_event = ['Map_Hearthome_Gym_00']
 defog_event = ['Map_Oreburgh_Gym_00', 'Map_Eterna_Gym_00', 'Map_Hearthome_Gym_00', 'Map_Solaceon_Ruins_Room10_00']
 fly_event = ['Map_Oreburgh_Gym_00', 'Map_Eterna_Gym_00', 'Map_Hearthome_Gym_00', 'Map_Veilstone_Warehouse_00',
              'Map_Veilstone_Gym_00']
-psyduck_event = ['Map_Pastoria_Gym_00', 'Map_Valor_Lakefront_01', 'Map_Pastoria_City_00', 'Map_Route_213_00']
+psyduck_event = ['Map_Pastoria_Gym_00', 'Map_Pastoria_City_00', 'Map_Route_213_00', 'Map_Valor_Lakefront_01']
 surf_event = ['Map_Oreburgh_Gym_00', 'Map_Eterna_Gym_00', 'Map_Hearthome_Gym_00', 'Map_Veilstone_Gym_00',
-              'Map_Pastoria_Gym_00', 'Map_Celestic_Shrine_00', 'Map_Valor_Lakefront_01', 'Map_Pastoria_City_00',
-              'Map_Route_213_00', 'Map_Celestic_Town_00']
+              'Map_Pastoria_Gym_00', 'Map_Valor_Lakefront_01', 'Map_Pastoria_City_00',
+              'Map_Route_213_00', 'Map_Celestic_Town_00', 'Map_Celestic_Shrine_00']
 strength_event = ['Map_Oreburgh_Gym_00', 'Map_Eterna_Gym_00', 'Map_Hearthome_Gym_00', 'Map_Veilstone_Gym_00',
                   'Map_Pastoria_Gym_00', 'Map_Canalave_Gym_00', 'Map_Canalave_City_00']
 lakes_event = ['Map_Iron_Island_00', 'Map_Canalave_Gym_00', 'Map_Canalave_Library_02']
@@ -92,8 +92,8 @@ guardiansfree_event = ['Map_Galactic_HQ_SS1_Room01_00']
 veilstonegym_event = ['Map_Veilstone_Gym_00']
 roark_event = ['Map_Oreburgh_Mine_Room02_00']
 
-FORCED_FLAG_ORDER = [ROCKSMASH_FLAG, CUT_FLAG, FLASH_FLAG, DEFOG_FLAG, FLY_FLAG, SURF_FLAG, STRENGTH_FLAG,
-                     ROCKCLIMB_FLAG, WATERFALL_FLAG]
+FORCED_FLAG_ORDER = [ROCKSMASH_FLAG, CUT_FLAG, FLASH_FLAG, HEARTHOMEGYM_FLAG, DEFOG_FLAG, VEILSTONEGYM_FLAG, FLY_FLAG,
+                     PSYDUCK_FLAG, SURF_FLAG, LAKES_FLAG, STRENGTH_FLAG, ROCKCLIMB_FLAG, WATERFALL_FLAG]
 FLAG_EVENT_LIST = [trainerschool_event, rocksmash_event, windworks_event, flash_event, cut_event, bike_event,
                    constesthall_event, hearthomegym_event, defog_event, fly_event, psyduck_event, surf_event,
                    strength_event, lakes_event, valor_event, verity_event, rockclimb_event, galactickey_event,
@@ -346,11 +346,11 @@ map_warp_accessibility = {
         1: [WT(0, 0)]
     },
     'Map_Sunyshore_City_00': {
-        0: [WT(3, 524288), WT(4, 0)],
+        0: [WT(3, 262144), WT(4, 0)],
         1: [],
         2: [],
         3: [WT(0, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(3, 524288)]
+        4: [WT(0, 0), WT(3, 262144)]
     },
     'Map_Sunyshore_City_01': {
         0: [WT(1, 0)],
@@ -651,8 +651,8 @@ map_warp_accessibility = {
         12: [WT(10, 0), WT(11, 0), WT(5, 65536)]  # w10 - bottom entrance
     },
     'Map_Victory_Road_Floor02_00': {
-        0: [],
-        1: [],
+        0: [WT(1, 4098)],
+        1: [WT(0, 4098)],
         2: []
     },
     'Map_Victory_Road_Floor03_01': {
@@ -1329,18 +1329,11 @@ map_warp_accessibility = {
         1: [WT(0, 0), WT(2, 0)],
         2: [WT(0, 0), WT(1, 0)]
     },
-    'Map_Pokemon_League_Aaron_Room_00': {
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_League_Bertha_Room_00': {
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_League_Flint_Room_00': {
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_League_Lucian_Room_00': {
-        1: [WT(0, 0)]
-    },
+    # NOTE: The Elite Four / Champion rooms (Aaron, Bertha, Flint, Lucian,
+    # Cynthia) are intentionally NOT listed here. Their two warps are merged into
+    # a single logical door via forced_warp_pairs, which makes any internal
+    # warp-to-warp routing rules redundant (and would conflict, since only warp 1
+    # was keyed while the paired representative is warp 0).
     'Map_Pokemon_League_Interior_01': {
         0: [WT(1, 0)],
         1: [WT(0, 0)]
@@ -1691,6 +1684,24 @@ map_to_map_warp_accessibility = {
         'Map_Floaroma_Town_00': WT(0, 2048),
         'Map_Route_205_00': WT(0, 2048)
     },
+    'Map_Eterna_Forest_Interior_00': {
+        'Map_Eterna_Forest_Interior_01': WT(0, 16)
+    },
+    'Map_Eterna_Forest_Interior_01': {
+        'Map_Eterna_Forest_Interior_00': WT(0, 16)
+    },
+    'Map_Victory_Road_Floor04_00': {
+        'Map_Victory_Road_Floor04_01': WT(0, 2048)
+    },
+    'Map_Victory_Road_Floor04_01': {
+        'Map_Victory_Road_Floor04_00': WT(0, 2048)
+    },
+    'Map_Stark_Mountain_Room02_00': {
+        'Map_Stark_Mountain_Room02_01': WT(0, 4098)
+    },
+    'Map_Stark_Mountain_Room02_01': {
+        'Map_Stark_Mountain_Room02_00': WT(0, 4098)
+    },
     'Map_Route_213_00': {
         'Map_Valor_Lakefront_03': WT(4, 0)
     },
@@ -1752,6 +1763,10 @@ map_to_map_warp_accessibility = {
     },
     'Map_Sunyshore_City_02': {
         'Map_Sunyshore_City_03': WT(1, 0)
+    },
+    'Map_Canalave_City_00': {
+        'Map_Iron_Island_00': WT(0, 0),
+        'Map_Canalave_City_01': WT(4, 0),
     }
 }
 
@@ -1765,7 +1780,37 @@ cant_go_back_warps = {
     'Map_Hall_Of_Fame_00': [0],
     'Map_Canalave_City_00': [3],
     'Map_Survival_Area_00': [0],
-    'Map_Galactic_HQ_Floor00_01': [7]
+    'Map_Galactic_HQ_Floor00_01': [7],
+}
+
+final_rooms = [
+    'Map_Pokemon_League_Aaron_Room_00',
+    'Map_Pokemon_League_Bertha_Room_00', 
+    'Map_Pokemon_League_Flint_Room_00',
+    'Map_Pokemon_League_Lucian_Room_00', 
+    'Map_Pokemon_League_Cynthia_Room_00',
+]
+
+# ---------------------------------------------------------------------------
+# Forced warp pairs (custom "treat these warps as one door" flagging)
+#
+# The randomizer normally groups two warps into a single logical door only when
+# their tiles are physically adjacent (see compute_pairs_for_map). Some maps have
+# an entrance and an exit that are NOT next to each other but should still be
+# treated as one warp so that randomization never routes THROUGH the room.
+#
+# Format: { map_name: [ [warp_id, warp_id, ...], ... ] }
+# Each inner list is one group of warp ids on that map that will be merged into a
+# single warp (the first id in the group is kept as the representative).
+# ---------------------------------------------------------------------------
+forced_warp_pairs = {
+    # Elite Four + Champion rooms: warp 0 (top / *_top) and warp 1 (bottom /
+    # *_bot) are on opposite ends of the room. Pair them so both ends act as one
+    # door and the randomizer can't route the player through the room.
+    'Map_Pokemon_League_Aaron_Room_00': [[0, 1]],
+    'Map_Pokemon_League_Bertha_Room_00': [[0, 1]],
+    'Map_Pokemon_League_Flint_Room_00': [[0, 1]],
+    'Map_Pokemon_League_Lucian_Room_00': [[0, 1]],
 }
 
 # Handles Connection Requirements
@@ -1777,7 +1822,8 @@ cut_needed = [  # TODO make work for Plat
 ]
 surf_needed = [  # TODO make work for Plat
     'Map_Route_220_00', 'Map_Route_220_01', 'Map_Route_219_00', 'Map_Route_218_00', 'Map_Route_230_00',
-    'Map_Route_230_01', 'Map_Route_230_02', 'Map_Route_226_02'
+    'Map_Route_230_01', 'Map_Route_230_02', 'Map_Route_226_02', 'Map_Route_223_00', 'Map_Route_223_01',
+    'Map_Route_223_02', 'Map_Route_223_03'
 ]
 strength_needed = [  # TODO make work for Plat
     
@@ -1786,6 +1832,30 @@ rockclimb_needed = [  # TODO make work for Plat
     'Map_Route_210_05', 'Map_Route_226_00', 'Map_Route_226_01'
 ]
 bike_needed = ['Map_Route_207_01', 'Map_Route_227_00']
+
+# ---------------------------------------------------------------------------
+# Per-map flag requirements
+#
+# A single lookup (map -> required flag bitmask) derived from the per-map
+# requirement lists above. The bitmask uses the same 1<<FLAG encoding as the
+# WT.flag values in map_warp_accessibility / map_to_map_warp_accessibility, so
+# BOTH the randomizer's is_map_progressable AND the route/tracker reachability
+# engine (reachable_room_warps) can gate on the exact same data via check_flags.
+# Add a list here to have it honored by both engines automatically.
+# ---------------------------------------------------------------------------
+_per_map_flag_requirement_lists = [
+    (SURF_FLAG, surf_needed),
+    (ROCKSMASH_FLAG, rocksmash_needed),
+    (CUT_FLAG, cut_needed),
+    (BIKE_FLAG, bike_needed),
+    (STRENGTH_FLAG, strength_needed),
+    (ROCKCLIMB_FLAG, rockclimb_needed),
+]
+
+map_flag_requirements = {}
+for _req_flag, _req_maps in _per_map_flag_requirement_lists:
+    for _req_map in _req_maps:
+        map_flag_requirements[_req_map] = map_flag_requirements.get(_req_map, 0) | (1 << _req_flag)
 
 # TODO finish work for Plat
 dont_randomize = [
@@ -2158,14 +2228,17 @@ def check_progession_blockers(flag, accesible_maps):  # TODO make work for Plat
 # If warp_id = -1 we check connection, otherwise we check if there is an accessible warp from warp id
 # noinspection DuplicatedCode
 def is_map_progressable(map, accesible_maps, warp_id, ignore=False):  # TODO make work for Plat
-    if not check_progession_blockers(SURF_FLAG, accesible_maps) and map in surf_needed:
-        return False
-    if not check_progession_blockers(ROCKSMASH_FLAG, accesible_maps) and map in rocksmash_needed:
-        return False
-    if not check_progession_blockers(CUT_FLAG, accesible_maps) and map in cut_needed:
-        return False
-    if not check_progession_blockers(BIKE_FLAG, accesible_maps) and map in bike_needed:
-        return False
+    # Per-map flag/HM gate. Driven by map_flag_requirements so the route/tracker
+    # reachability engine (reachable_room_warps) enforces the exact same rules.
+    required_flags = map_flag_requirements.get(map, 0)
+    if required_flags:
+        index = 0
+        bits = required_flags
+        while bits:
+            if (bits & 1) and not check_progession_blockers(index, accesible_maps):
+                return False
+            bits >>= 1
+            index += 1
     if warp_id == -1 and not ignore:
         if map not in map_warp_accessibility:
             return True

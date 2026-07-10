@@ -1391,6 +1391,11 @@ cant_go_back_warps = { #missing champion room
     'Map_Bell_Tower_Room00_04': [1, 2], #after you get there you cant jump back
 }
 
+# Forced warp pairs (custom "treat these warps as one door" flagging).
+# Format: { map_name: [ [warp_id, warp_id, ...], ... ] }. Groups non-adjacent
+# warps into a single logical door. None defined for this gen yet.
+forced_warp_pairs = {}
+
 # Handles Connection Requirements
 rocksmash_needed = [  # TODO make work
     'Map_Route_32',  # this is here because of the gym and sprout tower requirement to pass the miracle seed guy

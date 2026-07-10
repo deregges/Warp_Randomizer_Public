@@ -26,8 +26,8 @@ from nds.buffer import Buffer
 from nds.gen5 import White2WarpMapInfo as info, White2WarpMapInfo
 from ips_util import Patch
 from RandomizerUtils import Utils
-from RandomizerUtils import SructureDefinitions
-from RandomizerUtils import SructureDefinitions as structs
+from RandomizerUtils import StructureDefinitions
+from RandomizerUtils import StructureDefinitions as structs
 import ndspy.rom
 import ndspy.narc
 import ndspy.codeCompression
@@ -37,7 +37,7 @@ from nds.tableLocator import TableLocator
 import os
 
 
-class White2RandomizerFunctions(SructureDefinitions.GenRandomizerFunctions):
+class White2RandomizerFunctions(StructureDefinitions.GenRandomizerFunctions):
     def __init__(self):
         self.maps = []
         self.map_name_to_id = dict()
@@ -91,7 +91,8 @@ class White2RandomizerFunctions(SructureDefinitions.GenRandomizerFunctions):
                         temp1.append(
                             structs.Warp(global_x, global_y, warp['global_z'], warp['dest_map_id'],
                                          map_based_dest_warp_id, i, warp['header_id'], warp['dest_header'],
-                                         warp['width'], warp['height'], warp['is_rail']))
+                                         warp['width'], warp['height'], warp['is_rail'],
+                                         sekii_id=warp.get('sekii_id')))
                         i = i + 1
                 if connections is not None:
                     for connection in connections:

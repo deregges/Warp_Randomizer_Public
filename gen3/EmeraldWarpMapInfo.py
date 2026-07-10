@@ -611,6 +611,11 @@ cant_go_back_warps = {
     'MAP_ANCIENT_TOMB': [1]
 }
 
+# Forced warp pairs (custom "treat these warps as one door" flagging).
+# Format: { map_name: [ [warp_id, warp_id, ...], ... ] }. Groups non-adjacent
+# warps into a single logical door. None defined for this gen yet.
+forced_warp_pairs = {}
+
 # Handles Connection Requirements
 goggles_needed = ['MAP_ROUTE111']
 rocksmash_needed = ['MAP_ROUTE111']

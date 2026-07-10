@@ -22,10 +22,11 @@ from abc import ABC, abstractmethod
 
 
 class Warp:
-    def __init__(self, x, y, elevation, dest_map, dest_warp_id, warp_id, header_id=-1, dest_header_id=-1, width=1, height=1, no_pair=0):
+    def __init__(self, x, y, elevation, dest_map, dest_warp_id, warp_id, header_id=-1, dest_header_id=-1, width=1, height=1, no_pair=0, sekii_id=None):
         if isinstance(x, int) and isinstance(y, int) and isinstance(elevation, int) and isinstance(dest_map, str) \
                 and isinstance(dest_warp_id, int) and isinstance(warp_id, int) and isinstance(header_id, int) \
-                and isinstance(width, int) and isinstance(height, int) and isinstance(no_pair, int):
+                and isinstance(width, int) and isinstance(height, int) and isinstance(no_pair, int) \
+                and (sekii_id is None or isinstance(sekii_id, str)):
             self.x = x
             self.y = y
             self.elevation = elevation
@@ -37,6 +38,8 @@ class Warp:
             self.width = width
             self.height = height
             self.no_pair = (no_pair != 0)
+            # Optional stable identifier for a warp, used when exporting the tracker mapping
+            self.sekii_id = sekii_id
         else:
             raise ValueError("Invalid Warp")
 

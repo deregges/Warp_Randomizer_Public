@@ -23,11 +23,11 @@ import typing
 from gen3 import EmeraldWarpMapInfo as info
 from ips_util import Patch
 from RandomizerUtils import Utils
-from RandomizerUtils import SructureDefinitions
-from RandomizerUtils import SructureDefinitions as structs
+from RandomizerUtils import StructureDefinitions
+from RandomizerUtils import StructureDefinitions as structs
 
 
-class EmeraldRandomizerFunctions(SructureDefinitions.GenRandomizerFunctions):
+class EmeraldRandomizerFunctions(StructureDefinitions.GenRandomizerFunctions):
     def __init__(self):
         self.maps = []
         self.map_name_to_id = dict()
@@ -71,7 +71,7 @@ class EmeraldRandomizerFunctions(SructureDefinitions.GenRandomizerFunctions):
                     for warp in warps:
                         temp1.append(
                             structs.Warp(warp['x'], warp['y'], warp['elevation'], warp['dest_map'],
-                                         warp["dest_warp_id"], i))
+                                         warp["dest_warp_id"], i, sekii_id=warp.get('sekii_id')))
                         i = i + 1
                 if connections is not None:
                     for connection in connections:

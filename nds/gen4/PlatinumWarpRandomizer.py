@@ -24,8 +24,8 @@ from nds.buffer import Buffer
 from nds.gen4 import PlatinumWarpMapInfo as info, PlatinumWarpMapInfo
 from ips_util import Patch
 from RandomizerUtils import Utils
-from RandomizerUtils import SructureDefinitions
-from RandomizerUtils import SructureDefinitions as structs
+from RandomizerUtils import StructureDefinitions
+from RandomizerUtils import StructureDefinitions as structs
 import ndspy.rom
 import ndspy.narc
 
@@ -34,7 +34,7 @@ from nds.tableLocator import TableLocator
 import os
 
 
-class PlatinumRandomizerFunctions(SructureDefinitions.GenRandomizerFunctions):
+class PlatinumRandomizerFunctions(StructureDefinitions.GenRandomizerFunctions):
     def __init__(self):
         self.maps = []
         self.map_name_to_id = dict()
@@ -86,7 +86,8 @@ class PlatinumRandomizerFunctions(SructureDefinitions.GenRandomizerFunctions):
                         global_y = warp['y_pos'] + warp['map_y']*32
                         temp1.append(
                             structs.Warp(global_x, global_y, 0, warp['dest_map_id'],
-                                         map_based_dest_warp_id, i, warp['header_id'], warp['dest_header']))
+                                         map_based_dest_warp_id, i, warp['header_id'], warp['dest_header'],
+                                         sekii_id=warp.get('sekii_id')))
                         i = i + 1
                 if connections is not None:
                     for connection in connections:
@@ -127,7 +128,7 @@ class PlatinumRandomizerFunctions(SructureDefinitions.GenRandomizerFunctions):
                         'Regice_Empty_Cave' not in map_name and 'Elevator' not in map_name:
                     not_reachable.append(map_name)
                 print(map_name)
-        print(len(not_reachable))
+        print("determine_unreachable_maps: " + str(len(not_reachable)) + " maps")
         return not_reachable
 
     def is_not_needed_map_ok(self, map_name: str) -> bool:

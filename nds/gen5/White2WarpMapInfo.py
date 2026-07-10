@@ -396,6 +396,11 @@ cant_go_back_warps = {
     # league lobby, all elite 4 rooms you can co back unless you go too far and trigger their intro animations
 }
 
+# Forced warp pairs (custom "treat these warps as one door" flagging).
+# Format: { map_name: [ [warp_id, warp_id, ...], ... ] }. Groups non-adjacent
+# warps into a single logical door. None defined for this gen yet.
+forced_warp_pairs = {}
+
 # Handles Connection Requirements
 cut_needed = [  # TODO make work
     # cut isnt needed to get anywhere except postgame content
