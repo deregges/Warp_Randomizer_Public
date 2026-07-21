@@ -3702,8 +3702,7 @@
       }
     ],
     "connections": [
-      "Map_Route_218_01",
-      "Map_Canalave_City_01"
+      "Map_Route_218_01"
     ]
   },
   "Map_Route_218_01": {
@@ -4747,9 +4746,7 @@
         "dest_map_id": "Map_Oreburgh_Gate_00"
       }
     ],
-    "connections": [
-      "Map_Oreburgh_Cave_Floor01_01"
-    ]
+    "connections": []
   },
   "Map_Oreburgh_Mine_Room01_00": {
     "warps": [
@@ -4887,6 +4884,7 @@
     ],
     "connections": [
       "Map_Eterna_Forest_Interior_00",
+      "Map_Eterna_Forest_Interior_02",
       "m7_ad54_h203_x2_y2",
       "m7_ad54_h203_x1_y1"
     ]
@@ -4919,6 +4917,7 @@
       }
     ],
     "connections": [
+      "Map_Eterna_Forest_Interior_01",
       "m7_ad54_h203_x0_y1",
       "m7_ad54_h203_x1_y2"
     ]
@@ -6397,6 +6396,7 @@
       }
     ],
     "connections": [
+      "Map_Victory_Road_Floor04_01",
       "m46_ad71_h247_x1_y1",
       "m46_ad71_h247_x0_y0"
     ]
@@ -6416,6 +6416,7 @@
       }
     ],
     "connections": [
+      "Map_Victory_Road_Floor04_00",
       "m46_ad71_h247_x0_y0",
       "m46_ad71_h247_x1_y1"
     ]
@@ -6530,8 +6531,6 @@
       }
     ],
     "connections": [
-      "m50_ad59_h253_x0_y0",
-      "Map_Amity_Square_01"
     ]
   },
   "Map_Amity_Square_01": {
@@ -6560,8 +6559,6 @@
       }
     ],
     "connections": [
-      "m50_ad59_h253_x1_y0",
-      "Map_Amity_Square_00"
     ]
   },
   "Map_Ravaged_Path_00": {
@@ -6732,6 +6729,7 @@
       }
     ],
     "connections": [
+      "Map_Stark_Mountain_Room02_01",
       "m58_ad57_h264_x2_y0",
       "m58_ad57_h264_x1_y1",
       "m58_ad57_h264_x0_y0"
@@ -6752,6 +6750,7 @@
       }
     ],
     "connections": [
+      "Map_Stark_Mountain_Room02_00",
       "m58_ad57_h264_x1_y1",
       "m58_ad57_h264_x2_y2",
       "m58_ad57_h264_x0_y2"
@@ -8156,6 +8155,7 @@
       }
     ],
     "connections": [
+      "Map_Maniac_Cave_01",
       "m78_ad53_h513_x1_y0"
     ]
   },
@@ -8174,6 +8174,7 @@
       }
     ],
     "connections": [
+      "Map_Maniac_Cave_00",
       "m78_ad53_h513_x1_y0"
     ]
   },
@@ -8333,6 +8334,7 @@
       }
     ],
     "connections": [
+      "Map_Iron_Island_Room05_01",
       "m84_ad72_h293_x1_y1",
       "m84_ad72_h293_x0_y0"
     ]
@@ -8352,6 +8354,7 @@
       }
     ],
     "connections": [
+      "Map_Iron_Island_Room05_00",
       "m84_ad72_h293_x0_y0",
       "m84_ad72_h293_x1_y1"
     ]
