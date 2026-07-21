@@ -58,6 +58,9 @@ ROARK_FLAG = 24
 
 END_FLAG = ROARK_FLAG
 
+def fl(flag):
+    return 1 << flag
+
 # reminder - move deleter is in Map_Canalave_City_Room03_00
 
 trainerschool_event = ['Map_Jubilife_Trainer_School_00']
@@ -153,11 +156,11 @@ map_warp_accessibility = {
     },
     'Map_Oreburgh_City_00': {
         0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 16777216), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        2: [WT(0, 16777216), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, 16777216), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 16777216), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0)],
-        5: [WT(0, 16777216), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
+        1: [WT(0, fl(ROARK_FLAG)), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
+        2: [WT(0, fl(ROARK_FLAG)), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
+        3: [WT(0, fl(ROARK_FLAG)), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
+        4: [WT(0, fl(ROARK_FLAG)), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0)],
+        5: [WT(0, fl(ROARK_FLAG)), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
     },
     'Map_Oreburgh_City_01': {
         0: [WT(1, 0), WT(2, 0), WT(3, 0)],
@@ -176,31 +179,31 @@ map_warp_accessibility = {
     'Map_Route_206_00': {
         0: [WT(1, 0), WT(6, 0), WT(7, 0), WT(8, 0), WT(9, 0), WT(10, 0), WT(11, 0)],  # path
         1: [WT(0, 0), WT(6, 0), WT(7, 0), WT(8, 0), WT(9, 0), WT(10, 0), WT(11, 0)],  # path
-        2: [WT(3, 0), WT(4, 16), WT(5, 16), WT(12, 16), WT(13, 16)],  # underside
+        2: [WT(3, 0), WT(4, fl(CUT_FLAG)), WT(5, fl(CUT_FLAG)), WT(12, fl(CUT_FLAG)), WT(13, fl(CUT_FLAG))],  # underside
 
-        3: [WT(2, 0), WT(4, 16), WT(5, 16), WT(12, 16), WT(13, 16)],  # underside
+        3: [WT(2, 0), WT(4, fl(CUT_FLAG)), WT(5, fl(CUT_FLAG)), WT(12, fl(CUT_FLAG)), WT(13, fl(CUT_FLAG))],  # underside
 
-        4: [WT(5, 0), WT(12, 0), WT(13, 0), WT(2, 16), WT(3, 16)],  # exterior
-        5: [WT(4, 0), WT(12, 0), WT(13, 0), WT(2, 16), WT(3, 16)],  # exterior
+        4: [WT(5, 0), WT(12, 0), WT(13, 0), WT(2, fl(CUT_FLAG)), WT(3, fl(CUT_FLAG))],  # exterior
+        5: [WT(4, 0), WT(12, 0), WT(13, 0), WT(2, fl(CUT_FLAG)), WT(3, fl(CUT_FLAG))],  # exterior
         6: [WT(0, 0), WT(1, 0), WT(7, 0), WT(8, 0), WT(9, 0), WT(10, 0), WT(11, 0)],  # path
         7: [WT(0, 0), WT(1, 0), WT(6, 0), WT(8, 0), WT(9, 0), WT(10, 0), WT(11, 0)],  # path
         8: [WT(0, 0), WT(1, 0), WT(6, 0), WT(7, 0), WT(9, 0), WT(10, 0), WT(11, 0)],  # path
         9: [WT(0, 0), WT(1, 0), WT(6, 0), WT(7, 0), WT(8, 0), WT(10, 0), WT(11, 0)],  # path
         10: [WT(0, 0), WT(1, 0), WT(6, 0), WT(7, 0), WT(8, 0), WT(9, 0), WT(11, 0)],  # path
         11: [WT(0, 0), WT(1, 0), WT(6, 0), WT(7, 0), WT(8, 0), WT(9, 0), WT(10, 0)],  # path
-        12: [WT(4, 0), WT(5, 0), WT(13, 0), WT(2, 16), WT(3, 16)],  # exterior
-        13: [WT(4, 0), WT(5, 0), WT(12, 0), WT(2, 16), WT(3, 16)]  # exterior
+        12: [WT(4, 0), WT(5, 0), WT(13, 0), WT(2, fl(CUT_FLAG)), WT(3, fl(CUT_FLAG))],  # exterior
+        13: [WT(4, 0), WT(5, 0), WT(12, 0), WT(2, fl(CUT_FLAG)), WT(3, fl(CUT_FLAG))]  # exterior
     },
     'Map_Route_207_01': {
         0: [],
         1: []
     },
     'Map_Eterna_City_00': {
-        0: [WT(1, 0), WT(3, 0), WT(4, 0), WT(2, 16)],
-        1: [WT(0, 0), WT(3, 0), WT(4, 0), WT(2, 16)],
-        2: [WT(0, 16), WT(1, 16), WT(3, 16), WT(4, 16)],
-        3: [WT(0, 0), WT(1, 0), WT(4, 0), WT(2, 16)],
-        4: [WT(0, 0), WT(1, 0), WT(3, 0), WT(2, 16)]
+        0: [WT(1, 0), WT(3, 0), WT(4, 0), WT(2, fl(CUT_FLAG))],
+        1: [WT(0, 0), WT(3, 0), WT(4, 0), WT(2, fl(CUT_FLAG))],
+        2: [WT(0, fl(CUT_FLAG)), WT(1, fl(CUT_FLAG)), WT(3, fl(CUT_FLAG)), WT(4, fl(CUT_FLAG))],
+        3: [WT(0, 0), WT(1, 0), WT(4, 0), WT(2, fl(CUT_FLAG))],
+        4: [WT(0, 0), WT(1, 0), WT(3, 0), WT(2, fl(CUT_FLAG))]
     },
     'Map_Eterna_City_02': {
         0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
@@ -245,10 +248,10 @@ map_warp_accessibility = {
         4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
     },
     'Map_Hearthome_City_01': {
-        0: [WT(1, 0), WT(2, 64), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 64), WT(3, 0)],
+        0: [WT(1, 0), WT(2, fl(CONTESTHALL_FLAG)), WT(3, 0)],
+        1: [WT(0, 0), WT(2, fl(CONTESTHALL_FLAG)), WT(3, 0)],
         2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 64)]
+        3: [WT(0, 0), WT(1, 0), WT(2, fl(CONTESTHALL_FLAG))]
     },
     'Map_Hearthome_City_02': {
         0: [WT(1, 0), WT(2, 0)],
@@ -260,10 +263,10 @@ map_warp_accessibility = {
         6: [WT(3, 0), WT(4, 0), WT(5, 0)]
     },
     'Map_Hearthome_City_03': {
-        0: [WT(1, 0), WT(2, 128), WT(3, 128)],
-        1: [WT(0, 0), WT(2, 128), WT(3, 128)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 128)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 128)]
+        0: [WT(1, 0), WT(2, fl(HEARTHOMEGYM_FLAG)), WT(3, fl(HEARTHOMEGYM_FLAG))],
+        1: [WT(0, 0), WT(2, fl(HEARTHOMEGYM_FLAG)), WT(3, fl(HEARTHOMEGYM_FLAG))],
+        2: [WT(0, 0), WT(1, 0), WT(3, fl(HEARTHOMEGYM_FLAG))],
+        3: [WT(0, 0), WT(1, 0), WT(2, fl(HEARTHOMEGYM_FLAG))]
     },
     'Map_Route_208_01': {
         0: [WT(1, 0), WT(2, 0)],
@@ -300,9 +303,9 @@ map_warp_accessibility = {
         5: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
     },
     'Map_Veilstone_City_00': {
-        0: [WT(1, 0), WT(3, 8388608)],
-        1: [WT(0, 0), WT(3, 8388608)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 8388608)],
+        0: [WT(1, 0), WT(3, fl(VEILSTONEGYM_FLAG))],
+        1: [WT(0, 0), WT(3, fl(VEILSTONEGYM_FLAG))],
+        2: [WT(0, 0), WT(1, 0), WT(3, fl(VEILSTONEGYM_FLAG))],
         3: [WT(0, 0), WT(1, 0)]
     },
     'Map_Veilstone_City_01': {
@@ -326,8 +329,8 @@ map_warp_accessibility = {
     },
     'Map_Pastoria_City_00': {
         0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 8388608), WT(2, 0)],
-        2: [WT(0, 8388608), WT(1, 0)]
+        1: [WT(0, fl(VEILSTONEGYM_FLAG)), WT(2, 0)],
+        2: [WT(0, fl(VEILSTONEGYM_FLAG)), WT(1, 0)]
     },
     'Map_Pastoria_City_01': {
         0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
@@ -346,11 +349,11 @@ map_warp_accessibility = {
         1: [WT(0, 0)]
     },
     'Map_Sunyshore_City_00': {
-        0: [WT(3, 262144), WT(4, 0)],
+        0: [WT(3, fl(LIGHTHOUSE_FLAG)), WT(4, 0)],
         1: [],
         2: [],
         3: [WT(0, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(3, 262144)]
+        4: [WT(0, 0), WT(3, fl(LIGHTHOUSE_FLAG))]
     },
     'Map_Sunyshore_City_01': {
         0: [WT(1, 0)],
@@ -364,8 +367,8 @@ map_warp_accessibility = {
         4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
     },
     'Map_Sunyshore_City_03': {
-        0: [WT(1, 65536)],
-        1: [WT(0, 65536)]
+        0: [WT(1, fl(ROCKCLIMB_FLAG))],
+        1: [WT(0, fl(ROCKCLIMB_FLAG))]
     },
     'Map_Pokemon_League_01': {
         0: [WT(1, 0), WT(3, 0), WT(4, 0)],
@@ -441,9 +444,9 @@ map_warp_accessibility = {
         4: [WT(1, 0), WT(3, 0)]
     },
     'Map_Route_226_02': {
-        0: [WT(1, 2048), WT(2, 2048)],
-        1: [WT(2, 0), WT(0, 2048)],
-        2: [WT(1, 0), WT(0, 2048)]
+        0: [WT(1, fl(SURF_FLAG)), WT(2, fl(SURF_FLAG))],
+        1: [WT(2, 0), WT(0, fl(SURF_FLAG))],
+        2: [WT(1, 0), WT(0, fl(SURF_FLAG))]
     },
     'Map_Valor_Lakefront_01': {
         0: [WT(1, 0), WT(3, 0)],
@@ -465,13 +468,13 @@ map_warp_accessibility = {
         1: [WT(0, 0), WT(3, 0), WT(7, 0)],  # outside
 
         # top middle
-        2: [WT(4, 0), WT(5, 0), WT(6, 65536)],  # inside
+        2: [WT(4, 0), WT(5, 0), WT(6, fl(ROCKCLIMB_FLAG))],  # inside
 
         # top right
         3: [WT(0, 0), WT(1, 0), WT(7, 0)],  # outside
-        4: [WT(2, 0), WT(5, 0), WT(6, 65536)],  # inside
-        5: [WT(2, 0), WT(4, 0), WT(6, 65536)],  # inside
-        6: [WT(2, 65536), WT(4, 65536), WT(5, 65536)],  # inside
+        4: [WT(2, 0), WT(5, 0), WT(6, fl(ROCKCLIMB_FLAG))],  # inside
+        5: [WT(2, 0), WT(4, 0), WT(6, fl(ROCKCLIMB_FLAG))],  # inside
+        6: [WT(2, fl(ROCKCLIMB_FLAG)), WT(4, fl(ROCKCLIMB_FLAG)), WT(5, fl(ROCKCLIMB_FLAG))],  # inside
 
         # bottom left
         7: [WT(0, 0), WT(1, 0), WT(3, 0)]  # outside
@@ -501,10 +504,10 @@ map_warp_accessibility = {
         5: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
     },
     'Map_Route_228_00': {
-        0: [WT(1, 0), WT(2, 32), WT(3, 32)],
-        1: [WT(0, 0), WT(2, 32), WT(3, 32)],
-        2: [WT(0, 32), WT(1, 32)],
-        3: [WT(0, 32), WT(1, 32)]
+        0: [WT(1, 0), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG))],
+        1: [WT(0, 0), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG))],
+        2: [WT(0, fl(BIKE_FLAG)), WT(1, fl(BIKE_FLAG))],
+        3: [WT(0, fl(BIKE_FLAG)), WT(1, fl(BIKE_FLAG))]
     },
     'Map_Resort_Area_00': {
         0: [WT(1, 0), WT(2, 0), WT(3, 0)],
@@ -513,9 +516,9 @@ map_warp_accessibility = {
         3: [WT(0, 0), WT(1, 0), WT(2, 0)]
     },
     'Map_Oreburgh_Gate_00': {
-        0: [WT(1, 0), WT(2, 2)],
-        1: [WT(0, 0), WT(2, 2)],
-        2: [WT(0, 2), WT(1, 2)]
+        0: [WT(1, 0), WT(2, fl(ROCKSMASH_FLAG))],
+        1: [WT(0, 0), WT(2, fl(ROCKSMASH_FLAG))],
+        2: [WT(0, fl(ROCKSMASH_FLAG)), WT(1, fl(ROCKSMASH_FLAG))]
     },
     'Map_Oreburgh_Mine_Room01_00': {
         0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
@@ -534,9 +537,9 @@ map_warp_accessibility = {
         1: [WT(0, 0)]
     },
     'Map_Mount_Coronet_Floor00_00': {
-        0: [WT(1, 0), WT(2, 67584)],
-        1: [WT(0, 0), WT(2, 67584)],
-        2: [WT(0, 65536), WT(1, 65536)]
+        0: [WT(1, 0), WT(2, fl(SURF_FLAG) | fl(ROCKCLIMB_FLAG))],
+        1: [WT(0, 0), WT(2, fl(SURF_FLAG) | fl(ROCKCLIMB_FLAG))],
+        2: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, fl(ROCKCLIMB_FLAG))]
     },
     'Map_Mount_Coronet_Floor01_00': {
         0: [],
@@ -545,8 +548,8 @@ map_warp_accessibility = {
         3: []
     },
     'Map_Mount_Coronet_Floor01_01': {
-        0: [WT(1, 4096)],
-        1: [WT(0, 4096)]
+        0: [WT(1, fl(STRENGTH_FLAG))],
+        1: [WT(0, fl(STRENGTH_FLAG))]
     },
     'Map_Mount_Coronet_Floor02_00': {
         0: [WT(1, 0), WT(2, 0)],
@@ -554,12 +557,12 @@ map_warp_accessibility = {
         2: [WT(0, 0), WT(1, 0)]
     },
     'Map_Mount_Coronet_Floor03_00': {
-        0: [WT(4, 65536)],
-        1: [WT(2, 526336)],
+        0: [WT(4, fl(ROCKCLIMB_FLAG))],
+        1: [WT(2, fl(SURF_FLAG) | fl(WATERFALL_FLAG))],
 
-        2: [WT(1, 526336)],
+        2: [WT(1, fl(SURF_FLAG) | fl(WATERFALL_FLAG))],
         3: [],
-        4: [WT(0, 65536)]
+        4: [WT(0, fl(ROCKCLIMB_FLAG))]
     },
     'Map_Mount_Coronet_Floor04_00': {
         0: [WT(1, 0)],
@@ -583,9 +586,9 @@ map_warp_accessibility = {
         3: [WT(0, 0), WT(1, 0)]
     },
     'Map_Mount_Coronet_Floor09_01': {
-        0: [WT(1, 4096), WT(2, 4096)],
-        1: [WT(2, 4098)],
-        2: [WT(1, 4096)]
+        0: [WT(1, fl(STRENGTH_FLAG)), WT(2, fl(STRENGTH_FLAG))],
+        1: [WT(2, fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG))],
+        2: [WT(1, fl(STRENGTH_FLAG))]
     },
     'Map_Solaceon_Ruins_Room01_00': {
         0: [WT(1, 0)],
@@ -628,31 +631,31 @@ map_warp_accessibility = {
     },
     'Map_Victory_Road_Floor01_00': {
         # (0,0)
-        0: [WT(1, 65536), WT(2, 65536), WT(3, 65536), WT(4, 65536), WT(5, 65536), WT(6, 65536), WT(7, 65536), WT(9, 65536), WT(10, 65536), WT(11, 65536), WT(12, 65536)],  # w5 - top left stairs
+        0: [WT(1, fl(ROCKCLIMB_FLAG)), WT(2, fl(ROCKCLIMB_FLAG)), WT(3, fl(ROCKCLIMB_FLAG)), WT(4, fl(ROCKCLIMB_FLAG)), WT(5, fl(ROCKCLIMB_FLAG)), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, fl(ROCKCLIMB_FLAG)), WT(9, fl(ROCKCLIMB_FLAG)), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w5 - top left stairs
 
         # (1,0)
-        1: [WT(0, 65536), WT(2, 65536), WT(3, 65536), WT(4, 65536), WT(5, 0), WT(6, 65536), WT(7, 0), WT(9, 0), WT(10, 65536), WT(11, 65536), WT(12, 65536)],  # w4 - right stair exit
-        2: [WT(0, 65536), WT(1, 65536), WT(3, 0), WT(4, 0), WT(5, 65536), WT(6, 65536), WT(7, 65536), WT(9, 65536), WT(10, 65536), WT(11, 65536), WT(12, 65536)],  # w8 - top entrance
-        3: [WT(0, 65536), WT(1, 65536), WT(2, 0), WT(4, 0), WT(5, 65536), WT(6, 65536), WT(7, 65536), WT(9, 65536), WT(10, 65536), WT(11, 65536), WT(12, 65536)],  # w11 - top entrance
-        4: [WT(0, 65536), WT(1, 65536), WT(2, 0), WT(3, 0), WT(5, 65536), WT(6, 65536), WT(7, 65536), WT(9, 65536), WT(10, 65536), WT(11, 65536), WT(12, 65536)],  # w12 - top entrance
+        1: [WT(0, fl(ROCKCLIMB_FLAG)), WT(2, fl(ROCKCLIMB_FLAG)), WT(3, fl(ROCKCLIMB_FLAG)), WT(4, fl(ROCKCLIMB_FLAG)), WT(5, 0), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, 0), WT(9, 0), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w4 - right stair exit
+        2: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, fl(ROCKCLIMB_FLAG)), WT(3, 0), WT(4, 0), WT(5, fl(ROCKCLIMB_FLAG)), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, fl(ROCKCLIMB_FLAG)), WT(9, fl(ROCKCLIMB_FLAG)), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w8 - top entrance
+        3: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, fl(ROCKCLIMB_FLAG)), WT(2, 0), WT(4, 0), WT(5, fl(ROCKCLIMB_FLAG)), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, fl(ROCKCLIMB_FLAG)), WT(9, fl(ROCKCLIMB_FLAG)), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w11 - top entrance
+        4: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, fl(ROCKCLIMB_FLAG)), WT(2, 0), WT(3, 0), WT(5, fl(ROCKCLIMB_FLAG)), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, fl(ROCKCLIMB_FLAG)), WT(9, fl(ROCKCLIMB_FLAG)), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w12 - top entrance
 
         # (0,1)
-        5: [WT(10, 65536), WT(11, 65536), WT(12, 65536)],  # w0 - up stair entrance
-        6: [WT(10, 65536), WT(11, 65536), WT(12, 65536), WT(5, 65536), WT(7, 65536)],  # w1 - up stair exit
+        5: [WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w0 - up stair entrance
+        6: [WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG)), WT(5, fl(ROCKCLIMB_FLAG)), WT(7, fl(ROCKCLIMB_FLAG))],  # w1 - up stair exit
 
         # (1,1)
-        7: [WT(10, 65536), WT(11, 65536), WT(12, 65536), WT(5, 0), WT(6, 65536)],  # w2 - right stair entrance
+        7: [WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG)), WT(5, 0), WT(6, fl(ROCKCLIMB_FLAG))],  # w2 - right stair entrance
         8: [],  # w3 - item spot
-        9: [WT(0, 65536), WT(1, 0), WT(2, 65536), WT(3, 65536), WT(4, 65536), WT(5, 0), WT(6, 65536), WT(7, 0), WT(10, 65536), WT(11, 65536), WT(12, 65536)],  # w6 - postgame door
+        9: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, 0), WT(2, fl(ROCKCLIMB_FLAG)), WT(3, fl(ROCKCLIMB_FLAG)), WT(4, fl(ROCKCLIMB_FLAG)), WT(5, 0), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, 0), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w6 - postgame door
 
         # (0,2)
-        10: [WT(11, 0), WT(12, 0), WT(5, 65536)],  # w7 - bottom entrance
-        11: [WT(10, 0), WT(12, 0), WT(5, 65536)],  # w9 - bottom entrance
-        12: [WT(10, 0), WT(11, 0), WT(5, 65536)]  # w10 - bottom entrance
+        10: [WT(11, 0), WT(12, 0), WT(5, fl(ROCKCLIMB_FLAG))],  # w7 - bottom entrance
+        11: [WT(10, 0), WT(12, 0), WT(5, fl(ROCKCLIMB_FLAG))],  # w9 - bottom entrance
+        12: [WT(10, 0), WT(11, 0), WT(5, fl(ROCKCLIMB_FLAG))]  # w10 - bottom entrance
     },
     'Map_Victory_Road_Floor02_00': {
-        0: [WT(1, 4098)],
-        1: [WT(0, 4098)],
+        0: [WT(1, fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG))],
+        1: [WT(0, fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG))],
         2: []
     },
     'Map_Victory_Road_Floor03_01': {
@@ -680,8 +683,8 @@ map_warp_accessibility = {
         1: [WT(0, 0)]
     },
     'Map_Ravaged_Path_00': {
-        0: [WT(1, 2)],
-        1: [WT(0, 2)]
+        0: [WT(1, fl(ROCKSMASH_FLAG))],
+        1: [WT(0, fl(ROCKSMASH_FLAG))]
     },
     'Map_Floaroma_Meadow_00': {
         0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],  # top
@@ -898,10 +901,10 @@ map_warp_accessibility = {
         4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
     },
     'Map_Galactic_HQ_Floor00_00': {
-        0: [WT(1, 0), WT(3, 131072)],
-        1: [WT(0, 0), WT(3, 131072)],
+        0: [WT(1, 0), WT(3, fl(GALACTICKEY_FLAG))],
+        1: [WT(0, 0), WT(3, fl(GALACTICKEY_FLAG))],
         2: [WT(6, 0)],
-        3: [WT(0, 131072), WT(1, 131072)],
+        3: [WT(0, fl(GALACTICKEY_FLAG)), WT(1, fl(GALACTICKEY_FLAG))],
         4: [WT(5, 0)],
         5: [WT(4, 0)],
         6: [WT(2, 0)]
@@ -948,10 +951,10 @@ map_warp_accessibility = {
         2: []
     },
     'Map_Galactic_HQ_Floor03_00': {
-        0: [WT(1, 131072), WT(2, 131072), WT(3, 4325376)],
-        1: [WT(0, 131072), WT(2, 4194304), WT(3, 0)],
-        2: [WT(0, 4325376), WT(1, 4194304), WT(3, 4194304)],
-        3: [WT(0, 131072), WT(1, 0), WT(2, 4194304)]
+        0: [WT(1, fl(GALACTICKEY_FLAG)), WT(2, fl(GALACTICKEY_FLAG)), WT(3, fl(GALACTICKEY_FLAG) | fl(GUARDIANSFREE_FLAG))],
+        1: [WT(0, fl(GALACTICKEY_FLAG)), WT(2, fl(GUARDIANSFREE_FLAG)), WT(3, 0)],
+        2: [WT(0, fl(GALACTICKEY_FLAG) | fl(GUARDIANSFREE_FLAG)), WT(1, fl(GUARDIANSFREE_FLAG)), WT(3, fl(GUARDIANSFREE_FLAG))],
+        3: [WT(0, fl(GALACTICKEY_FLAG)), WT(1, 0), WT(2, fl(GUARDIANSFREE_FLAG))]
     },
     'Map_Galactic_HQ_Floor05_00': {
         0: [WT(1, 0)],
@@ -962,9 +965,9 @@ map_warp_accessibility = {
         1: [WT(0, 0)]
     },
     'Map_Lake_Verity_00': {
-        0: [WT(1, 2048), WT(2, 2048)],
-        1: [WT(2, 0), WT(0, 2048)],
-        2: [WT(1, 0), WT(0, 2048)]
+        0: [WT(1, fl(SURF_FLAG)), WT(2, fl(SURF_FLAG))],
+        1: [WT(2, 0), WT(0, fl(SURF_FLAG))],
+        2: [WT(1, 0), WT(0, fl(SURF_FLAG))]
     },
     'Map_Lake_Valor_Bombed_00': {
         0: [WT(1, 0)],
@@ -973,10 +976,10 @@ map_warp_accessibility = {
     'Map_Lake_Valor_Normal_00': {
         0: [],
         1: [],
-        2: [WT(3, 0), WT(4, 2048)],
-        3: [WT(2, 0), WT(4, 2048)],
+        2: [WT(3, 0), WT(4, fl(SURF_FLAG))],
+        3: [WT(2, 0), WT(4, fl(SURF_FLAG))],
 
-        4: [WT(2, 2048), WT(3, 2048)]
+        4: [WT(2, fl(SURF_FLAG)), WT(3, fl(SURF_FLAG))]
     },
     'Map_Valor_Cavern_00': {
         0: [WT(1, 0)],
@@ -989,18 +992,18 @@ map_warp_accessibility = {
     'Map_Lake_Acuity_WithCave_00': {
         0: [],
         1: [],
-        2: [WT(3, 0), WT(4, 2048)],
-        3: [WT(2, 0), WT(4, 2048)],
+        2: [WT(3, 0), WT(4, fl(SURF_FLAG))],
+        3: [WT(2, 0), WT(4, fl(SURF_FLAG))],
 
-        4: [WT(2, 2048), WT(3, 2048)]
+        4: [WT(2, fl(SURF_FLAG)), WT(3, fl(SURF_FLAG))]
     },
     'Map_Newmoon_Island_Interior_00': {
         0: [WT(1, 0)],
         1: [WT(0, 0)]
     },
     'Map_Jubilife_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 2)],
-        1: [WT(0, 0), WT(2, 2)],
+        0: [WT(1, 0), WT(2, fl(ROCKSMASH_FLAG))],
+        1: [WT(0, 0), WT(2, fl(ROCKSMASH_FLAG))],
         2: [WT(0, 0), WT(1, 0)]
     },
     'Map_Canalave_PokemonCenter_00': {
@@ -1009,8 +1012,8 @@ map_warp_accessibility = {
         2: [WT(0, 0), WT(1, 0)]
     },
     'Map_Oreburgh_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 2)],
-        1: [WT(0, 0), WT(2, 2)],
+        0: [WT(1, 0), WT(2, fl(ROCKSMASH_FLAG))],
+        1: [WT(0, 0), WT(2, fl(ROCKSMASH_FLAG))],
         2: [WT(0, 0), WT(1, 0)]
     },
     'Map_Eterna_PokemonCenter_00': {
@@ -1054,8 +1057,8 @@ map_warp_accessibility = {
         2: [WT(0, 0), WT(1, 0)]
     },
     'Map_Sandgem_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 2)],
-        1: [WT(0, 0), WT(2, 2)],
+        0: [WT(1, 0), WT(2, fl(ROCKSMASH_FLAG))],
+        1: [WT(0, 0), WT(2, fl(ROCKSMASH_FLAG))],
         2: [WT(0, 0), WT(1, 0)]
     },
     'Map_Floaroma_PokemonCenter_00': {
@@ -1611,24 +1614,24 @@ map_warp_accessibility = {
         1: [WT(0, 0)]
     },
     'Map_Route_206_Gate_01': {
-        0: [WT(1, 32), WT(2, 32), WT(3, 32), WT(4, 0), WT(5, 0)],
+        0: [WT(1, fl(BIKE_FLAG)), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(4, 0), WT(5, 0)],
         1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
         2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
         3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 0), WT(1, 32), WT(2, 32), WT(3, 32), WT(5, 0)],
-        5: [WT(0, 0), WT(1, 32), WT(2, 32), WT(3, 32), WT(4, 0)]
+        4: [WT(0, 0), WT(1, fl(BIKE_FLAG)), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(5, 0)],
+        5: [WT(0, 0), WT(1, fl(BIKE_FLAG)), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(4, 0)]
     },
     'Map_Route_206_Gate_00': {
         0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 32), WT(2, 32), WT(3, 32), WT(4, 0), WT(5, 0)],
+        1: [WT(0, fl(BIKE_FLAG)), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(4, 0), WT(5, 0)],
         2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
         3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 32), WT(1, 0), WT(2, 32), WT(3, 32), WT(5, 0)],
-        5: [WT(0, 32), WT(1, 0), WT(2, 32), WT(3, 32), WT(4, 0)]
+        4: [WT(0, fl(BIKE_FLAG)), WT(1, 0), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(5, 0)],
+        5: [WT(0, fl(BIKE_FLAG)), WT(1, 0), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(4, 0)]
     },
     'Map_Galactic_HQ_Floor06_00': {
         0: [WT(1, 0)],
-        1: [WT(0, 2097152)],
+        1: [WT(0, fl(SPEECH_FLAG))],
         2: []
     },
     'Map_Global_Terminal_01': {
@@ -1646,17 +1649,17 @@ map_warp_accessibility = {
         3: [WT(0, 0), WT(1, 0), WT(2, 0)]
     },
     'Map_Mount_Coronet_Exterior_00': {
-        0: [WT(1, 65536), WT(2, 65536)],
-        1: [WT(0, 65536), WT(2, 0)],
-        2: [WT(0, 65536), WT(1, 0)]
+        0: [WT(1, fl(ROCKCLIMB_FLAG)), WT(2, fl(ROCKCLIMB_FLAG))],
+        1: [WT(0, fl(ROCKCLIMB_FLAG)), WT(2, 0)],
+        2: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, 0)]
     },
     'Map_Mount_Coronet_Exterior_03': {
-        0: [WT(1, 2048), WT(2, 66560)],
-        1: [WT(0, 2048), WT(2, 65536)],
-        2: [WT(0, 66560), WT(1, 65536)]
+        0: [WT(1, fl(SURF_FLAG)), WT(2, fl(PSYDUCK_FLAG) | fl(ROCKCLIMB_FLAG))],
+        1: [WT(0, fl(SURF_FLAG)), WT(2, fl(ROCKCLIMB_FLAG))],
+        2: [WT(0, fl(PSYDUCK_FLAG) | fl(ROCKCLIMB_FLAG)), WT(1, fl(ROCKCLIMB_FLAG))]
     },
     'Map_Galactic_HQ_Floor04_00': {
-        0: [WT(1, 131072), WT(2, 0)],
+        0: [WT(1, fl(GALACTICKEY_FLAG)), WT(2, 0)],
 
         1: [WT(0, 0)],
 
@@ -1667,40 +1670,40 @@ map_warp_accessibility = {
 map_to_map_warp_accessibility = {
     'Map_Pokemon_League_01': {
         'Map_Pokemon_League_00': WT(2, 0),
-        'Map_Route_223_00': WT(0, 524288)
+        'Map_Route_223_00': WT(0, fl(WATERFALL_FLAG))
     },
     'Map_Jubilife_City_02': {
-        'Map_Jubilife_City_00': WT(0, 2),
-        'Map_Jubilife_City_03': WT(0, 2)
+        'Map_Jubilife_City_00': WT(0, fl(ROCKSMASH_FLAG)),
+        'Map_Jubilife_City_03': WT(0, fl(ROCKSMASH_FLAG))
     },
     # Pretty sure this should be a connection_to_connection_rules scenario, but also not sure this check is even needed?
     'Map_Jubilife_City_01': {
-        'Map_Route_203_00': WT(0, 1)
+        'Map_Route_203_00': WT(0, fl(TRAINERSCHOOL_FLAG))
     },
     'Map_ValleyWindworks_00': {
-        'Map_Route_205_02': WT(0, 1048576)
+        'Map_Route_205_02': WT(0, fl(MEADOW_FLAG))
     },
     'Map_Fuego_Ironworks_00': {
-        'Map_Floaroma_Town_00': WT(0, 2048),
-        'Map_Route_205_00': WT(0, 2048)
+        'Map_Floaroma_Town_00': WT(0, fl(SURF_FLAG)),
+        'Map_Route_205_00': WT(0, fl(SURF_FLAG))
     },
     'Map_Eterna_Forest_Interior_00': {
-        'Map_Eterna_Forest_Interior_01': WT(0, 16)
+        'Map_Eterna_Forest_Interior_01': WT(0, fl(CUT_FLAG))
     },
     'Map_Eterna_Forest_Interior_01': {
-        'Map_Eterna_Forest_Interior_00': WT(0, 16)
+        'Map_Eterna_Forest_Interior_00': WT(0, fl(CUT_FLAG))
     },
     'Map_Victory_Road_Floor04_00': {
-        'Map_Victory_Road_Floor04_01': WT(0, 2048)
+        'Map_Victory_Road_Floor04_01': WT(0, fl(SURF_FLAG))
     },
     'Map_Victory_Road_Floor04_01': {
-        'Map_Victory_Road_Floor04_00': WT(0, 2048)
+        'Map_Victory_Road_Floor04_00': WT(0, fl(SURF_FLAG))
     },
     'Map_Stark_Mountain_Room02_00': {
-        'Map_Stark_Mountain_Room02_01': WT(0, 4098)
+        'Map_Stark_Mountain_Room02_01': WT(0, fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG))
     },
     'Map_Stark_Mountain_Room02_01': {
-        'Map_Stark_Mountain_Room02_00': WT(0, 4098)
+        'Map_Stark_Mountain_Room02_00': WT(0, fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG))
     },
     'Map_Route_213_00': {
         'Map_Valor_Lakefront_03': WT(4, 0)
@@ -1712,45 +1715,45 @@ map_to_map_warp_accessibility = {
         'Map_Galactic_HQ_Floor02_01': WT(3, 0)
     },
     'Map_Mount_Coronet_Floor07_00': {
-        'Map_Mount_Coronet_Floor07_01': WT(0, 65538)
+        'Map_Mount_Coronet_Floor07_01': WT(0, fl(ROCKSMASH_FLAG) | fl(ROCKCLIMB_FLAG))
     },
     'Map_Mount_Coronet_Floor07_01': {
-        'Map_Mount_Coronet_Floor07_00': WT(0, 65538)
+        'Map_Mount_Coronet_Floor07_00': WT(0, fl(ROCKSMASH_FLAG) | fl(ROCKCLIMB_FLAG))
     },
     'Map_Route_210_01': {
-        'Map_Route_210_05': WT(0, 1024)
+        'Map_Route_210_05': WT(0, fl(PSYDUCK_FLAG))
     },
     'Map_Route_210_05': {
-        'Map_Route_210_01': WT(0, 66560)
+        'Map_Route_210_01': WT(0, fl(PSYDUCK_FLAG) | fl(ROCKCLIMB_FLAG))
     },
     'Map_Mount_Coronet_Floor09_00': {
-        'Map_Mount_Coronet_Floor09_01': WT(2, 4096)
+        'Map_Mount_Coronet_Floor09_01': WT(2, fl(STRENGTH_FLAG))
     },
     'Map_Route_228_01': {
-        'Map_Route_228_02': WT(0, 32)
+        'Map_Route_228_02': WT(0, fl(BIKE_FLAG))
     },
     'Map_Route_229_00': {
-        'Map_Route_228_02': WT(0, 32)
+        'Map_Route_228_02': WT(0, fl(BIKE_FLAG))
     },
     'Map_Route_227_00': {
-        'Map_Stark_Mountain_00': WT(0, 32)
+        'Map_Stark_Mountain_00': WT(0, fl(BIKE_FLAG))
     },
     'Map_Stark_Mountain_00': {
-        'Map_Route_227_00': WT(0, 32)
+        'Map_Route_227_00': WT(0, fl(BIKE_FLAG))
     },
     'Map_Survival_Area_00': {
-        'Map_Route_226_00': WT(0, 65536)
+        'Map_Route_226_00': WT(0, fl(ROCKCLIMB_FLAG))
     },
     'Map_Route_226_00': {
-        'Map_Survival_Area_00': WT(0, 65536),
-        'Map_Route_226_01': WT(0, 65536)
+        'Map_Survival_Area_00': WT(0, fl(ROCKCLIMB_FLAG)),
+        'Map_Route_226_01': WT(0, fl(ROCKCLIMB_FLAG))
     },
     'Map_Route_226_01': {
-        'Map_Route_226_00': WT(0, 65536),
-        'Map_Route_226_02': WT(0, 67584),
+        'Map_Route_226_00': WT(0, fl(ROCKCLIMB_FLAG)),
+        'Map_Route_226_02': WT(0, fl(SURF_FLAG) | fl(ROCKCLIMB_FLAG)),
     },
     'Map_Route_226_02': {
-        'Map_Route_226_01': WT(0, 67584)
+        'Map_Route_226_01': WT(0, fl(SURF_FLAG) | fl(ROCKCLIMB_FLAG))
     },
     'Map_Route_227_01': {
         'Map_Route_226_02': WT(1, 0)
