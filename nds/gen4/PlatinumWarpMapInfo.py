@@ -27,6 +27,15 @@ class WT:
             raise ValueError("Invalid Warp Tuple")
 
 
+class ZT:
+    def __init__(self, zone_id, flag):
+        if isinstance(zone_id, int) and isinstance(flag, int):
+            self.zone_id = zone_id
+            self.flag = flag
+        else:
+            raise ValueError("Invalid Zone Tuple")
+
+
 # Event/HM Dependencies
 # Any Warp/Connection that has an Event/HM Dependency will have a corresponding blocker flag
 # Based off bits set in flag, we will know what dependencies are required to traverse
@@ -60,6 +69,28 @@ END_FLAG = ROARK_FLAG
 
 def fl(flag):
     return 1 << flag
+
+
+def permutate(zone_ids, flag):
+    return {
+        source: [ZT(target, flag) for target in zone_ids if target != source]
+        for source in zone_ids
+    }
+
+
+def merge_rules(*rule_maps):
+    merged = {}
+    for rule_map in rule_maps:
+        for source, rules in rule_map.items():
+            source_rules = merged.setdefault(source, [])
+            target_indices = {rule.zone_id: index for index, rule in enumerate(source_rules)}
+            for rule in rules:
+                if rule.zone_id in target_indices:
+                    source_rules[target_indices[rule.zone_id]] = rule
+                else:
+                    target_indices[rule.zone_id] = len(source_rules)
+                    source_rules.append(rule)
+    return merged
 
 # reminder - move deleter is in Map_Canalave_City_Room03_00
 
@@ -106,1693 +137,11 @@ FLAG_EVENT_LIST = [trainerschool_event, rocksmash_event, windworks_event, flash_
 no_event_allowed = []  # incomplete
 map_chain_breaks = []  # incomplete
 
-# Event Based Warps and Warp Connections
-# If map not specified, assume that all warps are accessible
-map_warp_accessibility = {
-    'Map_Jubilife_City_00': {
-        0: [WT(1, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 0), WT(4, 0), WT(5, 0)],
-        2: [],
-        3: [],
-        4: [WT(0, 0), WT(1, 0), WT(5, 0)],
-        5: [WT(0, 0), WT(1, 0), WT(4, 0)]
-    },
-    'Map_Jubilife_City_01': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Jubilife_City_02': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Jubilife_City_03': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Verity_Lakefront_03': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(3, 0)],
-        3: [WT(1, 0), WT(2, 0)]
-    },
-    'Map_Route_221_02': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Twinleaf_Town_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Sandgem_Town_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Oreburgh_City_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, fl(ROARK_FLAG)), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        2: [WT(0, fl(ROARK_FLAG)), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, fl(ROARK_FLAG)), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, fl(ROARK_FLAG)), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0)],
-        5: [WT(0, fl(ROARK_FLAG)), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
-    },
-    'Map_Oreburgh_City_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Oreburgh_City_02': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0)],
-        5: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
-    },
-    'Map_Route_206_00': {
-        0: [WT(1, 0), WT(6, 0), WT(7, 0), WT(8, 0), WT(9, 0), WT(10, 0), WT(11, 0)],  # path
-        1: [WT(0, 0), WT(6, 0), WT(7, 0), WT(8, 0), WT(9, 0), WT(10, 0), WT(11, 0)],  # path
-        2: [WT(3, 0), WT(4, fl(CUT_FLAG)), WT(5, fl(CUT_FLAG)), WT(12, fl(CUT_FLAG)), WT(13, fl(CUT_FLAG))],  # underside
-
-        3: [WT(2, 0), WT(4, fl(CUT_FLAG)), WT(5, fl(CUT_FLAG)), WT(12, fl(CUT_FLAG)), WT(13, fl(CUT_FLAG))],  # underside
-
-        4: [WT(5, 0), WT(12, 0), WT(13, 0), WT(2, fl(CUT_FLAG)), WT(3, fl(CUT_FLAG))],  # exterior
-        5: [WT(4, 0), WT(12, 0), WT(13, 0), WT(2, fl(CUT_FLAG)), WT(3, fl(CUT_FLAG))],  # exterior
-        6: [WT(0, 0), WT(1, 0), WT(7, 0), WT(8, 0), WT(9, 0), WT(10, 0), WT(11, 0)],  # path
-        7: [WT(0, 0), WT(1, 0), WT(6, 0), WT(8, 0), WT(9, 0), WT(10, 0), WT(11, 0)],  # path
-        8: [WT(0, 0), WT(1, 0), WT(6, 0), WT(7, 0), WT(9, 0), WT(10, 0), WT(11, 0)],  # path
-        9: [WT(0, 0), WT(1, 0), WT(6, 0), WT(7, 0), WT(8, 0), WT(10, 0), WT(11, 0)],  # path
-        10: [WT(0, 0), WT(1, 0), WT(6, 0), WT(7, 0), WT(8, 0), WT(9, 0), WT(11, 0)],  # path
-        11: [WT(0, 0), WT(1, 0), WT(6, 0), WT(7, 0), WT(8, 0), WT(9, 0), WT(10, 0)],  # path
-        12: [WT(4, 0), WT(5, 0), WT(13, 0), WT(2, fl(CUT_FLAG)), WT(3, fl(CUT_FLAG))],  # exterior
-        13: [WT(4, 0), WT(5, 0), WT(12, 0), WT(2, fl(CUT_FLAG)), WT(3, fl(CUT_FLAG))]  # exterior
-    },
-    'Map_Route_207_01': {
-        0: [],
-        1: []
-    },
-    'Map_Eterna_City_00': {
-        0: [WT(1, 0), WT(3, 0), WT(4, 0), WT(2, fl(CUT_FLAG))],
-        1: [WT(0, 0), WT(3, 0), WT(4, 0), WT(2, fl(CUT_FLAG))],
-        2: [WT(0, fl(CUT_FLAG)), WT(1, fl(CUT_FLAG)), WT(3, fl(CUT_FLAG)), WT(4, fl(CUT_FLAG))],
-        3: [WT(0, 0), WT(1, 0), WT(4, 0), WT(2, fl(CUT_FLAG))],
-        4: [WT(0, 0), WT(1, 0), WT(3, 0), WT(2, fl(CUT_FLAG))]
-    },
-    'Map_Eterna_City_02': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0)],
-        5: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
-    },
-    'Map_Fuego_Ironworks_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Route_205_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Route_205_03': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Floaroma_Town_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Floaroma_Town_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0), WT(6, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0), WT(6, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0), WT(6, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0), WT(6, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0), WT(6, 0)],
-        5: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(6, 0)],
-        6: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)]
-    },
-    'Map_Hearthome_City_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Hearthome_City_01': {
-        0: [WT(1, 0), WT(2, fl(CONTESTHALL_FLAG)), WT(3, 0)],
-        1: [WT(0, 0), WT(2, fl(CONTESTHALL_FLAG)), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, fl(CONTESTHALL_FLAG))]
-    },
-    'Map_Hearthome_City_02': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)],
-        3: [WT(4, 0), WT(5, 0), WT(6, 0)],
-        4: [WT(3, 0), WT(5, 0), WT(6, 0)],
-        5: [WT(3, 0), WT(4, 0), WT(6, 0)],
-        6: [WT(3, 0), WT(4, 0), WT(5, 0)]
-    },
-    'Map_Hearthome_City_03': {
-        0: [WT(1, 0), WT(2, fl(HEARTHOMEGYM_FLAG)), WT(3, fl(HEARTHOMEGYM_FLAG))],
-        1: [WT(0, 0), WT(2, fl(HEARTHOMEGYM_FLAG)), WT(3, fl(HEARTHOMEGYM_FLAG))],
-        2: [WT(0, 0), WT(1, 0), WT(3, fl(HEARTHOMEGYM_FLAG))],
-        3: [WT(0, 0), WT(1, 0), WT(2, fl(HEARTHOMEGYM_FLAG))]
-    },
-    'Map_Route_208_01': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Route_209_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_215_02': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Solaceon_Town_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Solaceon_Town_01': {
-        0: [],
-        1: [],
-        2: [],
-        3: []
-    },
-    'Map_Celestic_Town_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0)],
-        5: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
-    },
-    'Map_Veilstone_City_00': {
-        0: [WT(1, 0), WT(3, fl(VEILSTONEGYM_FLAG))],
-        1: [WT(0, 0), WT(3, fl(VEILSTONEGYM_FLAG))],
-        2: [WT(0, 0), WT(1, 0), WT(3, fl(VEILSTONEGYM_FLAG))],
-        3: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Veilstone_City_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Veilstone_City_02': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Veilstone_City_03': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Pastoria_City_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, fl(VEILSTONEGYM_FLAG)), WT(2, 0)],
-        2: [WT(0, fl(VEILSTONEGYM_FLAG)), WT(1, 0)]
-    },
-    'Map_Pastoria_City_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Pastoria_City_02': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Route_212_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Sunyshore_City_00': {
-        0: [WT(3, fl(LIGHTHOUSE_FLAG)), WT(4, 0)],
-        1: [],
-        2: [],
-        3: [WT(0, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(3, fl(LIGHTHOUSE_FLAG))]
-    },
-    'Map_Sunyshore_City_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Sunyshore_City_02': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Sunyshore_City_03': {
-        0: [WT(1, fl(ROCKCLIMB_FLAG))],
-        1: [WT(0, fl(ROCKCLIMB_FLAG))]
-    },
-    'Map_Pokemon_League_01': {
-        0: [WT(1, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(5, 0), WT(6, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        5: [WT(2, 0), WT(6, 0)],
-        6: [WT(2, 0), WT(5, 0)]
-    },
-    'Map_Snowpoint_City_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Snowpoint_City_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Acuity_Lakefront_02': {
-        0: [WT(1, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(2, 0)]
-    },
-    'Map_Canalave_City_00': {
-        0: [WT(1, 0), WT(2, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Canalave_City_01': {
-        0: [WT(1, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(5, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        5: [WT(2, 0)]
-    },
-    'Map_Fullmoon_Island_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Iron_Island_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Newmoon_Island_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_218_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_218_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_225_02': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Survival_Area_00': {
-        0: [WT(1, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(3, 0), WT(4, 0)],
-        2: [],
-        3: [WT(1, 0), WT(4, 0)],
-        4: [WT(1, 0), WT(3, 0)]
-    },
-    'Map_Route_226_02': {
-        0: [WT(1, fl(SURF_FLAG)), WT(2, fl(SURF_FLAG))],
-        1: [WT(2, 0), WT(0, fl(SURF_FLAG))],
-        2: [WT(1, 0), WT(0, fl(SURF_FLAG))]
-    },
-    'Map_Valor_Lakefront_01': {
-        0: [WT(1, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(2, 0)]
-    },
-    'Map_Valor_Lakefront_03': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Spring_Path_02': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_213_00': {
-        # top left
-        0: [WT(1, 0), WT(3, 0), WT(7, 0)],  # outside
-        1: [WT(0, 0), WT(3, 0), WT(7, 0)],  # outside
-
-        # top middle
-        2: [WT(4, 0), WT(5, 0), WT(6, fl(ROCKCLIMB_FLAG))],  # inside
-
-        # top right
-        3: [WT(0, 0), WT(1, 0), WT(7, 0)],  # outside
-        4: [WT(2, 0), WT(5, 0), WT(6, fl(ROCKCLIMB_FLAG))],  # inside
-        5: [WT(2, 0), WT(4, 0), WT(6, fl(ROCKCLIMB_FLAG))],  # inside
-        6: [WT(2, fl(ROCKCLIMB_FLAG)), WT(4, fl(ROCKCLIMB_FLAG)), WT(5, fl(ROCKCLIMB_FLAG))],  # inside
-
-        # bottom left
-        7: [WT(0, 0), WT(1, 0), WT(3, 0)]  # outside
-    },
-    'Map_Route_214_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0)],
-        3: [WT(0, 0), WT(1, 0)],
-        4: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Route_222_02': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Fight_Area_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Fight_Area_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0)],
-        5: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
-    },
-    'Map_Route_228_00': {
-        0: [WT(1, 0), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG))],
-        1: [WT(0, 0), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG))],
-        2: [WT(0, fl(BIKE_FLAG)), WT(1, fl(BIKE_FLAG))],
-        3: [WT(0, fl(BIKE_FLAG)), WT(1, fl(BIKE_FLAG))]
-    },
-    'Map_Resort_Area_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Oreburgh_Gate_00': {
-        0: [WT(1, 0), WT(2, fl(ROCKSMASH_FLAG))],
-        1: [WT(0, 0), WT(2, fl(ROCKSMASH_FLAG))],
-        2: [WT(0, fl(ROCKSMASH_FLAG)), WT(1, fl(ROCKSMASH_FLAG))]
-    },
-    'Map_Oreburgh_Mine_Room01_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0)],
-        5: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
-    },
-    'Map_Eterna_Forest_Interior_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Eterna_Forest_Interior_02': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Mount_Coronet_Floor00_00': {
-        0: [WT(1, 0), WT(2, fl(SURF_FLAG) | fl(ROCKCLIMB_FLAG))],
-        1: [WT(0, 0), WT(2, fl(SURF_FLAG) | fl(ROCKCLIMB_FLAG))],
-        2: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, fl(ROCKCLIMB_FLAG))]
-    },
-    'Map_Mount_Coronet_Floor01_00': {
-        0: [],
-        1: [WT(2, 0)],
-        2: [WT(1, 0)],
-        3: []
-    },
-    'Map_Mount_Coronet_Floor01_01': {
-        0: [WT(1, fl(STRENGTH_FLAG))],
-        1: [WT(0, fl(STRENGTH_FLAG))]
-    },
-    'Map_Mount_Coronet_Floor02_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Mount_Coronet_Floor03_00': {
-        0: [WT(4, fl(ROCKCLIMB_FLAG))],
-        1: [WT(2, fl(SURF_FLAG) | fl(WATERFALL_FLAG))],
-
-        2: [WT(1, fl(SURF_FLAG) | fl(WATERFALL_FLAG))],
-        3: [],
-        4: [WT(0, fl(ROCKCLIMB_FLAG))]
-    },
-    'Map_Mount_Coronet_Floor04_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Mount_Coronet_Floor05_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Mount_Coronet_Floor06_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0)],
-        2: [WT(0, 0)],
-        3: [WT(0, 0)],
-        4: [WT(0, 0)]
-    },
-    'Map_Mount_Coronet_Floor08_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0)],
-        3: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Mount_Coronet_Floor09_01': {
-        0: [WT(1, fl(STRENGTH_FLAG)), WT(2, fl(STRENGTH_FLAG))],
-        1: [WT(2, fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG))],
-        2: [WT(1, fl(STRENGTH_FLAG))]
-    },
-    'Map_Solaceon_Ruins_Room01_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Solaceon_Ruins_Room02_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Solaceon_Ruins_Room03_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Solaceon_Ruins_Room05_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Solaceon_Ruins_Room05_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Solaceon_Ruins_Room07_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Solaceon_Ruins_Room08_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Victory_Road_Floor01_00': {
-        # (0,0)
-        0: [WT(1, fl(ROCKCLIMB_FLAG)), WT(2, fl(ROCKCLIMB_FLAG)), WT(3, fl(ROCKCLIMB_FLAG)), WT(4, fl(ROCKCLIMB_FLAG)), WT(5, fl(ROCKCLIMB_FLAG)), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, fl(ROCKCLIMB_FLAG)), WT(9, fl(ROCKCLIMB_FLAG)), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w5 - top left stairs
-
-        # (1,0)
-        1: [WT(0, fl(ROCKCLIMB_FLAG)), WT(2, fl(ROCKCLIMB_FLAG)), WT(3, fl(ROCKCLIMB_FLAG)), WT(4, fl(ROCKCLIMB_FLAG)), WT(5, 0), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, 0), WT(9, 0), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w4 - right stair exit
-        2: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, fl(ROCKCLIMB_FLAG)), WT(3, 0), WT(4, 0), WT(5, fl(ROCKCLIMB_FLAG)), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, fl(ROCKCLIMB_FLAG)), WT(9, fl(ROCKCLIMB_FLAG)), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w8 - top entrance
-        3: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, fl(ROCKCLIMB_FLAG)), WT(2, 0), WT(4, 0), WT(5, fl(ROCKCLIMB_FLAG)), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, fl(ROCKCLIMB_FLAG)), WT(9, fl(ROCKCLIMB_FLAG)), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w11 - top entrance
-        4: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, fl(ROCKCLIMB_FLAG)), WT(2, 0), WT(3, 0), WT(5, fl(ROCKCLIMB_FLAG)), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, fl(ROCKCLIMB_FLAG)), WT(9, fl(ROCKCLIMB_FLAG)), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w12 - top entrance
-
-        # (0,1)
-        5: [WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w0 - up stair entrance
-        6: [WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG)), WT(5, fl(ROCKCLIMB_FLAG)), WT(7, fl(ROCKCLIMB_FLAG))],  # w1 - up stair exit
-
-        # (1,1)
-        7: [WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG)), WT(5, 0), WT(6, fl(ROCKCLIMB_FLAG))],  # w2 - right stair entrance
-        8: [],  # w3 - item spot
-        9: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, 0), WT(2, fl(ROCKCLIMB_FLAG)), WT(3, fl(ROCKCLIMB_FLAG)), WT(4, fl(ROCKCLIMB_FLAG)), WT(5, 0), WT(6, fl(ROCKCLIMB_FLAG)), WT(7, 0), WT(10, fl(ROCKCLIMB_FLAG)), WT(11, fl(ROCKCLIMB_FLAG)), WT(12, fl(ROCKCLIMB_FLAG))],  # w6 - postgame door
-
-        # (0,2)
-        10: [WT(11, 0), WT(12, 0), WT(5, fl(ROCKCLIMB_FLAG))],  # w7 - bottom entrance
-        11: [WT(10, 0), WT(12, 0), WT(5, fl(ROCKCLIMB_FLAG))],  # w9 - bottom entrance
-        12: [WT(10, 0), WT(11, 0), WT(5, fl(ROCKCLIMB_FLAG))]  # w10 - bottom entrance
-    },
-    'Map_Victory_Road_Floor02_00': {
-        0: [WT(1, fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG))],
-        1: [WT(0, fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG))],
-        2: []
-    },
-    'Map_Victory_Road_Floor03_01': {
-        0: [],
-        1: []
-    },
-    'Map_Victory_Road_Floor05_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Victory_Road_Floor06_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pal_Park_00': {
-        0: [],
-        1: []
-    },
-    'Map_Amity_Square_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Amity_Square_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Ravaged_Path_00': {
-        0: [WT(1, fl(ROCKSMASH_FLAG))],
-        1: [WT(0, fl(ROCKSMASH_FLAG))]
-    },
-    'Map_Floaroma_Meadow_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],  # top
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],  # top
-
-        2: [WT(3, 0), WT(4, 0)],  # house
-
-        3: [WT(4, 0), WT(2, 0)],  # bottom
-        4: [WT(3, 0), WT(2, 0)]  # bottom
-    },
-    'Map_Fullmoon_Island_Interior_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Stark_Mountain_Room01_00': {
-        0: [],
-        1: []
-    },
-    'Map_Sendoff_Springs_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Turnback_Cave_Room01_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Turnback_Cave_Room02_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room03_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room04_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room04_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room04_02': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room04_03': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room04_04': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room04_05': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room05_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room05_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room05_02': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room05_03': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room05_04': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room05_05': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room06_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room06_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room06_02': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room06_03': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room06_04': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Turnback_Cave_Room06_05': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Snowpoint_Temple_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Snowpoint_Temple_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Snowpoint_Temple_02': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Snowpoint_Temple_03': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Snowpoint_Temple_04': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Wayward_Cave_Room01_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Wayward_Cave_Room01_01': {
-        0: [],
-        1: []
-    },
-    'Map_Trophy_Garden_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Iron_Island_Room01_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Iron_Island_Room03_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Iron_Island_Room06_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0)],
-        3: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Old_Chateau_Room01_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Old_Chateau_Room03_00': {
-        0: [],
-        1: []
-    },
-    'Map_Old_Chateau_Room04_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Galactic_HQ_Floor00_00': {
-        0: [WT(1, 0), WT(3, fl(GALACTICKEY_FLAG))],
-        1: [WT(0, 0), WT(3, fl(GALACTICKEY_FLAG))],
-        2: [WT(6, 0)],
-        3: [WT(0, fl(GALACTICKEY_FLAG)), WT(1, fl(GALACTICKEY_FLAG))],
-        4: [WT(5, 0)],
-        5: [WT(4, 0)],
-        6: [WT(2, 0)]
-    },
-    'Map_Galactic_HQ_Floor00_01': {
-        0: [],
-        1: [WT(3, 0), WT(4, 0)],
-        2: [],
-        3: [WT(1, 0), WT(4, 0)],
-        4: [WT(1, 0), WT(3, 0)],
-        5: [WT(6, 0)],
-        6: [WT(5, 0)],
-        7: [WT(0, 0)]
-    },
-    'Map_Galactic_HQ_Floor01_00': {
-        0: [WT(3, 0), WT(4, 0)],  # top left room
-        1: [WT(5, 0)],  # mid left room
-        2: [WT(11, 0), WT(14, 0), WT(7, 0)],  # center hallway
-        3: [WT(0, 0), WT(4, 0)],  # top left room
-        4: [WT(0, 0), WT(3, 0)],  # top left room
-        5: [WT(1, 0)],  # mid left room
-        6: [],  # left wall room
-        7: [WT(11, 0), WT(14, 0), WT(2, 0)],  # center room
-        8: [WT(9, 0)],  # bottom hall
-        9: [WT(8, 0)],  # bottom hall
-
-        10: [WT(12, 0)],  # bed room
-        11: [WT(14, 0), WT(2, 0), WT(7, 0)],  # center hallway
-        12: [WT(10, 0)],  # bed room
-        13: [],  # right wall room
-        14: [WT(11, 0), WT(2, 0), WT(7, 0)]  # center hallway
-    },
-    'Map_Galactic_HQ_Floor02_00': {
-        0: [],
-        1: [WT(2, 0)],
-        2: [WT(1, 0)],
-        3: [WT(4, 0), WT(5, 0)],
-        4: [WT(3, 0), WT(5, 0)],
-        5: [WT(3, 0), WT(4, 0)]
-    },
-    'Map_Galactic_HQ_Floor02_01': {
-        0: [],
-        1: [],
-        2: []
-    },
-    'Map_Galactic_HQ_Floor03_00': {
-        0: [WT(1, fl(GALACTICKEY_FLAG)), WT(2, fl(GALACTICKEY_FLAG)), WT(3, fl(GALACTICKEY_FLAG) | fl(GUARDIANSFREE_FLAG))],
-        1: [WT(0, fl(GALACTICKEY_FLAG)), WT(2, fl(GUARDIANSFREE_FLAG)), WT(3, 0)],
-        2: [WT(0, fl(GALACTICKEY_FLAG) | fl(GUARDIANSFREE_FLAG)), WT(1, fl(GUARDIANSFREE_FLAG)), WT(3, fl(GUARDIANSFREE_FLAG))],
-        3: [WT(0, fl(GALACTICKEY_FLAG)), WT(1, 0), WT(2, fl(GUARDIANSFREE_FLAG))]
-    },
-    'Map_Galactic_HQ_Floor05_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Lake_Verity_Dummy_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Lake_Verity_00': {
-        0: [WT(1, fl(SURF_FLAG)), WT(2, fl(SURF_FLAG))],
-        1: [WT(2, 0), WT(0, fl(SURF_FLAG))],
-        2: [WT(1, 0), WT(0, fl(SURF_FLAG))]
-    },
-    'Map_Lake_Valor_Bombed_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Lake_Valor_Normal_00': {
-        0: [],
-        1: [],
-        2: [WT(3, 0), WT(4, fl(SURF_FLAG))],
-        3: [WT(2, 0), WT(4, fl(SURF_FLAG))],
-
-        4: [WT(2, fl(SURF_FLAG)), WT(3, fl(SURF_FLAG))]
-    },
-    'Map_Valor_Cavern_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Lake_Acuity_NoCave_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Lake_Acuity_WithCave_00': {
-        0: [],
-        1: [],
-        2: [WT(3, 0), WT(4, fl(SURF_FLAG))],
-        3: [WT(2, 0), WT(4, fl(SURF_FLAG))],
-
-        4: [WT(2, fl(SURF_FLAG)), WT(3, fl(SURF_FLAG))]
-    },
-    'Map_Newmoon_Island_Interior_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Jubilife_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, fl(ROCKSMASH_FLAG))],
-        1: [WT(0, 0), WT(2, fl(ROCKSMASH_FLAG))],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Canalave_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Oreburgh_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, fl(ROCKSMASH_FLAG))],
-        1: [WT(0, 0), WT(2, fl(ROCKSMASH_FLAG))],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Eterna_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Hearthome_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Pastoria_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Veilstone_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Sunyshore_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Snowpoint_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Pokemon_League_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Fight_Area_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Sandgem_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, fl(ROCKSMASH_FLAG))],
-        1: [WT(0, 0), WT(2, fl(ROCKSMASH_FLAG))],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Floaroma_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Solaceon_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Celestic_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Survival_Area_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Resort_Area_PokemonCenter_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Jubilife_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Canalave_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Oreburgh_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Eterna_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Hearthome_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Pastoria_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Veilstone_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Sunyshore_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Snowpoint_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Pokemon_League_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Fight_Area_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Sandgem_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Floaroma_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Solaceon_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Celestic_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Survival_Area_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Resort_Area_PokemonCenter_01': {
-        0: [],
-        1: []
-    },
-    'Map_Pokemon_League_PokemonCenter02_01': {
-        0: [],
-        1: []
-    },
-    'Map_Twinleaf_Rival_House_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Twinleaf_Your_House_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Sandgem_House01_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Jubilife_Building01_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Jubilife_Building02_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Jubilife_Building03_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Oreburgh_Building01_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Oreburgh_Building02_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Oreburgh_Building03_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Eterna_Building01_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Eterna_Building01_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Oreburgh_Building_Unused_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Oreburgh_Building_Unused_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Jubilife_Poketch_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Jubilife_Poketch_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_League_Interior_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Grand_Lake_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Jubilife_TV_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Jubilife_TV_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Jubilife_TV_02': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0)]
-    },
-    'Map_Jubilife_TV_03': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Hearthome_Amity_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Hearthome_Amity_Gate_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Eterna_Gate_Unused_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Eterna_Galactic_Building_Floor01_00': {
-        0: [],
-        1: [WT(2, 0), WT(3, 0)],
-        2: [WT(1, 0), WT(3, 0)],
-        3: [WT(1, 0), WT(2, 0)]
-    },
-    'Map_Eterna_Galactic_Building_Floor02_00': {
-        0: [],
-        1: [WT(2, 0), WT(3, 0)],
-        2: [WT(1, 0), WT(3, 0)],
-        3: [WT(1, 0), WT(2, 0)]
-    },
-    'Map_Eterna_Galactic_Building_Floor03_00': {
-        0: [],
-        1: []
-    },
-    'Map_Hearthome_Contest_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Veilstone_Mall_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Veilstone_Mall_01': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Veilstone_Mall_02': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Veilstone_Mall_03': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Veilstone_Mall_04': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Veilstone_Warehouse_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_Mansion_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Pokemon_Mansion_01': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Pokemon_Mansion_Room01_00': {
-        0: [],
-        1: [],
-        2: []
-    },
-    'Map_Pastoria_Marsh_Entrance_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    # NOTE: The Elite Four / Champion rooms (Aaron, Bertha, Flint, Lucian,
-    # Cynthia) are intentionally NOT listed here. Their two warps are merged into
-    # a single logical door via forced_warp_pairs, which makes any internal
-    # warp-to-warp routing rules redundant (and would conflict, since only warp 1
-    # was keyed while the paired representative is warp 0).
-    'Map_Pokemon_League_Interior_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_League_Interior_02': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_League_Interior_03': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_League_Interior_04': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_League_Interior_05': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_League_Cynthia_Room_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Hall_Of_Fame_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Battle_Tower_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Ribbon_Syndicate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pal_Park_Interior_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Global_Terminal_02': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Jubilife_Building01_02': {
-        0: [],
-        1: []
-    },
-    'Map_Jubilife_Building01_Unused_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Jubilife_Building02_01': {
-        0: [],
-        1: []
-    },
-    'Map_Jubilife_Building02_Unused_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Oreburgh_Building01_01': {
-        0: [],
-        1: []
-    },
-    'Map_Oreburgh_Building02_01': {
-        0: [],
-        1: []
-    },
-    'Map_Oreburgh_Building03_01': {
-        0: [],
-        1: []
-    },
-    'Map_Eterna_Building01_02': {
-        0: [],
-        1: []
-    },
-    'Map_Hearthome_House02_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Hearthome_House03_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_Tower_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_Tower_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_Tower_02': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Pokemon_Tower_03': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Canalave_Library_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Canalave_Library_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Eterna_Gym_00': {
-        0: [],
-        1: []
-    },
-    'Map_Hearthome_Gym_00': {
-        0: [],
-        1: [WT(3, 0), WT(4, 0)],
-        2: [],
-        3: [WT(1, 0), WT(4, 0)],
-        4: [WT(1, 0), WT(3, 0)]
-    },
-    'Map_Hearthome_Gym_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Hearthome_Gym_02': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0)],
-        5: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
-    },
-    'Map_Hearthome_Gym_Unused_06': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Hearthome_Gym_Unused_07': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Hearthome_Gym_03': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)],
-        3: [WT(4, 0)],
-        4: [WT(3, 0)]
-    },
-    'Map_Sunyshore_Gym_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Sunyshore_Gym_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Battle_Park_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Battle_Park_Interior_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Great_Marsh_05': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Veilstone_Mall_05': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Battle_Frontier_Interior_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0)],
-        5: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
-    },
-    'Map_Battle_Factory_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Battle_Hall_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Battle_Castle_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Battle_Arcade_00': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Battle_Frontier_03': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Battle_Frontier_02': {
-        0: [WT(1, 0), WT(2, 0)],
-        1: [WT(0, 0), WT(2, 0)],
-        2: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Battle_Frontier_01': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(5, 0)],
-        5: [WT(0, 0), WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0)]
-    },
-    'Map_Battle_Frontier_00': {
-        0: [WT(1, 0), WT(4, 0)],
-        1: [WT(0, 0), WT(4, 0)],
-        2: [WT(3, 0)],
-        3: [WT(2, 0)],
-        4: [WT(0, 0), WT(1, 0)]
-    },
-    'Map_Route_212_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_225_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_214_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_208_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_209_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_215_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_213_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_218_Gate_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_218_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_222_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_228_Gate_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Route_206_Gate_01': {
-        0: [WT(1, fl(BIKE_FLAG)), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(4, 0), WT(5, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, 0), WT(1, fl(BIKE_FLAG)), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(5, 0)],
-        5: [WT(0, 0), WT(1, fl(BIKE_FLAG)), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(4, 0)]
-    },
-    'Map_Route_206_Gate_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        1: [WT(0, fl(BIKE_FLAG)), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(4, 0), WT(5, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0), WT(4, 0), WT(5, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0), WT(4, 0), WT(5, 0)],
-        4: [WT(0, fl(BIKE_FLAG)), WT(1, 0), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(5, 0)],
-        5: [WT(0, fl(BIKE_FLAG)), WT(1, 0), WT(2, fl(BIKE_FLAG)), WT(3, fl(BIKE_FLAG)), WT(4, 0)]
-    },
-    'Map_Galactic_HQ_Floor06_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, fl(SPEECH_FLAG))],
-        2: []
-    },
-    'Map_Global_Terminal_01': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Global_Terminal_00': {
-        0: [WT(1, 0)],
-        1: [WT(0, 0)]
-    },
-    'Map_Eterna_Galactic_Building_Floor00_00': {
-        0: [WT(1, 0), WT(2, 0), WT(3, 0)],
-        1: [WT(0, 0), WT(2, 0), WT(3, 0)],
-        2: [WT(0, 0), WT(1, 0), WT(3, 0)],
-        3: [WT(0, 0), WT(1, 0), WT(2, 0)]
-    },
-    'Map_Mount_Coronet_Exterior_00': {
-        0: [WT(1, fl(ROCKCLIMB_FLAG)), WT(2, fl(ROCKCLIMB_FLAG))],
-        1: [WT(0, fl(ROCKCLIMB_FLAG)), WT(2, 0)],
-        2: [WT(0, fl(ROCKCLIMB_FLAG)), WT(1, 0)]
-    },
-    'Map_Mount_Coronet_Exterior_03': {
-        0: [WT(1, fl(SURF_FLAG)), WT(2, fl(PSYDUCK_FLAG) | fl(ROCKCLIMB_FLAG))],
-        1: [WT(0, fl(SURF_FLAG)), WT(2, fl(ROCKCLIMB_FLAG))],
-        2: [WT(0, fl(PSYDUCK_FLAG) | fl(ROCKCLIMB_FLAG)), WT(1, fl(ROCKCLIMB_FLAG))]
-    },
-    'Map_Galactic_HQ_Floor04_00': {
-        0: [WT(1, fl(GALACTICKEY_FLAG)), WT(2, 0)],
-
-        1: [WT(0, 0)],
-
-        2: [WT(0, 0)]
-    }
-}
-
-map_to_map_warp_accessibility = {
-    'Map_Pokemon_League_01': {
-        'Map_Pokemon_League_00': WT(2, 0),
-        'Map_Route_223_00': WT(0, fl(WATERFALL_FLAG))
-    },
-    'Map_Jubilife_City_02': {
-        'Map_Jubilife_City_00': WT(0, fl(ROCKSMASH_FLAG)),
-        'Map_Jubilife_City_03': WT(0, fl(ROCKSMASH_FLAG))
-    },
-    # Pretty sure this should be a connection_to_connection_rules scenario, but also not sure this check is even needed?
-    'Map_Jubilife_City_01': {
-        'Map_Route_203_00': WT(0, fl(TRAINERSCHOOL_FLAG))
-    },
-    'Map_ValleyWindworks_00': {
-        'Map_Route_205_02': WT(0, fl(MEADOW_FLAG))
-    },
-    'Map_Fuego_Ironworks_00': {
-        'Map_Floaroma_Town_00': WT(0, fl(SURF_FLAG)),
-        'Map_Route_205_00': WT(0, fl(SURF_FLAG))
-    },
-    'Map_Eterna_Forest_Interior_00': {
-        'Map_Eterna_Forest_Interior_01': WT(0, fl(CUT_FLAG))
-    },
-    'Map_Eterna_Forest_Interior_01': {
-        'Map_Eterna_Forest_Interior_00': WT(0, fl(CUT_FLAG))
-    },
-    'Map_Victory_Road_Floor04_00': {
-        'Map_Victory_Road_Floor04_01': WT(0, fl(SURF_FLAG))
-    },
-    'Map_Victory_Road_Floor04_01': {
-        'Map_Victory_Road_Floor04_00': WT(0, fl(SURF_FLAG))
-    },
-    'Map_Stark_Mountain_Room02_00': {
-        'Map_Stark_Mountain_Room02_01': WT(0, fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG))
-    },
-    'Map_Stark_Mountain_Room02_01': {
-        'Map_Stark_Mountain_Room02_00': WT(0, fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG))
-    },
-    'Map_Route_213_00': {
-        'Map_Valor_Lakefront_03': WT(4, 0)
-    },
-    'Map_Route_206_00': {
-        'Map_Route_207_00': WT(12, 0)
-    },
-    'Map_Galactic_HQ_Floor02_00': {
-        'Map_Galactic_HQ_Floor02_01': WT(3, 0)
-    },
-    'Map_Mount_Coronet_Floor07_00': {
-        'Map_Mount_Coronet_Floor07_01': WT(0, fl(ROCKSMASH_FLAG) | fl(ROCKCLIMB_FLAG))
-    },
-    'Map_Mount_Coronet_Floor07_01': {
-        'Map_Mount_Coronet_Floor07_00': WT(0, fl(ROCKSMASH_FLAG) | fl(ROCKCLIMB_FLAG))
-    },
-    'Map_Route_210_01': {
-        'Map_Route_210_05': WT(0, fl(PSYDUCK_FLAG))
-    },
-    'Map_Route_210_05': {
-        'Map_Route_210_01': WT(0, fl(PSYDUCK_FLAG) | fl(ROCKCLIMB_FLAG))
-    },
-    'Map_Mount_Coronet_Floor09_00': {
-        'Map_Mount_Coronet_Floor09_01': WT(2, fl(STRENGTH_FLAG))
-    },
-    'Map_Route_228_01': {
-        'Map_Route_228_02': WT(0, fl(BIKE_FLAG))
-    },
-    'Map_Route_229_00': {
-        'Map_Route_228_02': WT(0, fl(BIKE_FLAG))
-    },
-    'Map_Route_227_00': {
-        'Map_Stark_Mountain_00': WT(0, fl(BIKE_FLAG))
-    },
-    'Map_Stark_Mountain_00': {
-        'Map_Route_227_00': WT(0, fl(BIKE_FLAG))
-    },
-    'Map_Survival_Area_00': {
-        'Map_Route_226_00': WT(0, fl(ROCKCLIMB_FLAG))
-    },
-    'Map_Route_226_00': {
-        'Map_Survival_Area_00': WT(0, fl(ROCKCLIMB_FLAG)),
-        'Map_Route_226_01': WT(0, fl(ROCKCLIMB_FLAG))
-    },
-    'Map_Route_226_01': {
-        'Map_Route_226_00': WT(0, fl(ROCKCLIMB_FLAG)),
-        'Map_Route_226_02': WT(0, fl(SURF_FLAG) | fl(ROCKCLIMB_FLAG)),
-    },
-    'Map_Route_226_02': {
-        'Map_Route_226_01': WT(0, fl(SURF_FLAG) | fl(ROCKCLIMB_FLAG))
-    },
-    'Map_Route_227_01': {
-        'Map_Route_226_02': WT(1, 0)
-    },
-    'Map_Oreburgh_City_01': {
-        'Map_Oreburgh_City_00': WT(1, 0)
-    },
-    'Map_Sunyshore_City_01': {
-        'Map_Sunyshore_City_03': WT(1, 0)
-    },
-    'Map_Sunyshore_City_02': {
-        'Map_Sunyshore_City_03': WT(1, 0)
-    },
-    'Map_Canalave_City_00': {
-        'Map_Iron_Island_00': WT(0, 0),
-        'Map_Canalave_City_01': WT(4, 0),
-    }
-}
-
-potential_softlock_warps = {
-    'Map_Pokemon_League_Aaron_Room_00': [1],
-    'Map_Pokemon_League_Bertha_Room_00': [1],
-    'Map_Pokemon_League_Flint_Room_00': [1],
-    'Map_Pokemon_League_Lucian_Room_00': [1],
-    'Map_Pokemon_League_Cynthia_Room_00': [1],
-    'Map_Hall_Of_Fame_01': [1],
-    'Map_Hall_Of_Fame_00': [0],
-    'Map_Canalave_City_00': [3],
-    'Map_Survival_Area_00': [0],
-    'Map_Galactic_HQ_Floor00_01': [7],
-}
-
-final_rooms = [
-    'Map_Pokemon_League_Aaron_Room_00',
-    'Map_Pokemon_League_Bertha_Room_00', 
-    'Map_Pokemon_League_Flint_Room_00',
-    'Map_Pokemon_League_Lucian_Room_00', 
-    'Map_Pokemon_League_Cynthia_Room_00',
-]
+final_rooms = ['Map_Pokemon_League_Aaron_Room_00',
+ 'Map_Pokemon_League_Bertha_Room_00',
+ 'Map_Pokemon_League_Flint_Room_00',
+ 'Map_Pokemon_League_Lucian_Room_00',
+ 'Map_Pokemon_League_Cynthia_Room_00']
 
 # ---------------------------------------------------------------------------
 # Forced warp pairs (custom "treat these warps as one door" flagging)
@@ -1806,59 +155,2237 @@ final_rooms = [
 # Each inner list is one group of warp ids on that map that will be merged into a
 # single warp (the first id in the group is kept as the representative).
 # ---------------------------------------------------------------------------
-forced_warp_pairs = {
-    # Elite Four + Champion rooms: warp 0 (top / *_top) and warp 1 (bottom /
-    # *_bot) are on opposite ends of the room. Pair them so both ends act as one
-    # door and the randomizer can't route the player through the room.
-    'Map_Pokemon_League_Aaron_Room_00': [[0, 1]],
-    'Map_Pokemon_League_Bertha_Room_00': [[0, 1]],
-    'Map_Pokemon_League_Flint_Room_00': [[0, 1]],
-    'Map_Pokemon_League_Lucian_Room_00': [[0, 1]],
+forced_warp_pairs = {'Map_Pokemon_League_Aaron_Room_00': [[0, 1]],
+ 'Map_Pokemon_League_Bertha_Room_00': [[0, 1]],
+ 'Map_Pokemon_League_Flint_Room_00': [[0, 1]],
+ 'Map_Pokemon_League_Lucian_Room_00': [[0, 1]]}
+
+# ---------------------------------------------------------------------------
+# Zone-based accessibility
+#
+# SOURCES:
+#   * The game data (every map, its warps, and its seamless connections) lives in
+#     the JSON file Resources/gen4/PlatinumMapResources.json. That JSON is the
+#     source of truth for WHAT warps/connections exist.
+#   * The zone_accessibility table below, in this .py file
+#     (nds/gen4/PlatinumWarpMapInfo.py), is the source of truth for HOW those
+#     warps/connections reach each other. "Referenced" always means "referenced
+#     by the zone_accessibility table in this .py file", and "warp"/"connection"
+#     always means an entry that exists in the .json file.
+#
+# A referenced map may define:
+#   * 'zones': list of zones. Zone members are warp ids (int) or connection map
+#     names (str), both drawn from that map's entry in the .json file. Everything
+#     in one zone is mutually reachable.
+#   * 'rules': one-way zone-to-zone movement, as {from_zone: [ZT(to_zone, flag)]}.
+#
+# Zone rules are intentionally NON-TRANSITIVE. A rule means "from this zone,
+# these target zones are directly reachable". This preserves modeling freedom for maps
+# whose direct reachability is intentionally not transitive; maps that should be
+# fully connected should state that explicitly with helpers such as permutate().
+#
+# Members that exist in the .json file but are left unreferenced on a map that
+# IS referenced by the .py zone_accessibility table (i.e. the map appears in the
+# table but does not list that member in any of its zones) are handled by MEMBER
+# TYPE:
+#
+#   * Warp id (int) omitted from every zone -> that warp is intentionally OUTSIDE
+#     the zone graph. It is not "defined for randomization"
+#     (is_member_defined_for_randomization returns False), has no accessible exit,
+#     and cannot be routed to or from by zone reachability. Use this to freeze a
+#     warp out of the shuffle. To keep a warp in the graph but isolated, give it
+#     its own single-member zone with no rules instead of omitting it.
+#
+#   * Connection string (str) omitted from every zone -> that connection stays an
+#     implicit FREE connection, entering the map through warp 0's zone (or zone 0
+#     if warp 0 is not zoned). It remains freely usable with no gating. Add the
+#     connection string to a zone only when it needs explicit routing, gating, or
+#     isolation.
+#
+# This literal table is the single source of Platinum zone definitions (the .py
+# side); it references the map/warp/connection data defined in the .json file.
+#
+# A map from the .json file that is not referenced by the zone_accessibility
+# table in this .py file is treated as one big zone: every warp and every
+# seamless connection on that map can reach every other warp/connection.
+# ---------------------------------------------------------------------------
+USES_ZONE_ACCESSIBILITY = True
+
+
+zone_accessibility = {
+    'Map_Acuity_Lakefront_02': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Amity_Square_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Amity_Square_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Battle_Arcade_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Battle_Castle_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Battle_Factory_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Battle_Frontier_00': {
+        'zones': [
+            [0, 1, 4],
+            [2, 3],
+        ],
+    },
+    'Map_Battle_Frontier_01': {
+        'zones': [
+            [0, 1, 2, 3, 4, 5],
+        ],
+    },
+    'Map_Battle_Frontier_02': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Battle_Frontier_03': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Battle_Frontier_Interior_00': {
+        'zones': [
+            [0, 1, 2, 3, 4, 5],
+        ],
+    },
+    'Map_Battle_Hall_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Battle_Park_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Battle_Park_Interior_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Battle_Tower_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Canalave_City_00': {
+        'zones': [
+            [0, 1, 2, 4, 'Map_Canalave_City_01', 'Map_Iron_Island_00'],
+            [3],
+        ],
+        'rules': {
+            1: [ZT(0, 0)],
+        },
+    },
+    'Map_Canalave_City_01': {
+        'zones': [
+            [0, 1, 3, 4],
+            [2, 5],
+            # Non-navigable connection to Route_218_00 (blocked): isolated zone
+            # with no rules so it can never be traversed to.
+            ['Map_Route_218_00'],
+        ],
+    },
+    'Map_Canalave_Library_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Canalave_Library_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Canalave_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Canalave_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Celestic_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Celestic_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Celestic_Town_00': {
+        'zones': [
+            [0, 1, 2, 3, 4, 5],
+        ],
+    },
+    'Map_Eterna_Building01_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Eterna_Building01_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Eterna_Building01_02': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Eterna_City_00': {
+        'zones': [
+            [0, 1, 3, 4],
+            [2],
+        ],
+        'rules': permutate([0, 1], fl(CUT_FLAG)),
+    },
+    'Map_Eterna_City_02': {
+        'zones': [
+            [0, 1, 2, 3, 4, 5],
+        ],
+    },
+    'Map_Eterna_Forest_00': {
+        'zones': [
+            ['Map_Eterna_Forest_01'],
+            ['Map_Eterna_Forest_02'],
+        ],
+        'rules': permutate([0, 1], fl(CUT_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Eterna_Forest_01': {
+        'zones': [
+            ['Map_Route_205_03'],
+            ['Map_Eterna_Forest_03'],
+        ],
+        'rules': permutate([0, 1], fl(CUT_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Eterna_Forest_02': {
+        'zones': [
+            ['Map_Eterna_Forest_03'],
+            ['Map_Route_205_00'],
+        ],
+        'rules': permutate([0, 1], fl(CUT_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Eterna_Forest_03': {
+        'zones': [
+            ['Map_Eterna_Forest_01'],
+            ['Map_Eterna_Forest_02'],
+        ],
+        'rules': permutate([0, 1], fl(CUT_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Eterna_Forest_Interior_00': {
+        'zones': [
+            [0],
+            ['Map_Eterna_Forest_Interior_01'],
+        ],
+        'rules': permutate([0, 1], fl(CUT_FLAG)),
+    },
+    'Map_Eterna_Forest_Interior_01': {
+        'zones': [
+            [0, 1],
+            ['Map_Eterna_Forest_Interior_00'],
+        ],
+        'rules': permutate([0, 1], fl(CUT_FLAG)),
+    },
+    'Map_Eterna_Forest_Interior_02': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Eterna_Galactic_Building_Floor00_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Eterna_Galactic_Building_Floor01_00': {
+        'zones': [
+            [0],
+            [1, 2, 3],
+        ],
+    },
+    'Map_Eterna_Galactic_Building_Floor02_00': {
+        'zones': [
+            [0],
+            [1, 2, 3],
+        ],
+    },
+    'Map_Eterna_Galactic_Building_Floor03_00': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Eterna_Gate_Unused_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Eterna_Gym_00': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Eterna_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Eterna_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Fight_Area_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Fight_Area_01': {
+        'zones': [
+            [0, 1, 2, 3, 4, 5],
+        ],
+    },
+    'Map_Fight_Area_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Fight_Area_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Floaroma_Meadow_00': {
+        'zones': [
+            [0, 1],
+            [2, 3, 4],
+        ],
+        'rules': {
+            0: [ZT(1, 0)],
+        },
+    },
+    'Map_Floaroma_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Floaroma_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Floaroma_Town_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Floaroma_Town_01': {
+        'zones': [
+            [0, 1, 2, 3, 4, 5, 6],
+        ],
+    },
+    'Map_Fuego_Ironworks_00': {
+        'zones': [
+            [0, 1, 2],
+            ['Map_Floaroma_Town_00'],
+            ['Map_Route_205_00'],
+        ],
+        # On main, map_to_map_warp_accessibility routes all connections through
+        # warp 0, so connection<->connection traversal is gated the same way as
+        # warp<->connection (SURF). The zone model needs explicit conn<->conn
+        # rules to match this.
+        'rules': merge_rules(
+            permutate([0, 1], fl(SURF_FLAG)),
+            permutate([0, 2], fl(SURF_FLAG)),
+            permutate([1, 2], fl(SURF_FLAG)),
+        ),
+    },
+    'Map_Fullmoon_Island_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Fullmoon_Island_Interior_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Galactic_HQ_Floor00_00': {
+        'zones': [
+            [0, 1],
+            [2, 6],
+            [3],
+            [4, 5],
+        ],
+        'rules': permutate([0, 2], fl(GALACTICKEY_FLAG)),
+    },
+    'Map_Galactic_HQ_Floor00_01': {
+        'zones': [
+            [0],
+            [1, 3, 4],
+            [2],
+            [5, 6],
+            [7],
+        ],
+        'rules': {
+            4: [ZT(0, 0)],
+        },
+    },
+    'Map_Galactic_HQ_Floor01_00': {
+        'zones': [
+            [0, 3, 4],
+            [1, 5],
+            [2, 7, 11, 14],
+            [6],
+            [8, 9],
+            [10, 12],
+            [13],
+        ],
+    },
+    'Map_Galactic_HQ_Floor02_00': {
+        'zones': [
+            [0],
+            [1, 2],
+            [3, 4, 5, 'Map_Galactic_HQ_Floor02_01'],
+        ],
+    },
+    'Map_Galactic_HQ_Floor02_01': {
+        'zones': [
+            [0],
+            [1],
+            [2],
+        ],
+    },
+    'Map_Galactic_HQ_Floor03_00': {
+        'zones': [
+            [0],
+            [1],
+            [2],
+            [3],
+        ],
+        'rules': {
+            0: [ZT(1, fl(GALACTICKEY_FLAG)), ZT(2, fl(GALACTICKEY_FLAG)),
+                ZT(3, fl(GALACTICKEY_FLAG) | fl(GUARDIANSFREE_FLAG))],
+            1: [ZT(0, fl(GALACTICKEY_FLAG)), ZT(2, fl(GUARDIANSFREE_FLAG)), ZT(3, 0)],
+            2: [ZT(0, fl(GALACTICKEY_FLAG) | fl(GUARDIANSFREE_FLAG)),
+                ZT(1, fl(GUARDIANSFREE_FLAG)), ZT(3, fl(GUARDIANSFREE_FLAG))],
+            3: [ZT(0, fl(GALACTICKEY_FLAG)), ZT(1, 0), ZT(2, fl(GUARDIANSFREE_FLAG))],
+        },
+    },
+    'Map_Galactic_HQ_Floor04_00': {
+        'zones': [
+            [0],
+            [1],
+            [2],
+        ],
+        'rules': merge_rules({
+            0: [ZT(1, fl(GALACTICKEY_FLAG))],
+            1: [ZT(0, 0)],
+        }, permutate([0, 2], 0)),
+    },
+    'Map_Galactic_HQ_Floor05_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Galactic_HQ_Floor06_00': {
+        'zones': [
+            [0],
+            [1],
+            [2],
+        ],
+        'rules': {
+            0: [ZT(1, 0)],
+            1: [ZT(0, fl(SPEECH_FLAG))],
+        },
+    },
+    'Map_Global_Terminal_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Global_Terminal_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Global_Terminal_02': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Grand_Lake_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Great_Marsh_05': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Hall_Of_Fame_00': {
+        'zones': [
+            [0],
+        ],
+    },
+    'Map_Hall_Of_Fame_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+        'rules': {
+            0: [ZT(1, 0)],
+        },
+    },
+    'Map_Hearthome_Amity_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Hearthome_Amity_Gate_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Hearthome_City_00': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Hearthome_City_01': {
+        'zones': [
+            [0, 1, 3],
+            [2],
+        ],
+        'rules': {
+            0: [ZT(1, fl(CONTESTHALL_FLAG))],
+            1: [ZT(0, 0)],
+        },
+    },
+    'Map_Hearthome_City_02': {
+        'zones': [
+            [0, 1, 2],
+            [3, 4, 5, 6],
+        ],
+    },
+    'Map_Hearthome_City_03': {
+        'zones': [
+            [0, 1],
+            [2],
+            [3],
+        ],
+        'rules': merge_rules({
+            0: [ZT(1, fl(HEARTHOMEGYM_FLAG)), ZT(2, fl(HEARTHOMEGYM_FLAG))],
+            1: [ZT(0, 0)],
+            2: [ZT(0, 0)],
+        }, permutate([1, 2], fl(HEARTHOMEGYM_FLAG))),
+    },
+    'Map_Hearthome_Contest_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Hearthome_Gym_00': {
+        'zones': [
+            [0],
+            [1, 3, 4],
+            [2],
+        ],
+    },
+    'Map_Hearthome_Gym_01': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Hearthome_Gym_02': {
+        'zones': [
+            [0, 1, 2, 3, 4, 5],
+        ],
+    },
+    'Map_Hearthome_Gym_03': {
+        'zones': [
+            [0, 1, 2],
+            [3, 4],
+        ],
+    },
+    'Map_Hearthome_Gym_Unused_06': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Hearthome_Gym_Unused_07': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Hearthome_House02_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Hearthome_House03_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Hearthome_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Hearthome_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Iron_Island_00': {
+        'zones': [
+            [0, 1],
+            [2],
+        ],
+        'rules': {
+            1: [ZT(0, 0)],
+        },
+    },
+    'Map_Iron_Island_Room01_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Iron_Island_Room03_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Iron_Island_Room06_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Jubilife_Building01_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Jubilife_Building01_02': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Jubilife_Building01_Unused_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Jubilife_Building02_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Jubilife_Building02_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Jubilife_Building02_Unused_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Jubilife_Building03_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Jubilife_City_00': {
+        'zones': [
+            [0, 1, 4, 5],
+            [2],
+            [3],
+        ],
+    },
+    'Map_Jubilife_City_01': {
+        'zones': [
+            [0, 1, 2],
+            ['Map_Route_203_00'],
+        ],
+        'rules': permutate([0, 1], fl(TRAINERSCHOOL_FLAG)),
+    },
+    'Map_Jubilife_City_02': {
+        'zones': [
+            [0, 1],
+            ['Map_Jubilife_City_00'],
+            ['Map_Jubilife_City_03'],
+        ],
+        'rules': merge_rules(
+            permutate([0, 1], fl(ROCKSMASH_FLAG)),
+            permutate([0, 2], fl(ROCKSMASH_FLAG)),
+        ),
+    },
+    'Map_Jubilife_City_03': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Jubilife_PokemonCenter_00': {
+        'zones': [
+            [0, 1],
+            [2],
+        ],
+        'rules': {
+            0: [ZT(1, fl(ROCKSMASH_FLAG))],
+            1: [ZT(0, 0)],
+        },
+    },
+    'Map_Jubilife_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Jubilife_Poketch_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Jubilife_Poketch_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Jubilife_TV_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Jubilife_TV_01': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Jubilife_TV_02': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Jubilife_TV_03': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Lake_Acuity_NoCave_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Lake_Acuity_WithCave_00': {
+        'zones': [
+            [0],
+            [1],
+            [2, 3],
+            [4],
+        ],
+        'rules': permutate([2, 3], fl(SURF_FLAG)),
+    },
+    'Map_Lake_Valor_Bombed_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Lake_Valor_Normal_00': {
+        'zones': [
+            [0],
+            [1],
+            [2, 3],
+            [4],
+        ],
+        'rules': permutate([2, 3], fl(SURF_FLAG)),
+    },
+    'Map_Lake_Verity_00': {
+        'zones': [
+            [0],
+            [1, 2],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+    },
+    'Map_Lake_Verity_Dummy_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Mount_Coronet_Exterior_00': {
+        'zones': [
+            [0],
+            [1, 2],
+        ],
+        'rules': permutate([0, 1], fl(ROCKCLIMB_FLAG)),
+    },
+    'Map_Mount_Coronet_Exterior_03': {
+        'zones': [
+            [0],
+            [1],
+            [2],
+        ],
+        'rules': merge_rules(
+            permutate([0, 1], fl(SURF_FLAG)),
+            permutate([0, 2], fl(PSYDUCK_FLAG) | fl(ROCKCLIMB_FLAG)),
+            permutate([1, 2], fl(ROCKCLIMB_FLAG)),
+        ),
+    },
+    'Map_Mount_Coronet_Floor00_00': {
+        'zones': [
+            [0, 1],
+            [2],
+        ],
+        'rules': {
+            0: [ZT(1, fl(SURF_FLAG) | fl(ROCKCLIMB_FLAG))],
+            1: [ZT(0, fl(ROCKCLIMB_FLAG))],
+        },
+    },
+    'Map_Mount_Coronet_Floor01_00': {
+        # On main, Floor01_00 -> Floor01_01 is non-navigable (blocked), but
+        # Floor01_01 -> Floor01_00 is NOT blocked; it requires SURF via
+        # connection_to_connection_rules on Floor01_01 and enters at warp 0
+        # (starting_warp defaults to 0 since no map_to_map_warp_accessibility).
+        'zones': [
+            [0],
+            [1, 2],
+            [3],
+            ['Map_Mount_Coronet_Floor01_01'],
+        ],
+        # One-way: entering from Floor01_01 can reach warp 0 for free.
+        # No reverse rule keeps the non-navigable Floor01_00 -> Floor01_01 block.
+        'rules': {
+            3: [ZT(0, 0)],
+        },
+    },
+    'Map_Mount_Coronet_Floor01_01': {
+        'zones': [
+            [0],
+            [1],
+            ['Map_Mount_Coronet_Floor01_00'],
+        ],
+        # Warps 0<->1 require STRENGTH. The Floor01_01 -> Floor01_00 connection
+        # requires SURF (matching main's connection_to_connection_rules).
+        'rules': merge_rules(
+            permutate([0, 1], fl(STRENGTH_FLAG)),
+            {0: [ZT(2, fl(SURF_FLAG))], 1: [ZT(2, fl(SURF_FLAG))]},
+        ),
+    },
+    'Map_Mount_Coronet_Floor02_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Mount_Coronet_Floor03_00': {
+        'zones': [
+            [0],
+            [1],
+            [2],
+            [3],
+            [4],
+        ],
+        'rules': merge_rules(
+            permutate([0, 4], fl(ROCKCLIMB_FLAG)),
+            permutate([1, 2], fl(SURF_FLAG) | fl(WATERFALL_FLAG)),
+        ),
+    },
+    'Map_Mount_Coronet_Floor04_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Mount_Coronet_Floor05_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Mount_Coronet_Floor06_00': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Mount_Coronet_Floor07_00': {
+        'zones': [
+            [0],
+            ['Map_Mount_Coronet_Floor07_01'],
+        ],
+        'rules': permutate([0, 1], fl(ROCKSMASH_FLAG) | fl(ROCKCLIMB_FLAG)),
+    },
+    'Map_Mount_Coronet_Floor07_01': {
+        'zones': [
+            [0],
+            ['Map_Mount_Coronet_Floor07_00'],
+        ],
+        'rules': permutate([0, 1], fl(ROCKSMASH_FLAG) | fl(ROCKCLIMB_FLAG)),
+    },
+    'Map_Mount_Coronet_Floor08_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Mount_Coronet_Floor09_00': {
+        'zones': [
+            [0],
+            ['Map_Mount_Coronet_Floor09_01'],
+        ],
+        'rules': permutate([0, 1], fl(STRENGTH_FLAG)),
+    },
+    'Map_Mount_Coronet_Floor09_01': {
+        'zones': [
+            [0],
+            [1],
+            [2],
+        ],
+        'rules': {
+            0: [ZT(1, fl(STRENGTH_FLAG)), ZT(2, fl(STRENGTH_FLAG))],
+            1: [ZT(2, fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG))],
+            2: [ZT(1, fl(STRENGTH_FLAG))],
+        },
+    },
+    'Map_Newmoon_Island_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Newmoon_Island_Interior_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Old_Chateau_Room01_00': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Old_Chateau_Room03_00': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Old_Chateau_Room04_00': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Oreburgh_Building01_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Oreburgh_Building01_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Oreburgh_Building02_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Oreburgh_Building02_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Oreburgh_Building03_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Oreburgh_Building03_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Oreburgh_Building_Unused_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Oreburgh_Building_Unused_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Oreburgh_City_00': {
+        'zones': [
+            [0],
+            [1, 2, 3, 4, 5],
+        ],
+        'rules': {
+            0: [ZT(1, 0)],
+            1: [ZT(0, fl(ROARK_FLAG))],
+        },
+    },
+    'Map_Oreburgh_City_01': {
+        'zones': [
+            [0, 1, 2, 3, 'Map_Oreburgh_City_00'],
+        ],
+    },
+    'Map_Oreburgh_City_02': {
+        'zones': [
+            [0, 1, 2, 3, 4, 5],
+        ],
+    },
+    'Map_Oreburgh_Gate_00': {
+        'zones': [
+            [0, 1],
+            [2],
+        ],
+        'rules': permutate([0, 1], fl(ROCKSMASH_FLAG)),
+    },
+    'Map_Oreburgh_Mine_Room01_00': {
+        'zones': [
+            [0, 1, 2, 3, 4, 5],
+        ],
+    },
+    'Map_Oreburgh_PokemonCenter_00': {
+        'zones': [
+            [0, 1],
+            [2],
+        ],
+        'rules': {
+            0: [ZT(1, fl(ROCKSMASH_FLAG))],
+            1: [ZT(0, 0)],
+        },
+    },
+    'Map_Oreburgh_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Pal_Park_00': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Pal_Park_Interior_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Pastoria_City_00': {
+        'zones': [
+            [0],
+            [1, 2],
+        ],
+        'rules': {
+            0: [ZT(1, 0)],
+            1: [ZT(0, fl(VEILSTONEGYM_FLAG))],
+        },
+    },
+    'Map_Pastoria_City_01': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Pastoria_City_02': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Pastoria_Marsh_Entrance_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Pastoria_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Pastoria_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Pokemon_League_01': {
+        'zones': [
+            [0, 1, 3, 4],
+            [2, 5, 6, 'Map_Pokemon_League_00'],
+            ['Map_Route_223_00'],
+        ],
+        'rules': permutate([0, 2], fl(WATERFALL_FLAG)),
+    },
+    'Map_Pokemon_League_Aaron_Room_00': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Pokemon_League_Bertha_Room_00': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Pokemon_League_Cynthia_Room_00': {
+        'zones': [
+            [0],
+            [1],
+        ],
+        'rules': {
+            0: [ZT(1, 0)],
+        },
+    },
+    'Map_Pokemon_League_Flint_Room_00': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Pokemon_League_Interior_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Pokemon_League_Interior_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Pokemon_League_Interior_02': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Pokemon_League_Interior_03': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Pokemon_League_Interior_04': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Pokemon_League_Interior_05': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Pokemon_League_Lucian_Room_00': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Pokemon_League_PokemonCenter02_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Pokemon_League_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Pokemon_League_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Pokemon_Mansion_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Pokemon_Mansion_01': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Pokemon_Mansion_Room01_00': {
+        'zones': [
+            [0],
+            [1],
+            [2],
+        ],
+    },
+    'Map_Pokemon_Tower_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Pokemon_Tower_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Pokemon_Tower_02': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Pokemon_Tower_03': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Ravaged_Path_00': {
+        'zones': [
+            [0],
+            [1],
+        ],
+        'rules': permutate([0, 1], fl(ROCKSMASH_FLAG)),
+    },
+    'Map_Resort_Area_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Resort_Area_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Resort_Area_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Ribbon_Syndicate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_205_00': {
+        'zones': [
+            [0, 1, 2],
+            ['Map_Fuego_Ironworks_00'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+    },
+    'Map_Route_205_01': {
+        'zones': [
+            ['Map_Route_205_00'],
+            ['Map_Route_205_02'],
+        ],
+        'rules': {
+            0: [ZT(1, fl(WINDWORKS_FLAG))],
+            1: [ZT(0, 0)],
+        },
+    },
+    'Map_Route_205_02': {
+        'zones': [
+            ['Map_ValleyWindworks_00', 'Map_Floaroma_Town_01'],
+            ['Map_Route_205_01'],
+        ],
+        'rules': {
+            0: [ZT(1, fl(WINDWORKS_FLAG))],
+            1: [ZT(0, 0)],
+        },
+    },
+    'Map_Route_205_03': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_206_00': {
+        'zones': [
+            [0, 1, 6, 7, 8, 9, 10, 11],
+            [2, 3],
+            [4, 5, 12, 13, 'Map_Route_207_00'],
+        ],
+        'rules': permutate([1, 2], fl(CUT_FLAG)),
+    },
+    'Map_Route_206_Gate_00': {
+        'zones': [
+            [0, 2, 3],
+            [1, 4, 5],
+        ],
+        'rules': {
+            0: [ZT(1, 0)],
+            1: [ZT(0, fl(BIKE_FLAG))],
+        },
+    },
+    'Map_Route_206_Gate_01': {
+        'zones': [
+            [0, 4, 5],
+            [1, 2, 3],
+        ],
+        'rules': {
+            0: [ZT(1, fl(BIKE_FLAG))],
+            1: [ZT(0, 0)],
+        },
+    },
+    'Map_Route_207_01': {
+        'zones': [
+            [0],
+            [1],
+            ['Map_Route_207_00'],
+        ],
+        # Warps 0/1 are standable dead-ends. Entering from the connection is
+        # free (matching main where include_starting_warp adds warp 0 before
+        # the progressability check), but leaving requires BIKE (matching
+        # main's bike_needed per-map gate via is_map_progressable).
+        'rules': {
+            2: [ZT(0, 0)],
+            0: [ZT(2, fl(BIKE_FLAG))],
+        },
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_208_01': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Route_208_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_209_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_209_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_210_01': {
+        'zones': [
+            [0],
+            ['Map_Route_210_05'],
+        ],
+        'rules': permutate([0, 1], fl(PSYDUCK_FLAG)),
+    },
+    'Map_Route_210_05': {
+        'zones': [
+            [0],
+            ['Map_Route_210_00'],
+            ['Map_Route_210_04'],
+            ['Map_Route_210_01'],
+        ],
+        # Route_210_05 is rock-climb terrain. Entering from any connection you can
+        # still stand at (randomize) warp 0 for free -- matching the flat model,
+        # which adds a gated map's warps to the pool before blocking its exits --
+        # but LEAVING warp 0 to any connection needs ROCKCLIMB (and additionally
+        # PSYDUCK for the Route_210_01 border). Connection<->connection therefore
+        # routes through warp 0 and is gated the same way.
+        'rules': {
+            0: [ZT(1, fl(ROCKCLIMB_FLAG)), ZT(2, fl(ROCKCLIMB_FLAG)),
+                ZT(3, fl(PSYDUCK_FLAG) | fl(ROCKCLIMB_FLAG))],
+            1: [ZT(0, 0)],
+            2: [ZT(0, 0)],
+            3: [ZT(0, 0)],
+        },
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_212_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_212_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_213_00': {
+        'zones': [
+            [0, 1, 3, 7],
+            [2, 4, 5, 'Map_Valor_Lakefront_03'],
+            [6],
+        ],
+        'rules': permutate([1, 2], fl(ROCKCLIMB_FLAG)),
+    },
+    'Map_Route_213_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_214_00': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Route_214_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_215_02': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_215_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_218_00': {
+        'zones': [
+            [0, 1],
+            ['Map_Route_218_01'],
+            # Non-navigable connection to Canalave_City_01 (blocked): isolated
+            # zone with no rules so it can never be traversed to/from.
+            ['Map_Canalave_City_01'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_218_01': {
+        'zones': [
+            [0, 1],
+            ['Map_Route_218_00'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+    },
+    'Map_Route_218_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_218_Gate_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_219_00': {
+        'zones': [
+            ['Map_Sandgem_Town_00'],
+            ['Map_Route_220_00'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_220_00': {
+        'zones': [
+            ['Map_Route_219_00'],
+            ['Map_Route_220_01'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_220_01': {
+        'zones': [
+            ['Map_Route_221_00'],
+            ['Map_Route_220_00'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_221_02': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_222_02': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Route_222_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_223_00': {
+        'zones': [
+            ['Map_Pokemon_League_01'],
+            ['Map_Route_223_01'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_223_01': {
+        'zones': [
+            ['Map_Route_223_00'],
+            ['Map_Route_223_02'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_223_02': {
+        'zones': [
+            ['Map_Route_223_01'],
+            ['Map_Route_223_03'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_223_03': {
+        'zones': [
+            ['Map_Route_223_02'],
+            ['Map_Sunyshore_City_00'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_225_02': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_225_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_226_00': {
+        'zones': [
+            [0],
+            ['Map_Route_226_01'],
+            ['Map_Survival_Area_00'],
+        ],
+        'rules': permutate([0, 1, 2], fl(ROCKCLIMB_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_226_01': {
+        'zones': [
+            [0],
+            ['Map_Route_226_00'],
+            ['Map_Route_226_02'],
+        ],
+        'rules': merge_rules(
+            permutate([0, 1], fl(ROCKCLIMB_FLAG)),
+            permutate([1, 2], fl(ROCKCLIMB_FLAG)),
+            permutate([0, 2], fl(SURF_FLAG) | fl(ROCKCLIMB_FLAG)),
+        ),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_226_02': {
+        'zones': [
+            [0],
+            [1],
+            [2],
+            ['Map_Route_226_01'],
+        ],
+        'rules': merge_rules(
+            permutate([0, 1, 2, 3], fl(SURF_FLAG)),
+            permutate([0, 3], fl(SURF_FLAG) | fl(ROCKCLIMB_FLAG)),
+        ),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_227_00': {
+        # Route_227_00 is a pass-through map with no warps. On main the forward
+        # path (Route_227_01 -> Stark_Mountain) is permanently blocked by the
+        # map_to_map_warp_accessibility starting_warp < 0 check. The return path
+        # (Stark_Mountain -> Route_227_01) is allowed because Route_227_01 is
+        # NOT in map_to_map_warp_accessibility and therefore bypasses the check.
+        # Both directions also require BIKE via per-map bike_needed.
+        'zones': [
+            ['Map_Stark_Mountain_00'],
+            ['Map_Route_227_01'],
+        ],
+        # One-way rule: Stark -> Route_227_01 (matches main). No reverse rule
+        # blocks the forward path Route_227_01 -> Stark (matches main).
+        'rules': {
+            0: [ZT(1, fl(BIKE_FLAG))],
+        },
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_227_01': {
+        'zones': [
+            [0, 'Map_Route_226_02'],
+        ],
+    },
+    'Map_Route_228_00': {
+        'zones': [
+            [0, 1],
+            [2],
+            [3],
+        ],
+        'rules': merge_rules(
+            permutate([0, 1], fl(BIKE_FLAG)),
+            permutate([0, 2], fl(BIKE_FLAG)),
+        ),
+    },
+    'Map_Route_228_01': {
+        'zones': [
+            [0],
+            ['Map_Route_228_02'],
+        ],
+        'rules': permutate([0, 1], fl(BIKE_FLAG)),
+    },
+    'Map_Route_228_Gate_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Route_229_00': {
+        'zones': [
+            [0],
+            ['Map_Route_228_02'],
+        ],
+        'rules': permutate([0, 1], fl(BIKE_FLAG)),
+    },
+    'Map_Route_230_00': {
+        'zones': [
+            ['Map_Route_230_01'],
+            ['Map_Fight_Area_01'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+    },
+    'Map_Route_230_01': {
+        'zones': [
+            ['Map_Route_230_02'],
+            ['Map_Route_230_00'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Route_230_02': {
+        'zones': [
+            ['Map_Route_229_00'],
+            ['Map_Route_230_01'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+        'legacy_report_in_is_map_progressable': True,
+    },
+    'Map_Sandgem_House01_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Sandgem_PokemonCenter_00': {
+        'zones': [
+            [0, 1],
+            [2],
+        ],
+        'rules': {
+            0: [ZT(1, fl(ROCKSMASH_FLAG))],
+            1: [ZT(0, 0)],
+        },
+    },
+    'Map_Sandgem_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Sandgem_Town_00': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Sendoff_Springs_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Snowpoint_City_00': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Snowpoint_City_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Snowpoint_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Snowpoint_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Snowpoint_Temple_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Snowpoint_Temple_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Snowpoint_Temple_02': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Snowpoint_Temple_03': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Snowpoint_Temple_04': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Solaceon_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Solaceon_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Solaceon_Ruins_Room01_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Solaceon_Ruins_Room02_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Solaceon_Ruins_Room03_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Solaceon_Ruins_Room05_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Solaceon_Ruins_Room05_01': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Solaceon_Ruins_Room07_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Solaceon_Ruins_Room08_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Solaceon_Town_00': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Solaceon_Town_01': {
+        'zones': [
+            [0],
+            [1],
+            [2],
+            [3],
+        ],
+    },
+    'Map_Spring_Path_02': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Stark_Mountain_00': {
+        'zones': [
+            [0],
+            ['Map_Route_227_00'],
+        ],
+        'rules': permutate([0, 1], fl(BIKE_FLAG)),
+    },
+    'Map_Stark_Mountain_Room01_00': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Stark_Mountain_Room02_00': {
+        'zones': [
+            [0],
+            ['Map_Stark_Mountain_Room02_01'],
+        ],
+        'rules': permutate([0, 1], fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG)),
+    },
+    'Map_Stark_Mountain_Room02_01': {
+        'zones': [
+            [0],
+            ['Map_Stark_Mountain_Room02_00'],
+        ],
+        'rules': permutate([0, 1], fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG)),
+    },
+    'Map_Sunyshore_City_00': {
+        'zones': [
+            [0, 4],
+            [1],
+            [2],
+            [3],
+        ],
+        'rules': {
+            0: [ZT(3, fl(LIGHTHOUSE_FLAG))],
+            3: [ZT(0, 0)],
+        },
+    },
+    'Map_Sunyshore_City_01': {
+        'zones': [
+            [0, 1, 'Map_Sunyshore_City_03'],
+        ],
+    },
+    'Map_Sunyshore_City_02': {
+        'zones': [
+            [0, 1, 2, 3, 4, 'Map_Sunyshore_City_03'],
+        ],
+    },
+    'Map_Sunyshore_City_03': {
+        'zones': [
+            [0],
+            [1],
+        ],
+        'rules': permutate([0, 1], fl(ROCKCLIMB_FLAG)),
+    },
+    'Map_Sunyshore_Gym_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Sunyshore_Gym_01': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Sunyshore_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Sunyshore_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Survival_Area_00': {
+        'zones': [
+            [0],
+            [1, 3, 4],
+            [2],
+            ['Map_Route_226_00'],
+        ],
+        'rules': merge_rules(
+            {0: [ZT(1, 0)]},
+            {3: [ZT(0, fl(ROCKCLIMB_FLAG))]},
+        ),
+    },
+    'Map_Survival_Area_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Survival_Area_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Trophy_Garden_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Turnback_Cave_Room01_00': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Turnback_Cave_Room02_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room03_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room04_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room04_01': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room04_02': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room04_03': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room04_04': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room04_05': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room05_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room05_01': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room05_02': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room05_03': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room05_04': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room05_05': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room06_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room06_01': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room06_02': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room06_03': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room06_04': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Turnback_Cave_Room06_05': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Twinleaf_Rival_House_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Twinleaf_Town_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Twinleaf_Your_House_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_ValleyWindworks_00': {
+        'zones': [
+            [0],
+            ['Map_Route_205_02'],
+        ],
+        'rules': permutate([0, 1], fl(MEADOW_FLAG)),
+    },
+    'Map_Valor_Cavern_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Valor_Lakefront_01': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Valor_Lakefront_03': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Veilstone_City_00': {
+        'zones': [
+            [0, 1],
+            [2],
+            [3],
+        ],
+        'rules': {
+            0: [ZT(2, fl(VEILSTONEGYM_FLAG))],
+            1: [ZT(0, 0), ZT(2, fl(VEILSTONEGYM_FLAG))],
+            2: [ZT(0, 0)],
+        },
+    },
+    'Map_Veilstone_City_01': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Veilstone_City_02': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Veilstone_City_03': {
+        'zones': [
+            [0, 1, 2, 3, 4],
+        ],
+    },
+    'Map_Veilstone_Mall_00': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Veilstone_Mall_01': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Veilstone_Mall_02': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Veilstone_Mall_03': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Veilstone_Mall_04': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Veilstone_Mall_05': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Veilstone_PokemonCenter_00': {
+        'zones': [
+            [0, 1, 2],
+        ],
+    },
+    'Map_Veilstone_PokemonCenter_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Veilstone_Warehouse_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Verity_Lakefront_03': {
+        'zones': [
+            [0, 1, 2, 3],
+        ],
+    },
+    'Map_Victory_Road_Floor01_00': {
+        'zones': [
+            [0],
+            [1, 9],
+            [2, 3, 4],
+            [5],
+            [6],
+            [7],
+            [8],
+            [10, 11, 12],
+        ],
+        'rules': merge_rules(
+            permutate([3, 7], fl(ROCKCLIMB_FLAG)),
+            permutate([4, 5], fl(ROCKCLIMB_FLAG)),
+            permutate([0, 1, 2], fl(ROCKCLIMB_FLAG)),
+            {
+                0: [ZT(3, fl(ROCKCLIMB_FLAG)), ZT(4, fl(ROCKCLIMB_FLAG)), ZT(5, fl(ROCKCLIMB_FLAG)), ZT(7, fl(ROCKCLIMB_FLAG))],
+                1: [ZT(3, 0), ZT(4, fl(ROCKCLIMB_FLAG)), ZT(5, 0), ZT(7, fl(ROCKCLIMB_FLAG))],
+                2: [ZT(3, fl(ROCKCLIMB_FLAG)), ZT(4, fl(ROCKCLIMB_FLAG)), ZT(5, fl(ROCKCLIMB_FLAG)), ZT(7, fl(ROCKCLIMB_FLAG))],
+                4: [ZT(7, fl(ROCKCLIMB_FLAG)), ZT(3, fl(ROCKCLIMB_FLAG))],
+                5: [ZT(7, fl(ROCKCLIMB_FLAG)), ZT(3, 0)],
+            }
+        ),
+    },
+    'Map_Victory_Road_Floor02_00': {
+        'zones': [
+            [0],
+            [1],
+            [2],
+        ],
+        'rules': permutate([0, 1], fl(ROCKSMASH_FLAG) | fl(STRENGTH_FLAG)),
+    },
+    'Map_Victory_Road_Floor03_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
+    'Map_Victory_Road_Floor04_00': {
+        'zones': [
+            [0],
+            ['Map_Victory_Road_Floor04_01'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+    },
+    'Map_Victory_Road_Floor04_01': {
+        'zones': [
+            [0],
+            ['Map_Victory_Road_Floor04_00'],
+        ],
+        'rules': permutate([0, 1], fl(SURF_FLAG)),
+    },
+    'Map_Victory_Road_Floor05_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Victory_Road_Floor06_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Wayward_Cave_Room01_00': {
+        'zones': [
+            [0, 1],
+        ],
+    },
+    'Map_Wayward_Cave_Room01_01': {
+        'zones': [
+            [0],
+            [1],
+        ],
+    },
 }
 
-# Handles Connection Requirements
-rocksmash_needed = [  # TODO make work for Plat
+def _zone_member_sort_key(member):
+    if isinstance(member, int):
+        return 0, member
+    return 1, member
 
-]
-cut_needed = [  # TODO make work for Plat
-    'Map_Eterna_Forest_00', 'Map_Eterna_Forest_01', 'Map_Eterna_Forest_02', 'Map_Eterna_Forest_03'
-]
-surf_needed = [  # TODO make work for Plat
-    'Map_Route_220_00', 'Map_Route_220_01', 'Map_Route_219_00', 'Map_Route_218_00', 'Map_Route_230_00',
-    'Map_Route_230_01', 'Map_Route_230_02', 'Map_Route_226_02', 'Map_Route_223_00', 'Map_Route_223_01',
-    'Map_Route_223_02', 'Map_Route_223_03'
-]
-strength_needed = [  # TODO make work for Plat
-    
-]
-rockclimb_needed = [  # TODO make work for Plat
-    'Map_Route_210_05', 'Map_Route_226_00', 'Map_Route_226_01'
-]
-bike_needed = ['Map_Route_207_01', 'Map_Route_227_00']
 
-# ---------------------------------------------------------------------------
-# Per-map flag requirements
-#
-# A single lookup (map -> required flag bitmask) derived from the per-map
-# requirement lists above. The bitmask uses the same 1<<FLAG encoding as the
-# WT.flag values in map_warp_accessibility / map_to_map_warp_accessibility, so
-# BOTH the randomizer's is_map_progressable AND the route/tracker reachability
-# engine (reachable_room_warps) can gate on the exact same data via check_flags.
-# Add a list here to have it honored by both engines automatically.
-# ---------------------------------------------------------------------------
-_per_map_flag_requirement_lists = [
-    (SURF_FLAG, surf_needed),
-    (ROCKSMASH_FLAG, rocksmash_needed),
-    (CUT_FLAG, cut_needed),
-    (BIKE_FLAG, bike_needed),
-    (STRENGTH_FLAG, strength_needed),
-    (ROCKCLIMB_FLAG, rockclimb_needed),
-]
+def _build_zone_views():
+    zones = {}
+    rules = {}
+    lookup = {}
+    legacy_maps = set()
+    for map_name, entry in zone_accessibility.items():
+        if 'zones' in entry:
+            zones[map_name] = entry['zones']
+            lookup[map_name] = {}
+            for zone_id, zone_members in enumerate(entry['zones']):
+                for member in zone_members:
+                    lookup[map_name][member] = zone_id
+        if 'rules' in entry:
+            rules[map_name] = entry['rules']
+        if entry.get('legacy_report_in_is_map_progressable'):
+            legacy_maps.add(map_name)
+    return zones, rules, lookup, legacy_maps
 
-map_flag_requirements = {}
-for _req_flag, _req_maps in _per_map_flag_requirement_lists:
-    for _req_map in _req_maps:
-        map_flag_requirements[_req_map] = map_flag_requirements.get(_req_map, 0) | (1 << _req_flag)
+
+map_zones, zone_to_zone_rules, _zone_member_lookup, _legacy_is_map_progressable_maps = _build_zone_views()
+
+
+def _compute_legacy_map_progressable_flag(map_name):
+    """Bitwise AND of every non-zero flag across all zone-to-zone rules.
+
+    Returns 0 when the map has no rules, no non-zero flags, or is not in
+    the zone tables.
+
+    If you do not get the result you expect you may have to add flags to the rules in the .json
+    """
+    combined = None  # None = "no non-zero flag seen yet"
+    rules_for_map = zone_to_zone_rules.get(map_name, {})
+    for zone_rules in rules_for_map.values():
+        for zt in zone_rules:
+            if zt.flag != 0:
+                if combined is None:
+                    combined = zt.flag
+                else:
+                    combined &= zt.flag
+    return combined if combined is not None else 0
+
+
+def _sync_zone_accessibility_map(map_name):
+    entry = zone_accessibility.setdefault(map_name, {})
+    if map_name in map_zones:
+        entry['zones'] = map_zones[map_name]
+    else:
+        entry.pop('zones', None)
+    if map_name in zone_to_zone_rules:
+        entry['rules'] = zone_to_zone_rules[map_name]
+    else:
+        entry.pop('rules', None)
 
 # TODO finish work for Plat
 dont_randomize = [
@@ -1891,6 +2418,19 @@ dont_randomize_warp = {  # TODO finish work for Plat
     'Map_Jubilife_City_00': [2, 3],
     'Map_Lake_Acuity_WithCave_00': [1, 0],
     'Map_Lake_Valor_Normal_00': [1, 0]
+}
+
+potential_softlock_warps = {
+    'Map_Pokemon_League_Aaron_Room_00': [1],
+    'Map_Pokemon_League_Bertha_Room_00': [1],
+    'Map_Pokemon_League_Flint_Room_00': [1],
+    'Map_Pokemon_League_Lucian_Room_00': [1],
+    'Map_Pokemon_League_Cynthia_Room_00': [1],
+    'Map_Hall_Of_Fame_01': [1],
+    'Map_Hall_Of_Fame_00': [0],
+    'Map_Canalave_City_00': [3],
+    'Map_Survival_Area_00': [0],
+    'Map_Galactic_HQ_Floor00_01': [7],
 }
 
 not_needed = [  # TODO finish work for Plat
@@ -1930,21 +2470,6 @@ not_needed = [  # TODO finish work for Plat
     'Map_Ribbon_Syndicate_00', 'Map_Villa_00', 'Map_Oreburgh_Shop_00'
 ]
 
-non_navigable_connections = [  # TODO finish work for Plat
-    ['Map_Canalave_City_01', 'Map_Route_218_00'], ['Map_Route_218_00', 'Map_Canalave_City_01'],
-    ['Map_Mount_Coronet_Floor01_00', 'Map_Mount_Coronet_Floor01_01']
-]
-
-connection_to_connection_rules = {
-    'Map_Route_205_02': {'Map_Route_205_01': 4},
-    'Map_Route_205_01': {'Map_Route_205_02': 4},
-    'Map_Eterna_Forest_02': {'Map_Route_205_00': 16, 'Map_Eterna_Forest_03': 16},
-    'Map_Eterna_Forest_01': {'Map_Route_205_03': 16, 'Map_Eterna_Forest_03': 16},
-    'Map_Route_205_00': {'Map_Fuego_Ironworks_00': 2048},
-    'Map_Route_218_00': {'Map_Route_218_01': 2048},
-    'Map_Route_218_01': {'Map_Route_218_00': 2048},
-    'Map_Mount_Coronet_Floor01_01': {'Map_Mount_Coronet_Floor01_00': 2048}
-}
 
 grouped_warps = {
     # "Lake Verity": {
@@ -2228,84 +2753,247 @@ def check_progession_blockers(flag, accesible_maps):  # TODO make work for Plat
     # return False
 
 
-# If warp_id = -1 we check connection, otherwise we check if there is an accessible warp from warp id
-# noinspection DuplicatedCode
-def is_map_progressable(map, accesible_maps, warp_id, ignore=False):  # TODO make work for Plat
-    # Per-map flag/HM gate. Driven by map_flag_requirements so the route/tracker
-    # reachability engine (reachable_room_warps) enforces the exact same rules.
-    required_flags = map_flag_requirements.get(map, 0)
-    if required_flags:
-        index = 0
-        bits = required_flags
-        while bits:
-            if (bits & 1) and not check_progession_blockers(index, accesible_maps):
-                return False
-            bits >>= 1
-            index += 1
-    if warp_id == -1 and not ignore:
-        if map not in map_warp_accessibility:
-            return True
-        map_warps = map_warp_accessibility[map].keys()
-        for map_warp in map_warps:
-            if is_map_progressable(map, accesible_maps, map_warp):
-                return True
-        return False
-    if warp_id != -1:
-        if map not in map_warp_accessibility:
-            return True
-        if warp_id not in map_warp_accessibility[map]:
-            return True
-        potential_warps = map_warp_accessibility[map][warp_id]
-        if len(potential_warps) == 0:
-            return True
-        for potential_warp in potential_warps:
-            bits = bin(potential_warp.flag)
-            index = 0
-            warp_pass = True
-            for bit in reversed(bits):
-                if bit == '1':
-                    if not check_progession_blockers(index, accesible_maps):
-                        warp_pass = False
-                        break
-                index = index + 1
-            if warp_pass:
-                return True
-        return False
-    else:
+# Zone reachability helpers --------------------------------------------------
+
+def _progression_mask_ready(flag_mask, accesible_maps):
+    index = 0
+    bits = flag_mask
+    while bits:
+        if (bits & 1) and not check_progession_blockers(index, accesible_maps):
+            return False
+        bits >>= 1
+        index += 1
+    return True
+
+
+def _flag_vector_ready(flag_mask, flags_satisfied):
+    if flags_satisfied is None:
         return True
+    index = 0
+    bits = flag_mask
+    while bits:
+        if (bits & 1) and (index >= len(flags_satisfied) or flags_satisfied[index] != 1):
+            return False
+        bits >>= 1
+        index += 1
+    return True
 
 
-def is_warp_to_warp_valid(map, accesible_maps, from_warp_id, to_warp_id):
-    if map not in map_warp_accessibility:
-        return True  # If map doesn't specify warp routing all warps are accessible
-    if from_warp_id not in map_warp_accessibility[map]:
-        return False  # If warp id isnt in map specifications, warp is not meant to be randomized
-    potential_warps = map_warp_accessibility[map][from_warp_id]
-    for potential_warp in potential_warps:
-        if potential_warp.warp_id != to_warp_id:
+def get_member_zone(map_name, member):
+    if map_name not in map_zones:
+        return 0  # implicit default whole-map zone
+    zone_id = _zone_member_lookup.get(map_name, {}).get(member)
+    if zone_id is None and isinstance(member, str):
+        # Most legacy map rules only described warp-to-warp routing; seamless
+        # connections that were not explicitly listed remained freely usable.
+        # In zone terms, an unlisted connection enters the map through warp 0's
+        # zone when possible, otherwise through zone 0.
+        return _zone_member_lookup.get(map_name, {}).get(0, 0)
+    return zone_id
+
+
+def is_explicit_zone_member(map_name, member):
+    return map_name in map_zones and member in _zone_member_lookup.get(map_name, {})
+
+
+def is_member_defined_for_randomization(map_name, member):
+    # Unreferenced maps use the implicit all-members zone. Referenced maps only
+    # randomize members that were placed into a zone.
+    return map_name not in map_zones or get_member_zone(map_name, member) is not None
+
+
+def is_member_ready_with_flags(map_name, member, flags_satisfied):
+    zone_id = get_member_zone(map_name, member)
+    return zone_id is not None
+
+
+def reachable_zone_ids(map_name, source_member, accesible_maps):
+    """Directly reachable zone ids from source_member under current flags.
+
+    This is intentionally non-transitive: rules describe direct reachability,
+    not graph edges to BFS through. That keeps the zone model equivalent to the
+    old map_warp_accessibility direct lookup while still allowing zones to group
+    mutually reachable warps/connections.
+    """
+    source_zone = get_member_zone(map_name, source_member)
+    if source_zone is None:
+        return set()
+    if map_name not in map_zones:
+        return {0}
+
+    reached = {source_zone}
+    for zone_tuple in zone_to_zone_rules.get(map_name, {}).get(source_zone, []):
+        if _progression_mask_ready(zone_tuple.flag, accesible_maps):
+            reached.add(zone_tuple.zone_id)
+    return reached
+
+
+def reachable_zone_ids_with_flags(map_name, source_member, flags_satisfied):
+    """Directly reachable zone ids from source_member under a flag vector.
+
+    Non-transitive for the same reason as reachable_zone_ids().
+    """
+    source_zone = get_member_zone(map_name, source_member)
+    if source_zone is None:
+        return set()
+    if map_name not in map_zones:
+        return {0}
+
+    reached = {source_zone}
+    for zone_tuple in zone_to_zone_rules.get(map_name, {}).get(source_zone, []):
+        if _flag_vector_ready(zone_tuple.flag, flags_satisfied):
+            reached.add(zone_tuple.zone_id)
+    return reached
+
+
+def is_member_to_member_valid(map_name, accesible_maps, from_member, to_member):
+    from_zone = get_member_zone(map_name, from_member)
+    if from_zone is None:
+        return False
+    # Unlisted connections keep the historical default: if you can stand in
+    # your current zone, you can walk out through that connection. Explicitly
+    # zoned connection strings opt into stricter zone-to-zone routing.
+    # This check must come before get_member_zone(to_member) because unlisted
+    # connections return None from get_member_zone.
+    if isinstance(to_member, str) and not is_explicit_zone_member(map_name, to_member):
+        return from_zone in reachable_zone_ids(map_name, from_member, accesible_maps)
+    to_zone = get_member_zone(map_name, to_member)
+    if to_zone is None:
+        return False
+    return to_zone in reachable_zone_ids(map_name, from_member, accesible_maps)
+
+
+def get_reachable_members(map_name, from_member, accesible_maps):
+    if map_name not in map_zones:
+        return None  # caller should use the implicit all-members map data
+    reached_zones = reachable_zone_ids(map_name, from_member, accesible_maps)
+    members = []
+    for zone_id in reached_zones:
+        members.extend(map_zones[map_name][zone_id])
+    return members
+
+
+def get_reachable_members_with_flags(map_name, from_member, flags_satisfied):
+    if map_name not in map_zones:
+        return None  # caller should use the implicit all-members map data
+    reached_zones = reachable_zone_ids_with_flags(map_name, from_member, flags_satisfied)
+    members = []
+    for zone_id in reached_zones:
+        members.extend(map_zones[map_name][zone_id])
+    return members
+
+
+def zone_member_has_accessible_exit(map_name, member):
+    if map_name not in map_zones:
+        return True
+    zone_id = get_member_zone(map_name, member)
+    if zone_id is None:
+        return False
+    if len(map_zones[map_name][zone_id]) > 1:
+        return True
+    # Check if any outgoing rule (ignoring flags — map_warp_divide mirrors
+    # main's static map_warp_accessibility) leads to a zone that contains
+    # at least one other WARP member.  Rules leading only to connection
+    # strings do not make the warp a "connect".
+    for zone_tuple in zone_to_zone_rules.get(map_name, {}).get(zone_id, []):
+        target_zone = zone_tuple.zone_id
+        if target_zone >= len(map_zones[map_name]):
             continue
-        bits = bin(potential_warp.flag)
-        index = 0
-        warp_pass = True
-        for bit in reversed(bits):
-            if bit == '1':
-                if not check_progession_blockers(index, accesible_maps):
-                    warp_pass = False
-                    break
-            index = index + 1
-        if warp_pass:
-            return True
+        for m in map_zones[map_name][target_zone]:
+            if isinstance(m, int) and m != member:
+                return True
     return False
 
 
+def get_member_to_member_flag_mask(map_name, from_member, to_member, flags_satisfied=None):
+    from_zone = get_member_zone(map_name, from_member)
+    to_zone = get_member_zone(map_name, to_member)
+    if from_zone is None or to_zone is None:
+        return 0
+    if map_name not in map_zones:
+        return 0
+
+    if from_zone == to_zone:
+        return 0
+    for zone_tuple in zone_to_zone_rules.get(map_name, {}).get(from_zone, []):
+        if zone_tuple.zone_id == to_zone and _flag_vector_ready(zone_tuple.flag, flags_satisfied):
+            return zone_tuple.flag
+    return 0
+
+
+def _rebuild_zone_lookup_for_map(map_name):
+    _zone_member_lookup[map_name] = {}
+    for zone_id, zone_members in enumerate(map_zones.get(map_name, [])):
+        for member in zone_members:
+            _zone_member_lookup[map_name][member] = zone_id
+
+
+def redirect_paired_warp_ids(map_name, paired_ids):
+    # Pair removal collapses the randomization availability pool, not the map's
+    # physical reachability model. Zone data is authoritative: paired doors that
+    # should be freely reachable are listed in the same zone, while noisy models
+    # can intentionally split paired members and gate them with rules. Rewriting
+    # zones here destroys that distinction, so this hook is intentionally a no-op
+    # for the zone-accessibility model.
+    return
+
+
+# If warp_id = -1 we check whether any zone on the map can be traversed;
+# otherwise we check whether the incoming warp's zone can currently reach any
+# other member (warp/connection). A warp whose zone can only reach itself given
+# the currently-satisfied flags is a dead end -- e.g. a warp stranded behind an
+# unmet HM gate expressed as a zone rule.
+#
+# IMPORTANT: a warp in a single-member zone with NO outgoing rules (not even
+# unsatisfied ones) is a standable dead-end, matching main's behaviour where
+# map_warp_accessibility[warp_id] = [] always returns True (progressable).
+# Only warps behind an UNMET gate are not progressable.
+def is_map_progressable(map, accesible_maps, warp_id, ignore=False):
+    if warp_id == -1:
+        # Legacy per-map flag: mirrors main's bike_needed / cut_needed etc.
+        # by checking the union of all zone-rule flags on the map.  Runs even
+        # when ignore=True because the connection-traversal loop in
+        # build_warps_to_randomize calls with ignore=True.  This is a
+        # temporary bridge — once all regressions pass, test data can be
+        # regenerated and the variable removed.
+        if map in _legacy_is_map_progressable_maps:
+            legacy_flag = _compute_legacy_map_progressable_flag(map)
+            if legacy_flag and not _progression_mask_ready(legacy_flag, accesible_maps):
+                return False
+        if not ignore:
+            # Progressable if ANY warp on the map can progress to another member.
+            warp_members = [m for zone in map_zones.get(map, []) for m in zone if isinstance(m, int)]
+            if not warp_members:
+                return True  # implicit/unzoned map: assume progressable
+            return any(is_map_progressable(map, accesible_maps, w) for w in warp_members)
+    if warp_id != -1:
+        zone_id = get_member_zone(map, warp_id)
+        if zone_id is None:
+            return False
+        if map not in map_zones:
+            return True  # implicit whole-map zone: every member is mutually reachable
+        for reached_zone in reachable_zone_ids(map, warp_id, accesible_maps):
+            for member in map_zones[map][reached_zone]:
+                # Only count OTHER WARP members as making this warp progressable.
+                # Connection members are zone-routing targets, not progress proofs
+                # (matching main's is_map_progressable which only checks
+                # map_warp_accessibility, never connections).
+                if isinstance(member, int) and member != warp_id:
+                    return True  # can progress to some other warp
+        # No other warp reachable under current flags. If the warp has no
+        # outgoing rules at all (not just unsatisfied ones), it is a standable
+        # dead-end: progressable (matching main's [] behaviour). If it HAS
+        # rules that are currently unmet, it is gated: not progressable.
+        has_outgoing_rules = len(zone_to_zone_rules.get(map, {}).get(zone_id, [])) > 0
+        if not has_outgoing_rules:
+            return True
+        return False
+    return True
+
+
+def is_warp_to_warp_valid(map, accesible_maps, from_warp_id, to_warp_id):
+    return is_member_to_member_valid(map, accesible_maps, from_warp_id, to_warp_id)
+
+
 def is_warp_ready(warp_tuple: WT, accesible_maps):
-    bits = bin(warp_tuple.flag)
-    index = 0
-    warp_pass = True
-    for bit in reversed(bits):
-        if bit == '1':
-            if not check_progession_blockers(index, accesible_maps):
-                warp_pass = False
-                break
-        index = index + 1
-    return warp_pass
+    return _progression_mask_ready(warp_tuple.flag, accesible_maps)

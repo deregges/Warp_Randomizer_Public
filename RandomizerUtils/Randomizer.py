@@ -28,7 +28,7 @@ import zipfile
 
 from RandomizerUtils import Definitions
 from gen3 import EmeraldWarpRandomizer, FireRedWarpRandomizer
-from nds.gen4 import PlatinumWarpRandomizer, PlatinumWarpMapInfo
+from nds.gen4 import PlatinumWarpRandomizer
 from nds.gen4 import JohtoWarpRandomizer
 from nds.gen5 import White2WarpRandomizer
 import RandomizerUtils.Definitions
@@ -186,6 +186,55 @@ def build_map(map_warps: dict, gen_functions):
     map_nodes[gen_functions.define_starting_map_id()] = starting_node
     build_node(starting_node, map_nodes, map_warps, valid_warps, gen_functions)
     return starting_node, map_nodes, valid_warps
+
+
+def uses_zone_accessibility(gen_functions):
+    return getattr(gen_functions.info(), 'USES_ZONE_ACCESSIBILITY', False)
+
+
+def is_member_defined_for_randomization(gen_functions, map_name, member):
+    info = gen_functions.info()
+    if uses_zone_accessibility(gen_functions):
+        return info.is_member_defined_for_randomization(map_name, member)
+    if isinstance(member, int) and map_name in info.map_warp_accessibility:
+        return member in info.map_warp_accessibility[map_name]
+    return True
+
+
+def zone_member_has_accessible_exit(gen_functions, map_name, member):
+    info = gen_functions.info()
+    if uses_zone_accessibility(gen_functions):
+        return info.zone_member_has_accessible_exit(map_name, member)
+    if map_name not in info.map_warp_accessibility:
+        return True
+    return member in info.map_warp_accessibility[map_name] and len(info.map_warp_accessibility[map_name][member]) != 0
+
+
+def is_member_to_member_valid(gen_functions, map_name, accessible_maps, from_member, to_member):
+    info = gen_functions.info()
+    if uses_zone_accessibility(gen_functions):
+        return info.is_member_to_member_valid(map_name, accessible_maps, from_member, to_member)
+    if isinstance(from_member, int) and isinstance(to_member, int):
+        return info.is_warp_to_warp_valid(map_name, accessible_maps, from_member, to_member)
+    return True
+
+
+def _zone_connection_entry_warp(gen_functions, map_name, connection_name, accessible_maps):
+    """Resolve a connection to its default entry warp ID in the zone model."""
+    info = gen_functions.info()
+    if map_name not in info.map_zones:
+        # Map not in explicit zone data (implicit whole-map zone) --
+        # the connection freely reaches any warp; warp 0 is canonical.
+        return 0
+    conn_zone = info.get_member_zone(map_name, connection_name)
+    if conn_zone is None:
+        return None
+    reached = info.reachable_zone_ids(map_name, connection_name, accessible_maps)
+    for zone_id in reached:
+        for member in info.map_zones[map_name][zone_id]:
+            if isinstance(member, int):
+                return member
+    return None
 
 
 # Need to compile a list of every warp available
@@ -346,7 +395,9 @@ def remove_pair_warps(available_warps, ignore_warps, randomized_map_warps, map_w
             # This is an important check, if a paired_warp is in map_to_map_warp_accessibility
             # we need to make sure the warp used in map_to_map_warp_accessibility isnt being erased
             # as such we update that entry to make sure it is using the warp in the pair that will still exist
-            if game_map in gen_functions.info().map_to_map_warp_accessibility:
+            if uses_zone_accessibility(gen_functions):
+                gen_functions.info().redirect_paired_warp_ids(game_map, paired_ids)
+            elif game_map in gen_functions.info().map_to_map_warp_accessibility:
                 for key_map in gen_functions.info().map_to_map_warp_accessibility[game_map]:
                     warp_tuple = gen_functions.info().map_to_map_warp_accessibility[game_map][key_map]
                     if warp_tuple.warp_id in paired_ids:
@@ -390,7 +441,18 @@ def map_warp_divide(all_maps, map_warps, gen_functions, available_warps):
             if warp[0] == game_map:
                 warp_count = warp_count + 1
         warps, connections = map_warps[game_map]
-        if warp_count > 1 and 'gym' not in game_map.lower():
+        if uses_zone_accessibility(gen_functions) and warp_count > 1 and 'gym' not in game_map.lower():
+            for warp in warps:
+                if not is_member_defined_for_randomization(gen_functions, game_map, warp.warp_id):
+                    continue
+                if game_map in gen_functions.info().dont_randomize_warp and \
+                        warp.warp_id in gen_functions.info().dont_randomize_warp[game_map]:
+                    continue
+                if zone_member_has_accessible_exit(gen_functions, game_map, warp.warp_id):
+                    connects.append([game_map, warp.warp_id])
+                else:
+                    end.append([game_map, warp.warp_id])
+        elif warp_count > 1 and 'gym' not in game_map.lower():
             # We now this map has multiple real warps that potentially connect so we must check
             for warp in warps:
                 if game_map not in gen_functions.info().map_warp_accessibility:
@@ -428,9 +490,16 @@ def get_all_accessible_warps_from_warp(game_map, warp_id, accessible_maps, gen_f
     accessible_warps = []
     dont_randomize_warps = []
     warps, connections = randomized_map_warps[game_map]
+
+    # When entering from a connection (string warp_id) in zone mode, resolve
+    # the entry warp so the incoming-warp skip below triggers correctly.
+    _resolved_entry = None
+    if isinstance(warp_id, str) and uses_zone_accessibility(gen_functions):
+        _resolved_entry = _zone_connection_entry_warp(gen_functions, game_map, warp_id, accessible_maps)
+
     for warp in warps:
         check_warps, check_connections = randomized_map_warps[game_map]
-        if warp.warp_id == warp_id:
+        if warp.warp_id == warp_id or (_resolved_entry is not None and warp.warp_id == _resolved_entry):
             if include_starting_warp:
                 # This for scenario when coming from connection and we want to include it in our don't randomize
                 # and accessible warp list, so we must check its a don't randomize warp
@@ -451,7 +520,14 @@ def get_all_accessible_warps_from_warp(game_map, warp_id, accessible_maps, gen_f
                 dont_randomize_warps.append(warp.warp_id)
                 continue
 
-        if game_map in gen_functions.info().map_warp_accessibility:
+        if uses_zone_accessibility(gen_functions):
+            if not is_member_defined_for_randomization(gen_functions, game_map, warp.warp_id) or \
+                    (game_map in gen_functions.info().dont_randomize_warp and
+                     warp.warp_id in gen_functions.info().dont_randomize_warp[game_map]):
+                continue
+            if not is_member_to_member_valid(gen_functions, game_map, accessible_maps, warp_id, warp.warp_id):
+                continue
+        elif game_map in gen_functions.info().map_warp_accessibility:
             # we must now check if incoming warp can reach this current warp following the rules specified
             if warp.warp_id not in gen_functions.info().map_warp_accessibility[game_map] or \
                     (game_map in gen_functions.info().dont_randomize_warp and
@@ -491,6 +567,7 @@ def build_warps_to_randomize(accessible_maps, visited_maps, warps_to_randomize, 
         return
 
     warps, connections = randomized_map_warps[current_map]
+    zone_access = uses_zone_accessibility(gen_functions)
     starting_warp = 0
     include_starting_warp = incoming_warp_id == -1
 
@@ -521,15 +598,22 @@ def build_warps_to_randomize(accessible_maps, visited_maps, warps_to_randomize, 
         # Basically if we hit a 1-way warp we want to consider this warp as a dead end, this ensures that any other
         # warps that potentially connect to this one way are not dead ends but rather maps that connect to the main
         # loop
-        if current_map in gen_functions.info().potential_softlock_warps and \
+        if hasattr(gen_functions.info(), 'potential_softlock_warps') and \
+                current_map in gen_functions.info().potential_softlock_warps and \
                 incoming_warp_id in gen_functions.info().potential_softlock_warps[current_map]:
             starting_warp = -3  # Lets us know that we should not add any warps to randomize for this map
     else:
         # Since we are coming from a connection we need to handle setting our starting warp a bit differently
         # We need to check if we can add any warps from current_map
-        if len(warps) == 0:
-            starting_warp = -2  # there are no warps to check
-        if current_map in gen_functions.info().map_to_map_warp_accessibility and \
+        if zone_access:
+            if previous_map != '':
+                starting_warp = previous_map  # connection members are represented by the other map's name
+            elif len(warps) == 0:
+                starting_warp = -2  # there is no concrete member to start from
+        else:
+            if len(warps) == 0:
+                starting_warp = -2  # there are no warps to check
+        if not zone_access and current_map in gen_functions.info().map_to_map_warp_accessibility and \
                 previous_map in gen_functions.info().map_to_map_warp_accessibility[current_map]:
             # map_to_map_warp_accessibility defines special scenarios for what warps to use when going from previous
             # map to current map, if it is specified then we use that warp to start
@@ -588,44 +672,42 @@ def build_warps_to_randomize(accessible_maps, visited_maps, warps_to_randomize, 
     for connection in connections:
         # connections are much easier :D
         # First check if connection is navigable, if not navigable, cannot make connection
-        is_valid_connection = True
-        for non_navigable_connection in gen_functions.info().non_navigable_connections:
-            if current_map == non_navigable_connection[0]:
-                if connection.map in non_navigable_connection:
-                    is_valid_connection = False
-                    break
+        if not zone_access:
+            is_valid_connection = True
+            for non_navigable_connection in gen_functions.info().non_navigable_connections:
+                if current_map == non_navigable_connection[0]:
+                    if connection.map in non_navigable_connection:
+                        is_valid_connection = False
+                        break
 
-        if not is_valid_connection:
-            continue  # the connection is considered non-navigable therefore skip connection
+            if not is_valid_connection:
+                continue  # the connection is considered non-navigable therefore skip connection
 
-        # Check specific connection to connection rules to see if we can progress through to next connection
-        if current_map in gen_functions.info().connection_to_connection_rules:
-            if connection.map in gen_functions.info().connection_to_connection_rules[current_map]:
-                flag = gen_functions.info().connection_to_connection_rules[current_map][connection.map]
-                bits = bin(flag)  # Convert flag into bits representation
-                connetion_pass = True
-                index = 0
-                for bit in reversed(bits):
-                    if bit == '1':
-                        if not gen_functions.info().check_progession_blockers(index, accessible_maps):
-                            connetion_pass = False  # One of the requirements is missing for flag
-                            break
-                    index = index + 1
-                if not connetion_pass:
-                    continue
+            # Check specific connection to connection rules to see if we can progress through to next connection
+            if current_map in gen_functions.info().connection_to_connection_rules:
+                if connection.map in gen_functions.info().connection_to_connection_rules[current_map]:
+                    flag = gen_functions.info().connection_to_connection_rules[current_map][connection.map]
+                    bits = bin(flag)  # Convert flag into bits representation
+                    connetion_pass = True
+                    index = 0
+                    for bit in reversed(bits):
+                        if bit == '1':
+                            if not gen_functions.info().check_progession_blockers(index, accessible_maps):
+                                connetion_pass = False  # One of the requirements is missing for flag
+                                break
+                        index = index + 1
+                    if not connetion_pass:
+                        continue
+
+        if zone_access:
+            if starting_warp == -2 or not is_member_to_member_valid(gen_functions, current_map, accessible_maps,
+                                                                    starting_warp, connection.map):
+                continue
 
         # Honor seamless border-warp routing when LEAVING current_map.
-        # map_to_map_warp_accessibility not only says which warp we land on when
-        # entering a map, it also names the single border warp we must be standing
-        # at to cross a seamless connection out of it. Previously this loop only
-        # enforced the entering side, so the fill could walk out of a map through a
-        # governed border from a warp/zone that cannot actually reach that border
-        # (e.g. crossing Map_Pokemon_League_01 -> Map_Pokemon_League_00 from the
-        # zone-A courtyard even though that crossing requires zone-B warp 2). That
-        # over-approximated reachability and let required warps (Flash) be stranded
-        # on an isolated island. Only cross when the border warp is actually
-        # reachable from where we entered - mirroring the tracker's reachable_room_warps.
-        if current_map in gen_functions.info().map_to_map_warp_accessibility and \
+        # Legacy gens still use map_to_map_warp_accessibility. Platinum now
+        # expresses the same border restrictions as zone member-to-member rules.
+        if not zone_access and current_map in gen_functions.info().map_to_map_warp_accessibility and \
                 connection.map in gen_functions.info().map_to_map_warp_accessibility[current_map]:
             border_wt = gen_functions.info().map_to_map_warp_accessibility[current_map][connection.map]
             if not gen_functions.info().is_warp_ready(border_wt, accessible_maps):
@@ -1074,7 +1156,6 @@ def build_map_connections(map_warps, gen_functions):
     # build_warps_to_randomize. Flag-gated connections (connection_to_connection_rules)
     # are treated as passable because the tracker models logical reachability
     # assuming full progression.
-    non_navigable = gen_functions.info().non_navigable_connections
     map_connections = {}
     for map_name in map_warps:
         adjacent = []
@@ -1082,11 +1163,14 @@ def build_map_connections(map_warps, gen_functions):
             if connection.map not in map_warps:
                 continue
             # Skip connections marked non-navigable from map_name's side
-            blocked = False
-            for pair in non_navigable:
-                if map_name == pair[0] and connection.map in pair:
-                    blocked = True
-                    break
+            if uses_zone_accessibility(gen_functions):
+                blocked = False
+            else:
+                blocked = False
+                for pair in gen_functions.info().non_navigable_connections:
+                    if map_name == pair[0] and connection.map in pair:
+                        blocked = True
+                        break
             if blocked:
                 continue
             adjacent.append(connection.map)
@@ -1133,6 +1217,71 @@ def reachable_room_warps(room_warps, entry_map, entry_warp_id, map_connections, 
     if cache is not None and cache_key in cache:
         return cache[cache_key]
 
+    warps_by_map = {}
+    for room_map, room_warp in room_warps:
+        warps_by_map.setdefault(room_map, {})[room_warp.warp_id] = room_warp
+
+    if uses_zone_accessibility(gen_functions):
+        info = gen_functions.info()
+        result_keys = set()
+        result = []
+
+        def add_result(map_name, warp_id):
+            if (map_name, warp_id) == (entry_map, entry_warp_id):
+                return
+            if warp_id not in warps_by_map.get(map_name, {}):
+                return
+            if (map_name, warp_id) not in result_keys:
+                result_keys.add((map_name, warp_id))
+                result.append((map_name, warps_by_map[map_name][warp_id]))
+
+        def reachable_members(map_name, member):
+            if not info.is_member_ready_with_flags(map_name, member, flags_satisfied):
+                return []
+            members = info.get_reachable_members_with_flags(map_name, member, flags_satisfied)
+            if members is not None:
+                members = list(members)
+                for adjacent in map_connections.get(map_name, ()):
+                    if not info.is_explicit_zone_member(map_name, adjacent) and adjacent not in members:
+                        members.append(adjacent)
+                return members
+            # Implicit default map zone: every warp and every navigable connection
+            # on this map is mutually reachable.
+            return list(warps_by_map.get(map_name, {}).keys()) + list(map_connections.get(map_name, ()))
+
+        visited_members = set()
+        frontier = [(entry_map, entry_warp_id)]
+        while frontier:
+            map_name, member = frontier.pop()
+            if (map_name, member) in visited_members:
+                continue
+            visited_members.add((map_name, member))
+
+            if isinstance(member, int):
+                add_result(map_name, member)
+
+            for reachable_member in reachable_members(map_name, member):
+                if reachable_member == member:
+                    continue
+                if isinstance(reachable_member, int):
+                    if reachable_member in warps_by_map.get(map_name, {}):
+                        add_result(map_name, reachable_member)
+                        frontier.append((map_name, reachable_member))
+                else:
+                    # Connection member: crossing from map_name to reachable_member
+                    # lands on the reciprocal connection member in the adjacent map.
+                    adjacent = reachable_member
+                    if adjacent not in map_connections.get(map_name, ()):
+                        continue
+                    if map_name not in map_connections.get(adjacent, ()):
+                        continue
+                    if info.is_member_ready_with_flags(adjacent, map_name, flags_satisfied):
+                        frontier.append((adjacent, map_name))
+
+        if cache is not None:
+            cache[cache_key] = result
+        return result
+
     accessibility = gen_functions.info().map_warp_accessibility
     map_to_map = gen_functions.info().map_to_map_warp_accessibility
 
@@ -1147,9 +1296,6 @@ def reachable_room_warps(room_warps, entry_map, entry_warp_id, map_connections, 
         # satisfied -- mirrors is_map_progressable's per-map HM gate.
         return map_flags_ok(gen_functions, map_name, flags_satisfied)
 
-    warps_by_map = {}
-    for room_map, room_warp in room_warps:
-        warps_by_map.setdefault(room_map, {})[room_warp.warp_id] = room_warp
 
     def intra_map_targets(map_name, warp_id):
         # Warps in the same map reachable from warp_id, honoring flag gating.
@@ -1464,6 +1610,8 @@ def map_flags_ok(gen_functions, map_name, flags_satisfied):
     # per-map gate at the top of is_map_progressable so the route/tracker
     # reachability engine honors the same rules. Gens that don't define
     # map_flag_requirements (or a None flag mask == full progression) pass freely.
+    if uses_zone_accessibility(gen_functions):
+        return True
     required_flags = getattr(gen_functions.info(), 'map_flag_requirements', {}).get(map_name, 0)
     if required_flags == 0 or flags_satisfied is None:
         return True
@@ -1473,6 +1621,8 @@ def map_flags_ok(gen_functions, map_name, flags_satisfied):
 # Find map based off current flag restrictions
 # If it can't find map return empty path, otherwise return path taken
 def find_map(map_to_find, warp_to_find, randomized_map_warps, gen_functions, current_flags_satisfied):
+    if uses_zone_accessibility(gen_functions):
+        return []
     paths_tested = [[(gen_functions.define_starting_map_id(), -1)]]
     maps_visited = [gen_functions.define_starting_map_id()]
 
@@ -1766,6 +1916,9 @@ def find_route_steps(randomized_map_warps, gen_functions, start_map, dest_map, f
     if not states:
         return []
 
+    info_module = gen_functions.info()
+    zone_access = uses_zone_accessibility(gen_functions)
+
     map_connections = build_map_connections(randomized_map_warps, gen_functions)
     if flags_satisfied is not None:
         # Don't describe a walk that crosses a map the player can't yet traverse
@@ -1776,10 +1929,26 @@ def find_route_steps(randomized_map_warps, gen_functions, start_map, dest_map, f
             for m, adj in map_connections.items()
         }
 
-    info_module = gen_functions.info()
-    map_req = getattr(info_module, 'map_flag_requirements', {})
-    accessibility = getattr(info_module, 'map_warp_accessibility', {})
-    map_to_map = getattr(info_module, 'map_to_map_warp_accessibility', {})
+    map_req = {} if zone_access else getattr(info_module, 'map_flag_requirements', {})
+    if zone_access:
+        # Zone model: derive per-map entry requirements from zone rules.
+        # For each map, find the flags needed to enter from any connection and
+        # reach any warp, OR to exit from any warp to any connection (matching
+        # main's per-map HM gates like bike_needed). Use flags_satisfied=None
+        # so get_member_to_member_flag_mask returns the raw flag mask.
+        map_zones_data = getattr(info_module, 'map_zones', {})
+        for _m, _zones in map_zones_data.items():
+            _entry_mask = 0
+            _conns = [m for zone in _zones for m in zone if isinstance(m, str)]
+            _warps = [m for zone in _zones for m in zone if isinstance(m, int)]
+            for _c in _conns:
+                for _w in _warps:
+                    _entry_mask |= info_module.get_member_to_member_flag_mask(_m, _c, _w, None)
+                    _entry_mask |= info_module.get_member_to_member_flag_mask(_m, _w, _c, None)
+            if _entry_mask:
+                map_req[_m] = _entry_mask
+    accessibility = {} if zone_access else getattr(info_module, 'map_warp_accessibility', {})
+    map_to_map = {} if zone_access else getattr(info_module, 'map_to_map_warp_accessibility', {})
 
     # flag bit index -> short human name, e.g. 5 -> 'bike' (from BIKE_FLAG).
     flag_names = {}
@@ -1805,6 +1974,8 @@ def find_route_steps(randomized_map_warps, gen_functions, start_map, dest_map, f
     def crossing_mask(from_map, to_map):
         # Flags gating the seamless connection from_map -> to_map (either the
         # outgoing or the incoming border rule may carry one).
+        if zone_access:
+            return 0
         mask = 0
         if from_map in map_to_map and to_map in map_to_map[from_map]:
             mask |= map_to_map[from_map][to_map].flag
@@ -1816,6 +1987,8 @@ def find_route_steps(randomized_map_warps, gen_functions, start_map, dest_map, f
         # Flags gating movement between two warps of the same map. Finds the
         # flag-satisfied intra-map path from src to dst that needs the fewest
         # flags and returns the union of the flags it crosses.
+        if zone_access:
+            return info_module.get_member_to_member_flag_mask(map_name, src_warp, dst_warp, flags_satisfied)
         if src_warp == dst_warp or map_name not in accessibility:
             return 0
         rules = accessibility[map_name]
@@ -1862,6 +2035,14 @@ def find_route_steps(randomized_map_warps, gen_functions, start_map, dest_map, f
                 path = _connection_path(current_map, state_map, map_connections)
                 for i in range(1, len(path)):
                     step_mask = pending_mask | crossing_mask(path[i - 1], path[i]) | map_req.get(path[i], 0)
+                    if zone_access:
+                        if i == 1:
+                            source_member = current_warp_id
+                        else:
+                            source_member = path[i - 2]
+                        step_mask |= intra_map_mask(path[i - 1], source_member, path[i])
+                        if i == len(path) - 1:
+                            step_mask |= intra_map_mask(path[i], path[i - 1], state_warp_id)
                     pending_mask = 0
                     lines.append(path[i] + mask_to_text(step_mask))
         else:
@@ -2241,35 +2422,10 @@ def logic_brute_forcer(rom_type, fixed_seed=-1):
         #                 print('%s warp %i points to %s warp %i' % (entry, map_warps[entry][0][warp_id].warp_id, dest, dest_warp))
         #                 return True, fixed_seed
 
-        """This is for finding maps locked behind an incorrect HM requirement"""
-        found = False
-        cancelled = False
-        out = ''
-        for event_idx in range(len(PlatinumWarpMapInfo.FLAG_EVENT_LIST)):
-            for entry in PlatinumWarpMapInfo.FLAG_EVENT_LIST[event_idx]:
-                entry = entry.split(':')[0]
-                for warp_id in range(len(map_warps[entry][0])):
-                    dest = map_warps[entry][0][warp_id].dest_map
-                    dest_warp = map_warps[entry][0][warp_id].dest_warp_id
-                    if dest in PlatinumWarpMapInfo.map_warp_accessibility.keys():
-                        for warp_accessibility_id in PlatinumWarpMapInfo.map_warp_accessibility[dest]:
-                            if warp_accessibility_id != dest_warp:
-                                for warp_tuple in PlatinumWarpMapInfo.map_warp_accessibility[dest][
-                                    warp_accessibility_id]:
-                                    if warp_tuple.warp_id == dest_warp and (warp_tuple.flag >> event_idx) & 0b1 == 1:
-                                        found = True
-                                        out = '%s warp %i points to %s warp %i' % (
-                                        dest, dest_warp, entry, map_warps[entry][0][warp_id].warp_id)
-                                        continue
-                                    if found and warp_tuple.warp_id == dest_warp and (
-                                            warp_tuple.flag >> event_idx) & 0b1 == 0:
-                                        cancelled = True
-                                        continue
-
-        if found and not cancelled:
-            print(fixed_seed)
-            print(out)
-            return True, fixed_seed
+        # The old HM-lock brute-force debug scan directly inspected
+        # map_warp_accessibility. Platinum now uses zones, so there is no legacy
+        # table to inspect here.
+        return None
 
 
 if __name__ == "__main__":
