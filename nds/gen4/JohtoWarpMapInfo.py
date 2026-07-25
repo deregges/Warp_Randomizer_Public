@@ -1382,7 +1382,7 @@ map_to_map_warp_accessibility = {
     }
 }
 
-cant_go_back_warps = { #missing champion room
+potential_softlock_warps = { #missing champion room
     'Map_Pokemon_League_Room01_00': [0],
     'Map_Pokemon_League_Room02_00': [0],
     'Map_Pokemon_League_Room03_00': [0],

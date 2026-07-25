@@ -1773,7 +1773,7 @@ map_to_map_warp_accessibility = {
     }
 }
 
-cant_go_back_warps = {
+potential_softlock_warps = {
     'Map_Pokemon_League_Aaron_Room_00': [1],
     'Map_Pokemon_League_Bertha_Room_00': [1],
     'Map_Pokemon_League_Flint_Room_00': [1],

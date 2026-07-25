@@ -29,6 +29,15 @@
 4. Run `make onefile`. A WarpRandomizerMain.dist will appear, in which you can check if the required data files are being copied correctly. In the root of the project, Windows
 users will find an executable. Mac and Linux users will find a .bin file, which will need its permissions adjusted to be executed with `chmod 777 WarpRandomizerMain.bin`.
 
+# Testing
+
+Install the test/development dependencies with `pip install -r requirements-dev.txt`.
+
+Run the full test suite with `python -m pytest`.
+
+Run the Platinum regression test in fail-fast mode with `python -m pytest -x tests/test_platinum_regression.py -vv`.
+When that regression fails, actual outputs are written under `tests/actual/platinum_seed_matrix/` for post-test analysis.
+
 # License
 This project is made available under the GPL-V3 license. See `LICENSE.md` for more details.
 

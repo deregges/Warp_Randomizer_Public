@@ -521,8 +521,8 @@ def build_warps_to_randomize(accessible_maps, visited_maps, warps_to_randomize, 
         # Basically if we hit a 1-way warp we want to consider this warp as a dead end, this ensures that any other
         # warps that potentially connect to this one way are not dead ends but rather maps that connect to the main
         # loop
-        if current_map in gen_functions.info().cant_go_back_warps and \
-                incoming_warp_id in gen_functions.info().cant_go_back_warps[current_map]:
+        if current_map in gen_functions.info().potential_softlock_warps and \
+                incoming_warp_id in gen_functions.info().potential_softlock_warps[current_map]:
             starting_warp = -3  # Lets us know that we should not add any warps to randomize for this map
     else:
         # Since we are coming from a connection we need to handle setting our starting warp a bit differently
@@ -2231,8 +2231,8 @@ def logic_brute_forcer(rom_type, fixed_seed=-1):
 
     if rom_type == Definitions.GEN4_PLATINUM:
         """This is for testing for gyms locked behind one-way warps"""
-        # for entry in PlatinumWarpMapInfo.cant_go_back_warps:
-        #     for warp_id in PlatinumWarpMapInfo.cant_go_back_warps[entry]:
+        # for entry in PlatinumWarpMapInfo.potential_softlock_warps:
+        #     for warp_id in PlatinumWarpMapInfo.potential_softlock_warps[entry]:
         #         dest = map_warps[entry][0][warp_id].dest_map
         #         dest_warp = map_warps[entry][0][warp_id].dest_warp_id
         #         if 'Gym' in dest or 'League' in dest:

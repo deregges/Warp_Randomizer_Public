@@ -640,7 +640,7 @@ map_to_map_warp_accessibility = {
 }
 
 
-cant_go_back_warps = {
+potential_softlock_warps = {
     'MAP_POKEMON_MANSION_1F': [7, 8],
     'MAP_POKEMON_MANSION_2F': [4],
     'MAP_POKEMON_LEAGUE_LORELEIS_ROOM': [0],

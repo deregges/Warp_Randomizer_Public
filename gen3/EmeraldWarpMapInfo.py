@@ -593,7 +593,7 @@ map_to_map_warp_accessibility = {
     }
 }
 
-cant_go_back_warps = {
+potential_softlock_warps = {
     'MAP_SOOTOPOLIS_CITY': [2],
     'MAP_EVER_GRANDE_CITY_SIDNEYS_ROOM': [0],
     'MAP_EVER_GRANDE_CITY_PHOEBES_ROOM': [0],

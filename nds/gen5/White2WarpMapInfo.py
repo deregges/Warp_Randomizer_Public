@@ -391,7 +391,7 @@ map_to_map_warp_accessibility = {
 
 }
 
-cant_go_back_warps = {
+potential_softlock_warps = {
     'Map_Pokemon_League_h137': [0],
     # league lobby, all elite 4 rooms you can co back unless you go too far and trigger their intro animations
 }
