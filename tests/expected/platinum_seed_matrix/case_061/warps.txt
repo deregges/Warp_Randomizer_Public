@@ -1,0 +1,422 @@
+Map_Jubilife_City_00[0] (jubilife:poketchright) <-> Map_Jubilife_TV_00[0] (jubilifetv_poketch:tv_f1_entrance)
+Map_Jubilife_City_00[1] (jubilife:poketchleft) <-> Map_Wayward_Cave_Room01_00[0]
+Map_Jubilife_City_00[2] <-> Map_Hearthome_Shop_00[0]
+Map_Jubilife_City_00[4] (jubilife:gate) <-> Map_Galactic_HQ_SS1_Room01_00[0]
+Map_Jubilife_City_01[0] (jubilife:righttv) <-> Map_Route_214_00[2] (route214:cave)
+Map_Jubilife_City_01[1] (jubilife:jubilifetv) <-> Map_Jubilife_Building01_00[0]
+Map_Jubilife_City_01[2] (jubilife:mart) <-> Map_Mount_Coronet_Exterior_00[1] (coronetsummit:topright)
+Map_Jubilife_City_02[0] (jubilife:trade) <-> Map_Mount_Coronet_Floor10_00[0]
+Map_Jubilife_City_02[1] (jubilife:tradebot) <-> Map_Celestic_Town_House04_00[0]
+Map_Jubilife_City_03[0] (jubilife:center) <-> Map_Route_206_Gate_00[0]
+Map_Jubilife_City_03[1] (jubilife:house) <-> Map_Galactic_HQ_Floor06_00[0]
+Map_Jubilife_City_03[2] <-> Map_Jubilife_Trainer_School_00[0]
+Map_Verity_Lakefront_03[0] (route201:lake) <-> Map_Iron_Island_Room03_00[1] (ironisland:bf2_right)
+Map_Route_203_01[0] (oreburghgate_r203:route203) <-> Map_Eterna_Building01_00[0]
+Map_Route_204_00[0] (route204:bot) <-> Map_Solaceon_Town_00[1] (solaceon:rightcenter)
+Map_Route_221_01[0] (route221:house) <-> Map_Galactic_HQ_Floor02_00[0]
+Map_Route_221_02[0] (route221:palpark) <-> Map_Victory_Road_Floor02_00[0]
+Map_Twinleaf_Town_00[0] <-> Map_Twinleaf_Rival_House_00[0]
+Map_Twinleaf_Town_00[1] <-> Map_Twinleaf_Your_House_00[0]
+Map_Twinleaf_Town_00[2] <-> Map_Twinleaf_Town_Room03_00[0]
+Map_Twinleaf_Town_00[3] <-> Map_Twinleaf_Town_Room04_00[0]
+Map_Sandgem_Town_00[0] (sandgem:mart) <-> Map_Pokemon_League_01[2]
+Map_Sandgem_Town_00[1] (sandgem:center) <-> Map_Celestic_Town_House03_00[0]
+Map_Sandgem_Town_00[2] <-> Map_Sandgem_Prof_Lab_00[0]
+Map_Sandgem_Town_00[3] (sandgem:profhouse) <-> Map_Route_218_Gate_00[0]
+Map_Sandgem_Town_00[4] (sandgem:house) <-> Map_Route_207_01[1]
+Map_Oreburgh_City_00[0] (oreburgh:gym) <-> Map_Fight_Area_01[4] (fightarea:center)
+Map_Oreburgh_City_00[1] (oreburgh:mart) <-> Map_Route_208_Gate_00[0]
+Map_Oreburgh_City_00[2] (oreburgh:top1) <-> Map_Stark_Mountain_Room01_00[0]
+Map_Oreburgh_City_00[3] (oreburgh:leftgym) <-> Map_Galactic_HQ_Floor02_01[1]
+Map_Oreburgh_City_00[4] (oreburgh:top2) <-> Map_Canalave_House02_00[0]
+Map_Oreburgh_City_00[5] (oreburgh:entrance) <-> Map_Snowpoint_Temple_04[0]
+Map_Oreburgh_City_01[0] (oreburgh:center) <-> Map_Route_222_Gate_00[1]
+Map_Oreburgh_City_01[1] (oreburgh:leftcenter) <-> Map_Route_222_02[2] (route222:right)
+Map_Oreburgh_City_01[2] (oreburgh:museum) <-> Map_Newmoon_Island_Interior_00[0]
+Map_Oreburgh_City_01[3] (oreburgh:rightcenter) <-> Map_Veilstone_City_00[3] (veilstone:warehouse)
+Map_Oreburgh_City_02[0] (oreburgh:minehouse) <-> Map_Mount_Coronet_Floor09_01[0] (coronet:upf1_bot)
+Map_Oreburgh_City_02[1] (oreburgh:mineentrance) <-> Map_Veilstone_House01_00[0]
+Map_Route_206_00[0] <-> Map_Wayward_Cave_Room02_01[0]
+Map_Route_206_00[2] (route206:caveright) <-> Map_Route_210_Cafe_00[0]
+Map_Route_206_00[3] (route206:caveleft) <-> Map_Stark_Mountain_Room01_00[1]
+Map_Route_206_00[4] (route206:exit) <-> Map_Oreburgh_Building01_00[1]
+Map_Route_206_00[6] <-> Map_Galactic_HQ_Floor03_00[2] (galactichq:f4_green)
+Map_Route_207_01[0] (route207_route208:r207) <-> Map_Pokemon_League_01[1] (league:entrance)
+Map_Eterna_City_00[0] (eterna:center) <-> Map_Snowpoint_House01_00[0]
+Map_Eterna_City_00[1] (eterna:bikeshop) <-> Map_Verity_Cavern_00[0]
+Map_Eterna_City_00[2] (eterna:galactic) <-> Map_Victory_Road_Floor01_00[1] (victoryroad:f1_right1)
+Map_Eterna_City_00[3] (eterna:leftstatue) <-> Map_Snowpoint_PokemonCenter_00[0] (snowpoint:center_mid)
+Map_Eterna_City_00[4] (eterna:underground) <-> Map_Pokemon_Tower_00[0]
+Map_Eterna_City_01[0] (eterna:botstatue) <-> Map_Veilstone_Mall_03[1] (departmentstore:f4_right)
+Map_Eterna_City_02[0] (eterna:mart) <-> Map_Hearthome_House01_00[0]
+Map_Eterna_City_02[1] (eterna:rightmart) <-> Map_Solaceon_PokemonCenter_00[1] (solaceon:center_up)
+Map_Eterna_City_02[2] (eterna:leftgym) <-> Map_Route_214_Gate_00[0]
+Map_Eterna_City_02[3] (eterna:route) <-> Map_Hearthome_Contest_01[0]
+Map_Eterna_City_02[5] (eterna:gym) <-> Map_Regice_Cave_00[0]
+Map_ValleyWindworks_00[0] (windworks:house) <-> Map_Eterna_Galactic_Building_Floor02_00[0]
+Map_Fuego_Ironworks_00[0] (ironworks_meadow:works_house) <-> Map_Jubilife_Building01_02[0]
+Map_Route_204_01[0] (route204:top) <-> Map_Oreburgh_PokemonCenter_00[1] (oreburgh:center_up)
+Map_Route_205_00[0] (eternaforest_r205:r205_entrance) <-> Map_Survival_Area_00[2] (survivalarea:up)
+Map_Route_205_00[2] (eternaforest_r205:r205_house) <-> Map_Veilstone_City_00[0] (veilstone:route215)
+Map_Route_205_03[0] (eternaforest_r205:r205_exit) <-> Map_Jubilife_TV_01[1] (jubilifetv_poketch:tv_f2_up)
+Map_Route_211_00[0] (route211:left) <-> Map_Mount_Coronet_Floor03_00[2] (coronet:f4_right)
+Map_Floaroma_Town_00[0] (ironworks_meadow:works_meadow) <-> Map_Solaceon_Ruins_Room04_01[0]
+Map_Floaroma_Town_01[0] (floaroma:mart) <-> Map_Pokemon_League_Flint_Room_00[0] (league:flint_top)
+Map_Floaroma_Town_01[1] (floaroma:center) <-> Map_Canalave_House01_00[0]
+Map_Floaroma_Town_01[2] (floaroma:flowershop) <-> Map_Eterna_Cycle_Shop_00[0] (:bike)
+Map_Floaroma_Town_01[3] (floaroma:rightcenter) <-> Map_Eterna_House02_00[0]
+Map_Floaroma_Town_01[4] (floaroma:leftflower) <-> Map_Oreburgh_Gate_00[0] (oreburghgate_r203:gate_left)
+Map_Floaroma_Town_01[5] (floaroma:meadows) <-> Map_Snowpoint_Temple_03[1]
+Map_Hearthome_City_00[0] (hearthome:squareleft) <-> Map_Eterna_Galactic_Building_Floor01_00[1] (eternagalactic:f2_stairs3)
+Map_Hearthome_City_00[2] (hearthome:contesthall) <-> Map_Valor_Lakefront_02[0] (valorlakefront:lakefront_topleft)
+Map_Hearthome_City_00[3] (hearthome:center) <-> Map_Snowpoint_City_00[1] (snowpoint:right)
+Map_Hearthome_City_00[4] (hearthome:bebe) <-> Map_Galactic_HQ_Floor02_00[1]
+Map_Hearthome_City_01[0] (hearthome:squareright) <-> Map_Galactic_HQ_Floor01_00[7] (galactichq:f2_tv)
+Map_Hearthome_City_01[2] (hearthome:gym) <-> Map_Solaceon_Ruins_Room09_01[0]
+Map_Hearthome_City_01[3] (hearthome:righthall) <-> Map_Solaceon_Ruins_Room06_01[0]
+Map_Hearthome_City_02[0] (hearthome:church) <-> Map_Victory_Road_Floor01_00[7] (victoryroad:f1_right3)
+Map_Hearthome_City_02[1] (hearthome:poffin) <-> Map_Solaceon_Ruins_Room05_00[1] (solaceonruins:bf2_topright)
+Map_Hearthome_City_02[2] (hearthome:mart) <-> Map_Route_213_00[0] (valorlakefront:r213_city)
+Map_Hearthome_City_02[3] (hearthome:routeleft) <-> Map_Regice_Empty_Cave_00[0]
+Map_Hearthome_City_02[4] (hearthome:routemid) <-> Map_Mount_Coronet_Floor01_00[2]
+Map_Hearthome_City_03[0] (hearthome:hotel) <-> Map_Oreburgh_Building03_00[0]
+Map_Hearthome_City_03[1] (hearthome:fanclub) <-> Map_Eterna_PokemonCenter_00[1] (eterna:center_up)
+Map_Hearthome_City_03[2] (hearthome:routeright) <-> Map_Mount_Coronet_Floor02_00[2] (coronet:f3_entrance)
+Map_Route_208_00[0] (route207_route208:r208_cave) <-> Map_Oreburgh_Mine_Room01_00[0]
+Map_Route_208_01[0] (route207_route208:r208_city) <-> Map_Iron_Island_Room01_00[2] (ironisland:f1_right)
+Map_Route_208_01[2] (route207_route208:r208_house) <-> Map_Canalave_City_Room03_00[0]
+Map_Route_209_00[0] (route209:tower) <-> Map_Battleground_00[0]
+Map_Route_209_01[0] (route209:entrance) <-> Map_Solaceon_Ruins_Room05_00[0] (solaceonruins:bf2_botright)
+Map_Route_210_01[0] (route210_route215:r210_cafe) <-> Map_Sunyshore_PokemonCenter_00[0] (sunyshore:center_mid)
+Map_Route_210_05[0] (route210_route215:r210_grandma) <-> Map_Old_Chateau_Room01_00[1] (eternaforest_r205:chateau_hub_right)
+Map_Route_211_01[0] (route211:right) <-> Map_Survival_Area_House01_00[0]
+Map_Route_215_02[0] (route210_route215:r215) <-> Map_Galactic_HQ_Floor00_01[2]
+Map_Solaceon_Town_00[0] (solaceon:daycare) <-> Map_Lake_Acuity_WithCave_00[2]
+Map_Solaceon_Town_00[2] (solaceon:rightcare) <-> Map_Galactic_HQ_Floor04_00[2] (galactichq:bf2_bot)
+Map_Solaceon_Town_00[3] (solaceon:center) <-> Map_Canalave_City_00[3] (canalave:right1)
+Map_Solaceon_Town_00[4] (solaceon:mart) <-> Map_Jubilife_Building02_01[0]
+Map_Solaceon_Town_01[0] (solaceon:right1) <-> Map_Pokemon_Mansion_00[0] (r212_mansion:mansion_left1)
+Map_Solaceon_Town_01[1] (solaceon:right2) <-> Map_Old_Chateau_Room04_00[4] (eternaforest_r205:chateau_line_door4)
+Map_Solaceon_Town_01[2] <-> Map_Veilstone_City_01[3] (veilstone:galactigmid)
+Map_Solaceon_Town_01[3] (solaceon:ruins) <-> Map_Resort_Area_PokemonCenter_00[2] (resortarea:center_bot)
+Map_Celestic_Town_00[0] (celestic:topmid) <-> Map_Resort_Area_PokemonCenter_00[1] (resortarea:center_up)
+Map_Celestic_Town_00[1] (celestic:topleft) <-> Map_Grand_Lake_House04_00[0]
+Map_Celestic_Town_00[2] (celestic:topright) <-> Map_Celestic_Shrine_00[0]
+Map_Celestic_Town_00[3] (celestic:botleft) <-> Map_Oreburgh_Building02_01[0]
+Map_Celestic_Town_00[4] (celestic:cave) <-> Map_Veilstone_City_01[0] (veilstone:centerupleft)
+Map_Celestic_Town_00[5] (celestic:center) <-> Map_Eterna_Building01_01[1]
+Map_Veilstone_City_00[2] (veilstone:department) <-> Map_Canalave_City_01[5] (canalave:left2)
+Map_Veilstone_City_01[1] (veilstone:centerupright) <-> Map_Solaceon_Ruins_Room10_00[0]
+Map_Veilstone_City_01[2] (veilstone:galacticleft) <-> Map_Pokemon_Tower_01[1]
+Map_Veilstone_City_01[4] (veilstone:galacticright) <-> Map_Snowpoint_Temple_04[1]
+Map_Veilstone_City_02[0] (veilstone:leftcasino2) <-> Map_Route_212_Gate_00[1]
+Map_Veilstone_City_02[1] (veilstone:leftcasino1) <-> Map_Floaroma_Flower_Shop_00[0]
+Map_Veilstone_City_02[2] (veilstone:gym) <-> Map_Mount_Coronet_Floor08_00[0] (coronet:upf12_bot)
+Map_Veilstone_City_03[0] (veilstone:casino) <-> Map_Mount_Coronet_Floor01_00[1]
+Map_Veilstone_City_03[1] (veilstone:rightcasino) <-> Map_Spear_Pillar_Leftover01[0]
+Map_Veilstone_City_03[2] (veilstone:center) <-> Map_Lake_Verity_00[1]
+Map_Veilstone_City_03[3] (veilstone:route214) <-> Map_Mount_Coronet_Floor10_01[0]
+Map_Pastoria_City_00[0] (pastoria:gym) <-> Map_Galactic_HQ_Floor00_01[6]
+Map_Pastoria_City_00[1] (pastoria:rightgym) <-> Map_Solaceon_Ruins_Room05_01[2] (solaceonruins:bf3_botleft)
+Map_Pastoria_City_00[2] (pastoria:center) <-> Map_Old_Chateau_Room04_00[0] (eternaforest_r205:chateau_line_entrance)
+Map_Pastoria_City_01[0] (pastoria:leftroute) <-> Map_Mount_Coronet_Floor03_00[3]
+Map_Pastoria_City_01[1] <-> Map_Pastoria_Marsh_Entrance_00[0]
+Map_Pastoria_City_01[3] (pastoria:route) <-> Map_Route_206_Gate_01[1]
+Map_Pastoria_City_02[0] (pastoria:upmart) <-> Map_Galactic_HQ_Floor01_00[11] (galactichq:f2_top)
+Map_Pastoria_City_02[1] (pastoria:mart) <-> Map_Veilstone_Mall_02[0] (departmentstore:f3_left)
+Map_Pastoria_City_02[2] (pastoria:leftmart) <-> Map_Hearthome_Church_00[0]
+Map_Pastoria_City_03[0] (pastoria:rightmart) <-> Map_Solaceon_Ruins_Room04_03[0]
+Map_Route_212_00[0] (r212_mansion:r212_city) <-> Map_Galactic_HQ_Floor01_00[0] (galactichq:f22_left)
+Map_Route_212_01[0] (r212_mansion:r212_mansion) <-> Map_Fight_Area_01[0] (fightarea:frontier)
+Map_Route_212_05[0] (r212_mansion:r212_house) <-> Map_Route_228_Gate_00[0]
+Map_Sunyshore_City_00[0] (sunyshore:market) <-> Map_Jubilife_Poketch_00[1] (jubilifetv_poketch:poketch_right)
+Map_Sunyshore_City_00[1] <-> Map_Sunyshore_House04_00[0]
+Map_Sunyshore_City_00[3] (sunyshore:gym) <-> Map_Sunyshore_Underground_House_00[0]
+Map_Sunyshore_City_01[0] (sunyshore:topright) <-> Map_Canalave_PokemonCenter_00[1] (canalave:center_up)
+Map_Sunyshore_City_01[1] (sunyshore:topleft) <-> Map_Canalave_Library_00[1]
+Map_Sunyshore_City_02[0] (sunyshore:leftmart) <-> Map_Canalave_Gym_00[0] (:mine_badge)
+Map_Sunyshore_City_02[1] (sunyshore:gate) <-> Map_Pastoria_PokemonCenter_00[2] (pastoria:center_bot)
+Map_Sunyshore_City_02[2] (sunyshore:mart) <-> Map_Lake_Valor_Normal_00[2]
+Map_Sunyshore_City_02[4] (sunyshore:center) <-> Map_Grand_Lake_Gate_00[0]
+Map_Sunyshore_City_03[0] (sunyshore:toplight) <-> Map_Route_205_House01_00[0]
+Map_Sunyshore_City_03[1] (sunyshore:lighthouse) <-> Map_Eterna_House03_00[0]
+Map_Pokemon_League_00[0] <-> Map_Wayward_Cave_Room02_00[0]
+Map_Pokemon_League_01[0] (league:center) <-> Map_Veilstone_Warehouse_00[0]
+Map_Route_224_03[0] <-> Map_Galactic_HQ_SS1_Room00_00[0]
+Map_Snowpoint_City_00[0] (snowpoint:left) <-> Map_Veilstone_Coin_Market_00[0]
+Map_Snowpoint_City_00[2] (snowpoint:temple) <-> Map_Veilstone_PokemonCenter_00[0] (veilstone:center_mid)
+Map_Snowpoint_City_00[3] (snowpoint:gym) <-> Map_Galactic_HQ_Floor03_00[3] (galactichq:f4_left)
+Map_Snowpoint_City_01[0] (snowpoint:mart) <-> Map_Eterna_Building01_02[0]
+Map_Snowpoint_City_01[1] (snowpoint:center) <-> Map_Mount_Coronet_Floor05_00[1]
+Map_Acuity_Lakefront_02[0] (route216_route217:r217_lake) <-> Map_Pastoria_House01_00[0]
+Map_Route_216_00[0] (route216_route217:r216_house) <-> Map_Snowpoint_Temple_02[1]
+Map_Route_216_02[0] (route216_route217:r216_cave) <-> Map_Turnback_Cave_Room01_00[4]
+Map_Route_217_00[0] (route216_route217:r217_right) <-> Map_Jubilife_PokemonCenter_00[1] (jubilife:center_up)
+Map_Route_217_01[0] (route216_route217:r217_left) <-> Map_Canalave_PokemonCenter_02[0]
+Map_Canalave_City_00[0] (canalave:gym) <-> Map_Route_216_House01_00[0]
+Map_Canalave_City_00[1] (canalave:center) <-> Map_Valor_Lakefront_01[0] (valorlakefront:lakefront_lake)
+Map_Canalave_City_00[2] (canalave:left1) <-> Map_Pokemon_League_Cynthia_Room_00[1] (:p_cynthia)
+Map_Canalave_City_00[4] (canalave:right2) <-> Map_Maniac_Cave_01[0]
+Map_Canalave_City_01[0] (canalave:mart) <-> Map_Route_214_Gate_00[1]
+Map_Canalave_City_01[1] (canalave:right3) <-> Map_Galactic_HQ_Floor00_01[7]
+Map_Canalave_City_01[2] (canalave:left3) <-> Map_Veilstone_Mall_00[1] (departmentstore:f1_right)
+Map_Canalave_City_01[3] (canalave:route) <-> Map_Acuity_Cavern_00[0]
+Map_Iron_Island_00[0] (ironisland:exterior_house) <-> Map_Canalave_PokemonCenter_01[0]
+Map_Iron_Island_00[1] (ironisland:exterior_entrance) <-> Map_Route_217_House02_00[0]
+Map_Iron_Island_00[2] (ironisland:exterior_ledge) <-> Map_Resort_Area_PokemonCenter_00[0] (resortarea:center_mid)
+Map_Route_218_00[0] <-> Map_Mount_Coronet_Floor07_01[0]
+Map_Route_218_01[0] <-> Map_Sendoff_Springs_00[0]
+Map_Stark_Mountain_00[0] (route226_route227:r227_stark) <-> Map_Galactic_HQ_Floor03_00[0] (galactichq:f4_stairs)
+Map_Route_225_01[0] (route225:house) <-> Map_Canalave_Darkrai_House_00[0]
+Map_Route_225_02[0] (route225:entrance) <-> Map_Galactic_HQ_Floor06_00[2]
+Map_Route_227_01[0] (route226_route227:r227_house) <-> Map_Route_212_House01_00[0]
+Map_Survival_Area_00[0] (survivalarea:bar) <-> Map_Mount_Coronet_Floor09_01[2] (coronet:upf1_right)
+Map_Survival_Area_00[1] (survivalarea:bot) <-> Map_Solaceon_Ruins_Room05_01[0] (solaceonruins:bf3_topleft)
+Map_Survival_Area_00[3] (survivalarea:center) <-> Map_Iron_Island_House01_00[0]
+Map_Survival_Area_00[4] (survivalarea:mart) <-> Map_Victory_Road_Floor01_00[5] (victoryroad:f1_left2)
+Map_Route_226_02[0] (route226_route227:r226_house) <-> Map_Jubilife_TV_02[1] (jubilifetv_poketch:tv_f3_up)
+Map_Route_226_02[1] (route226_route227:r226_gate) <-> Map_Solaceon_Ruins_Room04_02[0]
+Map_Valor_Lakefront_03[0] (valorlakefront:lakefront_topmid) <-> Map_Solaceon_Ruins_Room11_00[0]
+Map_Valor_Lakefront_03[1] (valorlakefront:lakefront_topright) <-> Map_Old_Chateau_Room03_00[0]
+Map_Spring_Path_02[0] (route214:forest) <-> Map_Jubilife_Shop_00[0]
+Map_Route_213_00[2] (valorlakefront:lakefront_midleft) <-> Map_Victory_Road_Floor03_01[1] (victoryroad:bf1_bot)
+Map_Route_213_00[3] (valorlakefront:r213_hotel) <-> Map_Oreburgh_Mine_Room02_00[0]
+Map_Route_213_00[4] (valorlakefront:lakefront_hotel) <-> Map_Jubilife_Poketch_02[0]
+Map_Route_213_00[5] (valorlakefront:lakefront_midbot) <-> Map_Floaroma_Meadow_00[0] (ironworks_meadow:meadow_exit)
+Map_Route_213_00[6] (valorlakefront:lakefront_midtop) <-> Map_Pokemon_League_Bertha_Room_00[0] (league:bertha_top)
+Map_Route_213_00[7] (valorlakefront:r213_house) <-> Map_Sunyshore_Gym_00[0] (:beacon_badge)
+Map_Route_214_00[0] (route214:top) <-> Map_Ravaged_Path_00[0]
+Map_Route_222_01[0] (route222:left) <-> Map_Hearthome_House02_00[0]
+Map_Route_222_02[0] (route222:city) <-> Map_Mount_Coronet_Floor00_00[0] (coronet:f1_entrance)
+Map_Fight_Area_00[0] (fightarea:gate) <-> Map_Hearthome_House04_00[0]
+Map_Fight_Area_01[2] (fightarea:up) <-> Map_Veilstone_Gym_00[0] (:cobble_badge)
+Map_Fight_Area_01[3] (fightarea:bot) <-> Map_Oreburgh_Building01_01[0]
+Map_Fight_Area_01[5] (fightarea:mart) <-> Map_Galactic_HQ_Floor00_01[5]
+Map_Route_228_00[0] (route228:gate) <-> Map_Celestic_PokemonCenter_00[2] (celestic:center_bot)
+Map_Route_228_00[2] (route228:cave) <-> Map_Mount_Coronet_Floor03_00[1] (coronet:f4_water)
+Map_Route_228_01[0] (route228:right) <-> Map_Hearthome_Gym_00[3] (:relic_badge)
+Map_Route_228_02[0] (route228:left) <-> Map_Pokemon_League_Interior_00_SS1[0]
+Map_Resort_Area_00[0] (resortarea:villa) <-> Map_Canalave_Library_01[1]
+Map_Resort_Area_00[1] (resortarea:house) <-> Map_Snowpoint_Temple_00[0]
+Map_Resort_Area_00[2] (resortarea:ribbon) <-> Map_Jubilife_TV_06[0]
+Map_Resort_Area_00[3] (resortarea:center) <-> Map_Hearthome_Amity_Gate_01[0]
+Map_Oreburgh_Gate_00[1] (oreburghgate_r203:gate_right) <-> Map_Eterna_Galactic_Building_Floor01_00[3] (eternagalactic:f2_stairs2)
+Map_Oreburgh_Gate_00[2] (oreburghgate_r203:gate_top) <-> Map_Amity_Square_01[0]
+Map_Oreburgh_Gate_Floor01_00[0] <-> Map_Celestic_PokemonCenter_00[0] (celestic:center_mid)
+Map_Oreburgh_Mine_Room01_00[3] <-> Map_Eterna_Galactic_Building_Floor01_00[0]
+Map_Eterna_Forest_Interior_00[0] (eternaforest_r205:forest_chateau) <-> Map_Oreburgh_PokemonCenter_00[0] (oreburgh:center_mid)
+Map_Eterna_Forest_Interior_01[0] (eternaforest_r205:forest_exit) <-> Map_Hearthome_PokemonCenter_00[1] (hearthome:center_up)
+Map_Eterna_Forest_Interior_02[0] (eternaforest_r205:forest_entrance) <-> Map_Iron_Island_Room05_01[0]
+Map_Fuego_Ironworks_Interior_00[0] <-> Map_Victory_Road_Floor05_00[1]
+Map_Mount_Coronet_Floor00_00[1] (coronet:f1_exit) <-> Map_Galactic_HQ_Floor01_00[4] (galactichq:f22_tele)
+Map_Mount_Coronet_Floor00_00[2] (coronet:f1_stairs) <-> Map_Hall_Of_Origin[0]
+Map_Mount_Coronet_Floor01_00[0] (coronet:f2_top) <-> Map_Galactic_HQ_Floor01_00[6]
+Map_Mount_Coronet_Floor01_00[3] <-> Map_Snowpoint_Temple_03[0]
+Map_Mount_Coronet_Floor01_01[0] (coronet:f2_right) <-> Map_Veilstone_Mall_01[1] (departmentstore:f2_right)
+Map_Mount_Coronet_Floor01_01[1] (coronet:f2_left) <-> Map_Hearthome_Poffin_House_00[0]
+Map_Mount_Coronet_Floor02_00[0] (coronet:f3_left) <-> Map_Eterna_House01_00[0]
+Map_Mount_Coronet_Floor02_00[1] (coronet:f3_right) <-> Map_Canalave_PokemonCenter_00[0] (canalave:center_mid)
+Map_Mount_Coronet_Exterior_00[0] (coronetsummit:top) <-> Map_Regirock_Cave_00[0]
+Map_Mount_Coronet_Exterior_00[2] (coronetsummit:topleft) <-> Map_Pokemon_League_Lucian_Room_00[0] (league:lucian_top)
+Map_Mount_Coronet_Exterior_03[0] (coronetsummit:botleft) <-> Map_Solaceon_Daycare_00[0]
+Map_Mount_Coronet_Exterior_03[1] (coronetsummit:botright) <-> Map_Veilstone_Mall_02[1] (departmentstore:f3_right)
+Map_Mount_Coronet_Exterior_03[2] (coronetsummit:bot) <-> Map_Grand_Lake_House05_00[0]
+Map_Mount_Coronet_Floor03_00[0] (coronet:f4_left) <-> Map_Sunyshore_House02_00[0]
+Map_Mount_Coronet_Floor03_00[4] (coronet:f4_up) <-> Map_Galactic_HQ_Floor04_00[0] (galactichq:bf2_left)
+Map_Mount_Coronet_Floor04_00[0] <-> Map_Veilstone_Mall_00[3] (departmentstore:f1_left)
+Map_Mount_Coronet_Floor04_00[1] <-> Map_Galactic_HQ_Floor02_01[2]
+Map_Mount_Coronet_Floor05_00[0] <-> Map_Stark_Mountain_Room02_01[0]
+Map_Mount_Coronet_Floor06_00[0] <-> Map_Old_Chateau_Room08_00[0]
+Map_Mount_Coronet_Floor06_00[1] <-> Map_Pokemon_Mansion_00[2] (r212_mansion:mansion_left3)
+Map_Mount_Coronet_Floor07_00[0] <-> Map_Hearthome_PokemonCenter_00[2] (hearthome:center_bot)
+Map_Mount_Coronet_Floor08_00[1] (coronet:upf12_left) <-> Map_Hearthome_PokemonCenter_00[0] (hearthome:center_mid)
+Map_Mount_Coronet_Floor08_00[2] (coronet:upf12_top) <-> Map_Solaceon_Ruins_Room01_00[1]
+Map_Mount_Coronet_Floor09_00[0] (coronet:upf1_top) <-> Map_Registeel_Cave_00[0]
+Map_Mount_Coronet_Floor09_01[1] (coronet:upf1_left) <-> Map_Sunyshore_PokemonCenter_00[2] (sunyshore:center_bot)
+Map_Solaceon_Ruins_Room01_00[0] <-> Map_Jubilife_Building03_01[0]
+Map_Solaceon_Ruins_Room02_00[0] (solaceonruins:entrance_door) <-> Map_Galactic_HQ_Floor01_00[3] (galactichq:f22_right)
+Map_Solaceon_Ruins_Room02_00[1] (solaceonruins:entrance_topright) <-> Map_Snowpoint_Temple_00[1]
+Map_Solaceon_Ruins_Room02_00[2] (solaceonruins:entrance_botright) <-> Map_Jubilife_Poketch_01[0]
+Map_Solaceon_Ruins_Room02_00[3] (solaceonruins:entrance_topleft) <-> Map_Solaceon_Ruins_Room08_00[2] (solaceonruins:bf1_topright)
+Map_Solaceon_Ruins_Room03_00[0] (solaceonruins:bf4_topleft) <-> Map_Grand_Lake_House01_00[0]
+Map_Solaceon_Ruins_Room03_00[1] (solaceonruins:bf4_topright) <-> Map_Route_222_Gate_00[0]
+Map_Solaceon_Ruins_Room03_00[2] (solaceonruins:bf4_botleft) <-> Map_Hearthome_Amity_Gate_00[1]
+Map_Solaceon_Ruins_Room03_00[3] (solaceonruins:bf4_botright) <-> Map_Global_Terminal_02[2] (jubilife:trade_red)
+Map_Solaceon_Ruins_Room04_00[0] <-> Map_Victory_Road_Floor06_00[0]
+Map_Solaceon_Ruins_Room05_00[2] (solaceonruins:bf2_topleft) <-> Map_Jubilife_TV_04[0]
+Map_Solaceon_Ruins_Room05_00[3] (solaceonruins:bf2_botleft) <-> Map_Galactic_HQ_Floor01_00[12]
+Map_Solaceon_Ruins_Room05_01[1] (solaceonruins:bf3_topright) <-> Map_Eterna_Galactic_Building_Floor03_00[1]
+Map_Solaceon_Ruins_Room05_01[3] (solaceonruins:bf3_botright) <-> Map_Hearthome_Contest_00[0]
+Map_Solaceon_Ruins_Room06_00[0] <-> Map_Galactic_HQ_Floor00_00[5]
+Map_Solaceon_Ruins_Room06_02[0] <-> Map_Iron_Island_Room03_00[0] (ironisland:bf2_left)
+Map_Solaceon_Ruins_Room06_03[0] <-> Map_Hearthome_Amity_Gate_01[1]
+Map_Solaceon_Ruins_Room07_00[0] (solaceonruins:bf32_topleft) <-> Map_Jubilife_Building03_00[0]
+Map_Solaceon_Ruins_Room07_00[1] (solaceonruins:bf32_botleft) <-> Map_Pokemon_Mansion_01[0] (r212_mansion:mansion_door)
+Map_Solaceon_Ruins_Room07_00[2] (solaceonruins:bf32_botright) <-> Map_Sunyshore_House01_00[0]
+Map_Solaceon_Ruins_Room08_00[0] (solaceonruins:bf1_topleft) <-> Map_Pokemon_League_Interior_00[1] (league:league_door)
+Map_Solaceon_Ruins_Room08_00[1] (solaceonruins:bf1_botleft) <-> Map_Pokemon_League_PokemonCenter_00[1] (league:center_up)
+Map_Solaceon_Ruins_Room08_00[3] (solaceonruins:bf1_botright) <-> Map_Victory_Road_Floor05_00[0]
+Map_Solaceon_Ruins_Room09_00[0] <-> Map_Canalave_PokemonCenter_00[2] (canalave:center_bot)
+Map_Victory_Road_Floor01_00[0] (victoryroad:f1_left1) <-> Map_Victory_Road_Floor02_00[2]
+Map_Victory_Road_Floor01_00[2] (victoryroad:f1_exit) <-> Map_Galactic_HQ_Floor01_00[2] (galactichq:f2_stairs)
+Map_Victory_Road_Floor01_00[6] (victoryroad:f1_left3) <-> Map_Route_217_House01_00[0]
+Map_Victory_Road_Floor01_00[8] <-> Map_Veilstone_PokemonCenter_00[2] (veilstone:center_bot)
+Map_Victory_Road_Floor01_00[9] (victoryroad:f1_right2) <-> Map_Sandgem_PokemonCenter_00[1] (sandgem:center_up)
+Map_Victory_Road_Floor01_00[10] (victoryroad:f1_entrance) <-> Map_Sandgem_PokemonCenter_00[0] (sandgem:center_mid)
+Map_Victory_Road_Floor02_00[1] <-> Map_Route_228_House02_00[0]
+Map_Victory_Road_Floor03_00[0] (victoryroad:bf1_top) <-> Map_Veilstone_House02_00[0]
+Map_Victory_Road_Floor03_01[0] (victoryroad:bf1_mid) <-> Map_Snowpoint_Temple_01[1]
+Map_Victory_Road_Floor04_00[0] <-> Map_Jubilife_Poketch_01[1]
+Map_Victory_Road_Floor04_01[0] <-> Map_Pokemon_Tower_01[0]
+Map_Victory_Road_Floor06_00[1] <-> Map_Solaceon_PokemonCenter_00[0] (solaceon:center_mid)
+Map_Pal_Park_00[0] <-> Map_Pal_Park_Interior_00[1]
+Map_Amity_Square_00[0] <-> Map_Pokemon_League_Interior_00[3] (league:league_bot)
+Map_Ravaged_Path_00[1] <-> Map_Pokemon_Tower_04[0]
+Map_Floaroma_Meadow_00[2] (ironworks_meadow:meadow_house) <-> Map_Route_228_House01_00[0]
+Map_Floaroma_Meadow_00[3] (ironworks_meadow:meadow_entrance) <-> Map_Fullmoon_Island_Interior_00[0]
+Map_Stark_Mountain_Room02_00[0] <-> Map_Veilstone_PokemonCenter_00[1] (veilstone:center_up)
+Map_Stark_Mountain_Room03_00[0] <-> Map_Lake_Valor_Normal_00[4]
+Map_Sendoff_Springs_01[0] <-> Map_Eterna_Galactic_Building_Floor00_00[1] (eternagalactic:f1_stairs1)
+Map_Turnback_Cave_Room01_00[0] <-> Map_Oreburgh_City_Room05_00[0]
+Map_Turnback_Cave_Room01_00[1] <-> Map_Route_222_Room02_00[0]
+Map_Turnback_Cave_Room01_00[2] <-> Map_Resort_Area_Shop_00[0]
+Map_Turnback_Cave_Room01_00[3] <-> Map_Survival_Area_Shop_00[0]
+Map_Snowpoint_Temple_01[0] <-> Map_Iron_Island_Room01_00[0] (ironisland:f1_entrance)
+Map_Snowpoint_Temple_02[0] <-> Map_Pokemon_Tower_03[1]
+Map_Snowpoint_Temple_05[0] <-> Map_Jubilife_Building03_00[1]
+Map_Wayward_Cave_Room01_00[1] <-> Map_Galactic_HQ_Floor00_00[4]
+Map_Wayward_Cave_Room01_01[0] <-> Map_Global_Terminal_02[1] (jubilife:trade_green)
+Map_Wayward_Cave_Room01_01[1] <-> Map_Pokemon_Mansion_00[1] (r212_mansion:mansion_left2)
+Map_Maniac_Cave_00[0] <-> Map_Global_Terminal_02[0] (jubilife:trade_entrance)
+Map_Trophy_Garden_00[0] <-> Map_Hearthome_Amity_Gate_00[0]
+Map_Iron_Island_Room01_00[1] (ironisland:f1_left) <-> Map_Old_Chateau_Room01_00[2] (eternaforest_r205:chateau_hub_middle)
+Map_Iron_Island_Room02_00[0] <-> Map_Pokemon_Mansion_01[1] (r212_mansion:mansion_right)
+Map_Iron_Island_Room03_00[2] (ironisland:bf2_top) <-> Map_Jubilife_TV_02[0] (jubilifetv_poketch:tv_f3_down)
+Map_Iron_Island_Room04_00[0] <-> Map_Eterna_Galactic_Building_Floor00_00[0] (eternagalactic:f1_entrance)
+Map_Iron_Island_Room05_00[0] <-> Map_Snowpoint_PokemonCenter_00[2] (snowpoint:center_bot)
+Map_Iron_Island_Room06_00[0] (ironisland:bf3_left) <-> Map_Berry_Master_00[0]
+Map_Iron_Island_Room06_00[1] (ironisland:bf3_bot) <-> Map_Solaceon_House01_00[0]
+Map_Iron_Island_Room06_00[2] (ironisland:bf3_right) <-> Map_Pokemon_Mansion_01[2] (r212_mansion:mansion_top)
+Map_Old_Chateau_Room01_00[0] (eternaforest_r205:chateau_hub_left) <-> Map_Route_226_House01_00[0]
+Map_Old_Chateau_Room01_00[3] (eternaforest_r205:chateau_hub_top) <-> Map_Route_218_Gate_01[1]
+Map_Old_Chateau_Room01_00[4] (eternaforest_r205:chateau_hub_entrance) <-> Map_Galactic_HQ_Floor00_01[4] (galactichq:f12_left)
+Map_Old_Chateau_Room02_00[0] <-> Map_Hearthome_Contest_00[1]
+Map_Old_Chateau_Room03_00[1] <-> Map_Eterna_Galactic_Building_Floor02_00[3] (eternagalactic:f3_stairs2)
+Map_Old_Chateau_Room04_00[1] (eternaforest_r205:chateau_line_door1) <-> Map_Celestic_Town_House02_00[0]
+Map_Old_Chateau_Room04_00[2] (eternaforest_r205:chateau_line_door2) <-> Map_Survival_Area_PokemonCenter_00[1] (survivalarea:center_up)
+Map_Old_Chateau_Room04_00[3] (eternaforest_r205:chateau_line_door3) <-> Map_Valor_Cavern_00[0]
+Map_Old_Chateau_Room04_01[0] (eternaforest_r205:chateau_line_door5) <-> Map_Pokemon_Mansion_Room01_00[0]
+Map_Old_Chateau_Room05_00[0] <-> Map_Jubilife_TV_00[1] (jubilifetv_poketch:tv_f1_stairs)
+Map_Old_Chateau_Room06_00[0] <-> Map_Galactic_HQ_Floor01_00[9]
+Map_Old_Chateau_Room07_00[0] <-> Map_Eterna_Building01_00[1]
+Map_Old_Chateau_Room_09_00[0] <-> Map_Route_212_Gate_00[0]
+Map_Galactic_HQ_Floor00_00[0] (galactichq:f1_left) <-> Map_Jubilife_TV_05[0]
+Map_Galactic_HQ_Floor00_00[1] (galactichq:f1_right) <-> Map_Galactic_HQ_Floor03_00[1] (galactichq:f4_right)
+Map_Galactic_HQ_Floor00_00[2] <-> Map_Route_221_House01_00[0]
+Map_Galactic_HQ_Floor00_00[3] (galactichq:f1_top) <-> map_Registeel_Empty_Cave_00[0]
+Map_Galactic_HQ_Floor00_00[6] <-> Map_Jubilife_TV_02[2] (jubilifetv_poketch:tv_f3_right)
+Map_Galactic_HQ_Floor00_01[0] <-> Map_Survival_Area_PokemonCenter_00[2] (survivalarea:center_bot)
+Map_Galactic_HQ_Floor00_01[1] (galactichq:f12_stairs) <-> Map_ValleyWindworks_Interior_00[0]
+Map_Galactic_HQ_Floor00_01[3] (galactichq:f12_right) <-> Map_Veilstone_Mall_03[0] (departmentstore:f4_left)
+Map_Galactic_HQ_Floor01_00[1] <-> Map_Route_209_Gate_00[0]
+Map_Galactic_HQ_Floor01_00[5] <-> Map_Eterna_PokemonCenter_00[0] (eterna:center_mid)
+Map_Galactic_HQ_Floor01_00[8] <-> Map_Route_215_Gate_00[1]
+Map_Galactic_HQ_Floor01_00[10] <-> Map_Galactic_HQ_Floor02_00[2]
+Map_Galactic_HQ_Floor01_00[13] <-> Map_Sandgem_House01_00[1]
+Map_Galactic_HQ_Floor01_00[14] (galactichq:f2_bot) <-> Map_Galactic_HQ_Floor05_00[1]
+Map_Galactic_HQ_Floor02_00[3] (galactichq:f3_left) <-> Map_Sunyshore_Market_00[0]
+Map_Galactic_HQ_Floor02_00[4] (galactichq:f3_mid) <-> Map_Route_225_Gate_00[1]
+Map_Galactic_HQ_Floor02_00[5] (galactichq:f3_right) <-> Map_Footstep_House_00[0]
+Map_Galactic_HQ_Floor02_01[0] (galactichq:f3_stairs) <-> Map_Jubilife_Poketch_00[0] (jubilifetv_poketch:poketch_left)
+Map_Galactic_HQ_Floor04_00[1] (galactichq:bf2_top) <-> Map_Eterna_Galactic_Building_Floor02_00[2] (eternagalactic:f3_stairs1)
+Map_Galactic_HQ_Floor05_00[0] <-> Map_Survival_Area_House02_00[0]
+Map_Lake_Verity_00[0] <-> Map_Jubilife_Building01_Unused_01[0]
+Map_Lake_Valor_Normal_00[0] <-> Map_Oreburgh_City_Room07_00[0]
+Map_Lake_Acuity_WithCave_00[0] <-> Map_Snowpoint_City_Room01_00[0]
+Map_Lake_Acuity_WithCave_00[4] <-> Map_Grand_Lake_House06_00[0]
+Map_Pastoria_Gym_00[0] (:fen_badge) <-> Map_Snowpoint_PokemonCenter_00[1] (snowpoint:center_up)
+Map_Oreburgh_Gym_00[0] (:coal_badge) <-> Map_Pokemon_League_Interior_00[0] (league:league_e4)
+Map_Snowpoint_Gym_00[0] (:icicle_badge) <-> Map_Eterna_Galactic_Building_Floor00_00[2] (eternagalactic:f1_stairs2)
+Map_Jubilife_PokemonCenter_00[0] (jubilife:center_mid) <-> Map_Route_227_House01_00[0]
+Map_Jubilife_PokemonCenter_00[2] (jubilife:center_bot) <-> Map_Pokemon_League_Aaron_Room_00[0] (league:aaron_top)
+Map_Oreburgh_PokemonCenter_00[2] (oreburgh:center_bot) <-> Map_Pokemon_Tower_00[1]
+Map_Eterna_PokemonCenter_00[2] (eterna:center_bot) <-> Map_Galactic_HQ_SS1_Room00_01[0]
+Map_Pastoria_PokemonCenter_00[0] (pastoria:center_mid) <-> Map_Floaroma_PokemonCenter_00[1] (floaroma:center_up)
+Map_Pastoria_PokemonCenter_00[1] (pastoria:center_up) <-> Map_Global_Terminal_00[1]
+Map_Sunyshore_PokemonCenter_00[1] (sunyshore:center_up) <-> Map_Jubilife_TV_03[0] (jubilifetv_poketch:tv_f4_stairs)
+Map_Pokemon_League_PokemonCenter_00[0] (league:center_mid) <-> Map_Galactic_HQ_Floor06_00[1]
+Map_Pokemon_League_PokemonCenter_00[2] (league:center_bot) <-> Map_Floaroma_PokemonCenter_00[0] (floaroma:center_mid)
+Map_Fight_Area_PokemonCenter_00[0] (fightarea:center_mid) <-> Map_Eterna_Gym_00[0] (:forest_badge)
+Map_Fight_Area_PokemonCenter_00[1] (fightarea:center_up) <-> Map_Veilstone_Mall_05[0] (departmentstore:bf1_stairs)
+Map_Fight_Area_PokemonCenter_00[2] (fightarea:center_bot) <-> Map_Grand_Lake_House02_00[0]
+Map_Sandgem_PokemonCenter_00[2] (sandgem:center_bot) <-> Map_Solaceon_PokemonCenter_00[2] (solaceon:center_bot)
+Map_Floaroma_PokemonCenter_00[2] (floaroma:center_bot) <-> Map_Route_209_Gate_00[1]
+Map_Celestic_PokemonCenter_00[1] (celestic:center_up) <-> Map_Route_218_Gate_00[1]
+Map_Survival_Area_PokemonCenter_00[0] (survivalarea:center_mid) <-> Map_Route_225_Gate_00[0]
+Map_Sandgem_PokemonCenter_01[1] <-> Map_Union_Room[0]
+Map_Oreburgh_Shop_00[0] <-> Map_Jubilife_Building02_01[1]
+Map_Veilstone_City_Room07_00[0] <-> Map_Route_228_Gate_00[1]
+Map_Floaroma_Meadow_Room01_00[0] <-> Map_Jubilife_Building01_02[1]
+Map_Route_210_Room01_00[0] <-> Map_Route_206_Gate_01[0]
+Map_Celestic_Town_House01_00[0] <-> Map_Veilstone_Warehouse_00[1]
+Map_Twinleaf_Rival_House_00[1] <-> Map_Twinleaf_Rival_House_01[0]
+Map_Twinleaf_Your_House_00[1] <-> Map_Twinleaf_Your_House_01[0]
+Map_Sandgem_House01_00[0] <-> Map_Eterna_Building01_01[0]
+Map_Sandgem_House01_01[0] <-> Map_Pokemon_Tower_03[0]
+Map_Jubilife_Building01_00[1] <-> Map_Sunyshore_House03_00[0]
+Map_Jubilife_Building02_00[0] <-> Map_Veilstone_Mall_01[0] (departmentstore:f2_left)
+Map_Jubilife_Building02_00[1] <-> Map_Pokemon_Mansion_Room02_00[0]
+Map_Oreburgh_Building01_00[0] <-> Map_Eterna_Galactic_Building_Floor02_00[1] (eternagalactic:f3_stairs3)
+Map_Oreburgh_Building02_00[0] <-> Map_Grand_Lake_Gate_00[1]
+Map_Oreburgh_Building02_00[1] <-> Map_Veilstone_Game_Corner_00[0]
+Map_Oreburgh_Building03_00[1] <-> Map_Pokemon_Tower_02[0]
+Map_Oreburgh_Building_Unused_00[0] <-> Map_Oreburgh_Building01_01[1]
+Map_Oreburgh_Building_Unused_00[1] <-> Map_Oreburgh_Building_Unused_02[0]
+Map_Oreburgh_Building_Unused_01[0] <-> Map_Oreburgh_Building02_01[1]
+Map_Oreburgh_Building_Unused_01[1] <-> Map_Oreburgh_Building_Unused_03[0]
+Map_Jubilife_Poketch_00[2] (jubilifetv_poketch:poketch_stairs) <-> Map_Route_215_Gate_00[0]
+Map_Pokemon_League_Interior_00[2] (league:league_top) <-> Map_Canalave_Library_01[0]
+Map_Grand_Lake_House03_00[0] <-> Map_Global_Terminal_00[0]
+Map_Jubilife_TV_01[0] (jubilifetv_poketch:tv_f2_down) <-> Map_Oreburgh_Museum_00[0]
+Map_Jubilife_TV_01[2] (jubilifetv_poketch:tv_f2_door) <-> Map_Pastoria_Mart_00[0]
+Map_Jubilife_TV_02[3] (jubilifetv_poketch:tv_f3_left) <-> Map_Pokemon_Mansion_Room01_00[1]
+Map_Eterna_Galactic_Building_Floor01_00[2] (eternagalactic:f2_stairs1) <-> Map_Global_Terminal_01[1]
+Map_Eterna_Galactic_Building_Floor03_00[0] <-> Map_Route_208_Gate_00[1]
+Map_Veilstone_Mall_00[0] (departmentstore:f1_entrance) <-> Map_Lighthouse_00[0]
+Map_Veilstone_Mall_04[0] (departmentstore:f5_stairs) <-> Map_Rotom_Room_00[0]
+Map_Pokemon_Mansion_Room01_00[2] <-> Map_Route_213_Gate_00[0]
+Map_Pastoria_Marsh_Entrance_00[1] <-> Map_Pastoria_Marsh_Entrance_01[0]
+Map_Pastoria_Marsh_Entrance_00[2] <-> Map_Great_Marsh_05[0]
+Map_Pokemon_League_Cynthia_Room_00[0] <-> Map_Hall_Of_Fame_01[1]
+Map_Hall_Of_Fame_00[0] <-> Map_Hall_Of_Fame_01[0]
+Map_Battle_Tower_00[0] <-> Map_Battle_Frontier_03[0]
+Map_Jubilife_Building02_Unused_00[1] <-> Map_Jubilife_Building02_Unused_02[0]
+Map_Oreburgh_Building03_01[0] <-> Map_Canalave_Library_00[0]
+Map_Oreburgh_Building03_01[1] <-> Map_Oreburgh_Building_Unused_04[0]
+Map_Eterna_Building01_02[1] <-> Map_Eterna_Building01_Unused_00[0]
+Map_Pokemon_Tower_02[1] <-> Map_Canalave_Library_02[0]
+Map_Eterna_Gym_00[1] <-> Map_Eterna_Gym_Unused_00[0]
+Map_Hearthome_Gym_00[1] <-> Map_Hearthome_Gym_01[0]
+Map_Hearthome_Gym_00[4] <-> Map_Hearthome_Gym_03[4]
+Map_Hearthome_Gym_Unused_00[0] <-> Map_Hearthome_Gym_03[1]
+Map_Hearthome_Gym_Unused_01[0] <-> Map_Hearthome_Gym_03[2]
+Map_Hearthome_Gym_Unused_02[0] <-> Map_Hearthome_Gym_Unused_06[0]
+Map_Hearthome_Gym_Unused_03[0] <-> Map_Hearthome_Gym_Unused_06[2]
+Map_Hearthome_Gym_Unused_04[0] <-> Map_Hearthome_Gym_Unused_07[1]
+Map_Hearthome_Gym_Unused_05[0] <-> Map_Hearthome_Gym_Unused_07[0]
+Map_Hearthome_Gym_Unused_06[1] <-> Map_Hearthome_Gym_Unused_07[3]
+Map_Hearthome_Gym_Unused_06[3] <-> Map_Hearthome_Gym_03[0]
+Map_Hearthome_Gym_Unused_07[2] <-> Map_Hearthome_Gym_Unused_08[0]
+Map_Sunyshore_Gym_00[1] <-> Map_Sunyshore_Gym_01[0]
+Map_Sunyshore_Gym_01[1] <-> Map_Sunyshore_Gym_02[0]
+Map_Battle_Park_00[0] <-> Map_Battle_Park_Interior_00[0]
+Map_Battle_Park_00[1] <-> Map_Battle_Park_Interior_00[1]
+Map_Battle_Park_00[2] <-> Map_Battle_Park_Unused_00[0]
+Map_Eterna_ExplorerKit_House_00[0] <-> Map_Global_Terminal_01[0]
+Map_Battle_Frontier_Interior_00[0] <-> Map_Battle_Frontier_01[2]
+Map_Battle_Factory_00[0] <-> Map_Battle_Frontier_00[4]
+Map_Battle_Hall_00[0] <-> Map_Battle_Frontier_02[2]
+Map_Battle_Castle_00[0] <-> Map_Battle_Frontier_01[5]
+Map_Battle_Arcade_00[0] <-> Map_Battle_Frontier_01[4]
+Map_Route_213_Gate_00[1] <-> Map_Route_218_Gate_01[0]
+Map_Route_206_Gate_00[1] <-> Map_Eterna_Galactic_Building_Floor00_00[3] (eternagalactic:f1_door)
